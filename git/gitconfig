@@ -3,3 +3,5 @@
 # Please adapt and uncomment the following lines:
     name = Kyle Hill
     email = kylhill@gmail.com
+[push]
+	default = matching
