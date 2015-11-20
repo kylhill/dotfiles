@@ -124,6 +124,9 @@ fi
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
+
 extract () {
     if [ -f $1 ] ; then
         case $1 in
