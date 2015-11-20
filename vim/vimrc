@@ -7,10 +7,11 @@ execute pathogen#infect()
 
 " General
 set nocompatible
-set autoread                    " set to autoread when a file is changed from the outside
-set history=1000                " store lots of :cmdline history
-set hidden                      " hide buffers when they are abandoned
-set autowrite                   " automatically save before certain commands
+set autoread        " set to autoread when a file is changed from the outside
+set history=1000    " store lots of :cmdline history
+set hidden          " hide buffers when they are abandoned
+set autowrite       " automatically save before certain commands
+set autochdir       " automatically set current directory to directory of last opened file
 
 " Colors and Fonts
 syntax enable
@@ -51,5 +52,3 @@ set smartcase       " do smart case matching
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-n> :NERDTreeToggle<CR>
 
-" Have vim's cwd follow the current buffer
-autocmd BufEnter * lcd %:p:h
