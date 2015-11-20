@@ -6,11 +6,16 @@
 execute pathogen#infect()
 
 " General
-set autoread        " set to autoread when a file is changed from the outside
+set nocompatible
+set autoread                    " set to autoread when a file is changed from the outside
+set history=1000                " store lots of :cmdline history
+set hidden                      " hide buffers when they are abandoned
+set autowrite                   " automatically save before certain commands
 
 " Colors and Fonts
 syntax enable
 set background=dark
+"let g:solarized_termcolors=256 " needed if not running in 256 color terminal
 colorscheme solarized
 
 " Spaces and Tabs
@@ -19,9 +24,13 @@ set tabstop=4       " number of spaces per tab
 set softtabstop=4   " number of spaces in tab when editing
 set expandtab       " tabs are spaces
 
+" Enable loading the plugin/indent files for specific file types
+filetype plugin indent on
+
 " UI Config
-"set number          " show line numbers
+set number          " show line numbers
 set showcmd         " show command in bottom bar
+set showmode        " show current mode in bottom bar
 set cursorline      " highlight current line
 set wildmenu        " turn on the WiLd menu
 set lazyredraw      " redraw only when we need to
@@ -33,3 +42,10 @@ set hlsearch        " highlight matches
 set ignorecase      " do case insensitive matching
 set smartcase       " do smart case matching
 
+" NERDTree Config
+"autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>
+
+" Have vim's cwd follow the current buffer
+autocmd BufEnter * lcd %:p:h
