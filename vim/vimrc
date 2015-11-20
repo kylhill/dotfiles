@@ -15,26 +15,30 @@ set autowrite                   " automatically save before certain commands
 " Colors and Fonts
 syntax enable
 set background=dark
-"let g:solarized_termcolors=256 " needed if not running in 256 color terminal
-colorscheme solarized
+
+if &t_Co < 256
+    colorscheme default
+    set nocursorline
+else
+    colorscheme solarized
+    set cursorline
+endif
 
 " Spaces and Tabs
+filetype plugin indent on
 set autoindent
 set tabstop=4       " number of spaces per tab
 set softtabstop=4   " number of spaces in tab when editing
 set expandtab       " tabs are spaces
 
-" Enable loading the plugin/indent files for specific file types
-filetype plugin indent on
-
 " UI Config
 set number          " show line numbers
 set showcmd         " show command in bottom bar
 set showmode        " show current mode in bottom bar
-set cursorline      " highlight current line
 set wildmenu        " turn on the WiLd menu
 set lazyredraw      " redraw only when we need to
 set showmatch       " highlight matching [{()}]
+set noruler         " turn off the ruler
 
 " Searching
 set incsearch       " search as characters are entered

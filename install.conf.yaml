@@ -13,6 +13,10 @@
         create: true
         force: true
         path: byobu/statusrc
+    ~/.byobu/profile.tmux:
+        create: true
+        force: true
+        path: byobu/profile.tmux
     ~/.dircolors:
         create: true
         force: true
