@@ -7,14 +7,13 @@ execute pathogen#infect()
 
 " General
 set nocompatible
-set autoread        " set to autoread when a file is changed from the outside
-set history=1000    " store lots of :cmdline history
 set hidden          " hide buffers when they are abandoned
 set autowrite       " automatically save before certain commands
 set autochdir       " automatically set current directory to directory of last opened file
+set lazyredraw      " redraw only when we need to
+set ttyfast
 
 " Colors and Fonts
-syntax enable
 set background=dark
 
 if &t_Co < 256
@@ -26,24 +25,17 @@ else
 endif
 
 " Spaces and Tabs
-filetype plugin indent on
-set autoindent
 set tabstop=4       " number of spaces per tab
 set softtabstop=4   " number of spaces in tab when editing
 set expandtab       " tabs are spaces
 
 " UI Config
 set number          " show line numbers
-set showcmd         " show command in bottom bar
-set wildmenu        " turn on the WiLd menu
-set lazyredraw      " redraw only when we need to
 set showmatch       " highlight matching [{()}]
 set noruler         " turn off the ruler
 set noshowmode      " show current mode in bottom bar
-set laststatus=2    " always show the status line
 
 " Searching
-set incsearch       " search as characters are entered
 set hlsearch        " highlight matches
 set ignorecase      " do case insensitive matching
 set smartcase       " do smart case matching
