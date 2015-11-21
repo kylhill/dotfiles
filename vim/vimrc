@@ -35,11 +35,12 @@ set expandtab       " tabs are spaces
 " UI Config
 set number          " show line numbers
 set showcmd         " show command in bottom bar
-set showmode        " show current mode in bottom bar
 set wildmenu        " turn on the WiLd menu
 set lazyredraw      " redraw only when we need to
 set showmatch       " highlight matching [{()}]
 set noruler         " turn off the ruler
+set noshowmode      " show current mode in bottom bar
+set laststatus=2    " always show the status line
 
 " Searching
 set incsearch       " search as characters are entered
