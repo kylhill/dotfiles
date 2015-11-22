@@ -16,9 +16,6 @@
 [submodule "vim/vim/bundle/vim-sensible"]
 	path = vim/vim/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible
-[submodule "vim/vim/vim-trailing-whitespace"]
-	path = vim/vim/bundle/vim-trailing-whitespace
-	url = https://github.com/duff/vim-trailing-whitespace
 [submodule "vim/vim/bundle/vim-polyglot"]
 	path = vim/vim/bundle/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot

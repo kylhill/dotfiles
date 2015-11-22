@@ -11,7 +11,7 @@ set hidden          " hide buffers when they are abandoned
 set autowrite       " automatically save before certain commands
 set autochdir       " automatically set current directory to directory of last opened file
 set lazyredraw      " redraw only when we need to
-set ttyfast
+set ttyfast         " make vim faster?
 
 " Colors and Fonts
 set background=dark
@@ -20,6 +20,7 @@ if &t_Co < 256
     colorscheme default
     set nocursorline
 else
+    " Use solarized if term is 256 color
     colorscheme solarized
     set cursorline
 endif
@@ -41,7 +42,6 @@ set ignorecase      " do case insensitive matching
 set smartcase       " do smart case matching
 
 " NERDTree Config
-"autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-n> :NERDTreeToggle<CR>
 
