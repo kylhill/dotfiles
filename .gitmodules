@@ -1,15 +1,15 @@
+[submodule "dotbot"]
+	path = dotbot
+    url = https://github.com/anishathalye/dotbot
+[submodule "bash/dircolors/dircolors-solarized"]
+	path = bash/dircolors/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "vim/vim/bundle/nerdtree"]
 	path = vim/vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "vim/vim/bundle/vim-colors-solarized"]
 	path = vim/vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "dotbot"]
-	path = dotbot
-	url = https://github.com/anishathalye/dotbot
-[submodule "bash/dircolors/dircolors-solarized"]
-	path = bash/dircolors/dircolors-solarized
-	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "vim/vim/bundle/vim-airline"]
 	path = vim/vim/bundle/vim-airline
 	url = https://github.com/bling/vim-airline
@@ -22,9 +22,9 @@
 [submodule "vim/vim/bundle/vim-fugitive"]
 	path = vim/vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "vim/vim/bundle/syntastic"]
-	path = vim/vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
 [submodule "vim/vim/bundle/ctrlp.vim"]
 	path = vim/vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/vim/bundle/vim-tmux-navigator"]
+	path = vim/vim/bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
