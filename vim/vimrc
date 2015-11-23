@@ -13,6 +13,10 @@ set autochdir       " automatically set current directory to directory of last o
 set lazyredraw      " redraw only when we need to
 set ttyfast         " make vim faster?
 
+" Enable syntax highlighting
+syntax on
+filetype plugin on
+
 " Colors and Fonts
 set background=dark
 
