@@ -121,8 +121,9 @@ fi
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell;
+# Autocorrect typos path names
+shopt -s cdspell
+shopt -s dirspell
 
 extract () {
     if [ -f $1 ] ; then
