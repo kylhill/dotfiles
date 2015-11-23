@@ -77,8 +77,8 @@ if [ -x /usr/bin/dircolors ]; then
     #test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     eval `dircolors ~/.dircolors/dircolors-solarized/dircolors.256dark`
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -120,6 +120,8 @@ fi
 # Kyle's customizations:
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+alias vi='vim'
 
 # Autocorrect typos path names
 shopt -s cdspell
