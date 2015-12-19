@@ -21,12 +21,14 @@ filetype plugin on
 set background=dark
 
 if &t_Co < 256
-    colorscheme default
+    colorscheme elflord
     set nocursorline
+    set nonumber
 else
     " Use solarized if term is 256 color
     colorscheme solarized
     set cursorline
+    set number
 endif
 
 " Spaces and Tabs
@@ -35,7 +37,6 @@ set softtabstop=4   " number of spaces in tab when editing
 set expandtab       " tabs are spaces
 
 " UI Config
-set number          " show line numbers
 set showmatch       " highlight matching [{()}]
 set noruler         " turn off the ruler
 set noshowmode      " show current mode in bottom bar

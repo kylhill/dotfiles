@@ -1,7 +1,7 @@
 source $BYOBU_PREFIX/share/byobu/profiles/tmux
 
-# Use 256 color terminal
-set -g default-terminal 'tmux-256color'
+# Use 256 color tmux if terminal supports it
+if-shell 'test $(tput colors) -ge 256' 'set-option -g default-terminal "tmux-256color"'
 
 # Act like vim
 set -g mode-keys vi
