@@ -32,6 +32,7 @@ endif
 if has("wildmenu")
     " Enable the wildmenu
     set wildmenu
+    set wildmode=longest,list
 endif
 
 " Colors and Fonts
