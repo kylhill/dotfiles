@@ -127,6 +127,13 @@ alias vi='vim'
 shopt -s cdspell
 shopt -s dirspell
 
+# Disable XON/XOFF flow control
+stty -ixon
+
+# Disable beeps
+setterm -bfreq 0
+
+# Fancy autoextract script
 extract () {
     if [ -f $1 ] ; then
         case $1 in
