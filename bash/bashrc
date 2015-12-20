@@ -118,7 +118,7 @@ if ! shopt -oq posix; then
 fi
 
 # Kyle's customizations:
-export VISUAL=vim
+export VISUAL=/usr/bin/vim
 export EDITOR="$VISUAL"
 
 alias vi='vim'
@@ -132,6 +132,9 @@ stty -ixon
 
 # Disable beeps
 setterm -bfreq 0
+
+# Use vi editing mode
+set -o vi
 
 # Fancy autoextract script
 extract () {
