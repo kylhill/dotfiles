@@ -1,56 +1,86 @@
-" Kyle's customizations
-"   http://dougblack.io/words/a-good-vimrc.html
-"   https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+" Kyle's custom vimrc
 
-" Pathogen
-execute pathogen#infect()
+" Enable Pathogen
+silent! execute pathogen#infect()
 
-" General
-set nocompatible
+" General Settings
+set nocompatible    " disable compatibility mode
 set hidden          " hide buffers when they are abandoned
 set autowrite       " automatically save before certain commands
 set autochdir       " automatically set current directory to directory of last opened file
 set lazyredraw      " redraw only when we need to
-set ttyfast         " make vim faster?
+set ttyfast         " make vim update faster
+set autoread        " reload files if they change
+set history=1000    " remember a lot of history
 
-" Enable syntax highlighting
-syntax on
-filetype plugin on
+" Allow backspace past start of indent
+set backspace=indent,eol,start
+
+if has("syntax")
+    " Enable syntax highlighting
+    syntax on
+endif
+
+if has("autocmd")
+    " Jump to the last file position when reopening a file
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+    " Enable file type identification
+    filetype plugin indent on
+endif
+
+if has("wildmenu")
+    " Enable the wildmenu
+    set wildmenu
+endif
 
 " Colors and Fonts
 set background=dark
+colorscheme elflord
 
 if &t_Co < 256
-    colorscheme elflord
     set nocursorline
     set nonumber
 else
     " Use solarized if term is 256 color
-    colorscheme solarized
+    silent! colorscheme solarized
     set cursorline
     set number
 endif
 
-" Spaces and Tabs
-set tabstop=4       " number of spaces per tab
-set softtabstop=4   " number of spaces in tab when editing
-set expandtab       " tabs are spaces
+" UI Configuration
+set laststatus=2        " always show the status line
+set showcmd             " show command in status line
+set showmatch           " highlight matching brackets
+set noruler             " turn off the ruler
+set noshowmode          " show current mode in bottom bar
+set scrolloff=1         " always show 1 line below the cursor
+set display+=lastline   " try to show text that scrolls off the display
 
-" UI Config
-set showmatch       " highlight matching [{()}]
-set noruler         " turn off the ruler
-set noshowmode      " show current mode in bottom bar
+" Spaces and Tabs
+set expandtab       " tabs are spaces
+set shiftwidth=4    " number of spaces per level of indentation
+set softtabstop=4   " number of spaces per tab
+set autoindent      " copy indentation from previous line
 
 " Searching
 set hlsearch        " highlight matches
+set incsearch       " incremental search
 set ignorecase      " do case insensitive matching
 set smartcase       " do smart case matching
 
-" NERDTree Config
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-map <C-n> :NERDTreeToggle<CR>
+" Plugin-specific Configuration
+if exists(":NERDTree")
+    " NERDTree Configuration
+    if has("autocmd")
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    endif
+    map <C-n> :NERDTreeToggle<CR>
+endif
 
-" CtrlP Config
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+if exists(":Ctrlp")
+    " CtrlP Configuration
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_cmd = 'CtrlP'
+endif
 
