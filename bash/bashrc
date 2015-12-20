@@ -130,9 +130,6 @@ shopt -s dirspell
 # Disable XON/XOFF flow control
 stty -ixon
 
-# Disable beeps
-setterm -bfreq 0
-
 # Use vi editing mode
 set -o vi
 
