@@ -35,21 +35,16 @@ if has("wildmenu")
     set wildmode=longest,list
 endif
 
-" Colors and Fonts
-set background=dark
-colorscheme elflord
-
-if &t_Co < 256
-    set nocursorline
-    set nonumber
-else
-    " Use solarized if term is 256 color
+" UI Configuration
+colorscheme desert
+if &t_Co >= 256
+    " Try to use solarized if term is 256 color
     silent! colorscheme solarized
-    set cursorline
-    set number
 endif
 
-" UI Configuration
+set background=dark     " use a dark background
+set cursorline          " show the cursor line
+set number              " show line numbers
 set laststatus=2        " always show the status line
 set showcmd             " show command in status line
 set showmatch           " highlight matching brackets
