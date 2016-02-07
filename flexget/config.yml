@@ -11,7 +11,8 @@
 tasks:
   showrss:
     # showRSS: per-show settings for quality, with propers and no magnets (allows rename)
-    rss: https://showrss.info/rss.php?user_id=40121&hd=null&proper=1&magnets=false
+    #rss: https://showrss.info/rss.php?user_id=40121&hd=null&proper=1&magnets=false
+    rss: https://showrss.info/user/219.rss?magnets=false&namespaces=false&name=clean&quality=null&re=yes
 
     # Download all series from the custom feed
     all_series: yes
