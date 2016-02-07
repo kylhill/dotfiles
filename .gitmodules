@@ -22,3 +22,6 @@
 [submodule "vim/vim/bundle/vim-tmux-navigator"]
 	path = vim/vim/bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "vim/vim/bundle/vim-airline-themes"]
+	path = vim/vim/bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
