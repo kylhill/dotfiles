@@ -10,8 +10,7 @@
 
 tasks:
   showrss:
-    # showRSS: per-show settings for quality, with propers and no magnets (allows rename)
-    #rss: https://showrss.info/rss.php?user_id=40121&hd=null&proper=1&magnets=false
+    # showRSS: no magnets (allows rename), no namespaces, cleaned names, per-show settings for quality, and all propers
     rss: https://showrss.info/user/219.rss?magnets=false&namespaces=false&name=clean&quality=null&re=yes
 
     # Download all series from the custom feed
@@ -29,11 +28,11 @@ tasks:
       path: /srv/shared/torrents/
       space: 10000
 
-    # Output entities to Deluge
+    # Output entries to Deluge
     deluge:
       main_file_only: yes
       queuetotop: yes
-      maxupspeed: 100.0
+      maxupspeed: 100.0     # don't attract too much attention
 
       # Rename files using TheTVDB metadata: "Series Name/Sx0E - Episode Name"
       content_filename: /{{ series_season }}x{{ series_episode|pad(2) }}{% if tvdb_ep_name %} - {{ tvdb_ep_name }}{% endif %}
