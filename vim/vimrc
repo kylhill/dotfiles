@@ -36,14 +36,14 @@ if has("wildmenu")
 endif
 
 " UI Configuration
-colorscheme desert
+colorscheme elflord
 if &t_Co >= 256
     " Try to use solarized if term is 256 color
     silent! colorscheme solarized
+    set cursorline      " show the cursor line
 endif
 
 set background=dark     " use a dark background
-set cursorline          " show the cursor line
 set number              " show line numbers
 set laststatus=2        " always show the status line
 set showcmd             " show command in status line
