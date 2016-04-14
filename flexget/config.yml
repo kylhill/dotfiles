@@ -13,6 +13,10 @@ tasks:
     # showRSS: no magnets (allows rename), no namespaces, cleaned names, per-show settings for quality, and all propers
     rss: https://showrss.info/user/219.rss?magnets=false&namespaces=false&name=clean&quality=null&re=yes
 
+    # showrss is flaky... retry mulitple times before we give up
+    retry_failed:
+      max_retries: 10
+
     # Download all series from the custom feed
     all_series: yes
     accept_all: yes
