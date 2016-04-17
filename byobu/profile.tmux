@@ -5,13 +5,15 @@ if-shell 'test $(tput colors) -ge 256' 'set-option -g default-terminal "tmux-256
 if-shell 'test $(tput colors) -lt 256' 'set-option -g default-terminal "tmux"'
 
 # Act like vim
-set -g mode-keys vi
+set-window-option -g mode-keys vi
 bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 bind-key -r C-h select-window -t :-
 bind-key -r C-l select-window -t :+
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-selection
 
 # Start window numbers at 1 to match keyboard order with tmux window order
 set -g base-index 1
