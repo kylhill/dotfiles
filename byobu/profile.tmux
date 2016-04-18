@@ -31,34 +31,34 @@ setw -g aggressive-resize on
 # See: https://github.com/seebi/tmux-colors-solarized
 
 # default statusbar colors
-set-option -g status-bg black
-set-option -g status-fg yellow
-#set-option -g status-attr default
+set-option -g status-bg black #base02
+set-option -g status-fg yellow #yellow
+set-option -g status-attr default
 
 # default window title colors
-set-window-option -g window-status-fg brightblue
+set-window-option -g window-status-fg brightblue #base0
 set-window-option -g window-status-bg default
-set-window-option -g window-status-attr default
+#set-window-option -g window-status-attr dim
 
 # active window title colors
-set-window-option -g window-status-current-fg colour12
+set-window-option -g window-status-current-fg yellow #orange
 set-window-option -g window-status-current-bg default
-set-window-option -g window-status-current-attr reverse
+#set-window-option -g window-status-current-attr bright
 
 # pane border
-set-option -g pane-border-fg black
-set-option -g pane-active-border-fg brightgreen
+set-option -g pane-border-fg black #base02
+set-option -g pane-active-border-fg brightgreen #base01
 
 # message text
-set-option -g message-bg black
-set-option -g message-fg brightred
+set-option -g message-bg black #base02
+set-option -g message-fg brightred #orange
 
 # pane number display
-set-option -g display-panes-active-colour blue
-set-option -g display-panes-colour brightred
+set-option -g display-panes-active-colour blue #blue
+set-option -g display-panes-colour brightred #orange
 
 # clock
-set-window-option -g clock-mode-colour green
+set-window-option -g clock-mode-colour green #green
 
 # bell
-set-window-option -g window-status-bell-style fg=black,bg=red
+set-window-option -g window-status-bell-style fg=black,bg=red #base02, red
