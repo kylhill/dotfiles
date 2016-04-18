@@ -4,7 +4,7 @@ set -g prefix ^A
 set -g prefix2 ^A
 bind a send-prefix
 
-# move around panes with j and k, a bit like vim
+# Move around panes with j and k, a bit like vim
 bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
@@ -13,9 +13,19 @@ bind l select-pane -R
 bind-key -r C-h select-window -t :-
 bind-key -r C-l select-window -t :+
 
+# Resize pane shortcuts
+bind -r H resize-pane -L 10
+bind -r J resize-pane -D 10
+bind -r K resize-pane -U 10
+bind -r L resize-pane -R 10
+
 # Copy and paste a bit like vim
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+unbind [
+bind Escape copy-mode
+unbind p
+bind p paste-buffer
+bind -t vi-copy 'v' begin-selection
+bind -t vi-copy 'y' copy-selection
 
 # Smart pane switching with awareness of vim splits
 # See: https://github.com/christoomey/vim-tmux-navigator

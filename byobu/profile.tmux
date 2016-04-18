@@ -20,6 +20,11 @@ setw -g pane-base-index 1
 # Renumber windows sequentially after closing any of them
 set -g renumber-windows on
 
+# Rather than constraining window size to the maximum size of any client
+# connected to the *session*, constrain window size to the maximum size of any
+# client connected to *that window*. Much more reasonable.
+setw -g aggressive-resize on
+
 #### COLOR (Solarized dark)
 # See: https://github.com/seebi/tmux-colors-solarized
 
