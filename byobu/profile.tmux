@@ -9,7 +9,7 @@ setw -g utf8 on
 set -g status-utf8 on
 
 # Use vi-style key bindings in the status line
-setw -g mode-keys vi
+set -g mode-keys vi
 
 # xterm-style function key sequences
 setw -g xterm-keys on
@@ -22,43 +22,58 @@ setw -g pane-base-index 1
 set -g renumber-windows on
 setw -g automatic-rename on
 
+# Monitor activity
+setw -g monitor-activity on
+
 # Rather than constraining window size to the maximum size of any client
 # connected to the *session*, constrain window size to the maximum size of any
 # client connected to *that window*. Much more reasonable.
 setw -g aggressive-resize on
 
-#### COLOR (Solarized dark)
-# See: https://github.com/seebi/tmux-colors-solarized
+# Center the window list
+set -g status-justify centre
 
-# default statusbar colors
-set-option -g status-bg black #base02
-set-option -g status-fg yellow #yellow
-set-option -g status-attr default
-
-# default window title colors
-set-window-option -g window-status-fg brightblue #base0
-set-window-option -g window-status-bg default
-#set-window-option -g window-status-attr dim
-
-# active window title colors
-set-window-option -g window-status-current-fg yellow #orange
-set-window-option -g window-status-current-bg default
-#set-window-option -g window-status-current-attr bright
+# My attempt at a Solarized dark color scheme
+#############################################
 
 # pane border
-set-option -g pane-border-fg black #base02
-set-option -g pane-active-border-fg brightgreen #base01
-
-# message text
-set-option -g message-bg black #base02
-set-option -g message-fg brightred #orange
+set-option -g pane-active-border-fg $BYOBU_HIGHLIGHT
+set-option -g pane-active-border-bg $BYOBU_DARK
+set-option -g pane-border-fg $BYOBU_ACCENT
+set-option -g pane-border-bg $BYOBU_DARK
 
 # pane number display
-set-option -g display-panes-active-colour blue #blue
-set-option -g display-panes-colour brightred #orange
+set-option -g display-panes-active-colour $BYOBU_HIGHLIGHT
+set-option -g display-panes-colour $BYOBU_ACCENT
+
+# window mode
+set-option -g mode-fg $BYOBU_LIGHT
+set-option -g mode-bg $BYOBU_DARK
+
+# default status bar colors
+set -g status-fg $BYOBU_LIGHT
+set -g status-bg $BYOBU_DARK
+
+# default window title colors
+set-window-option -g window-status-fg $BYOBU_ACCENT
+set-window-option -g window-status-bg $BYOBU_DARK
+
+# active window title colors
+set-window-option -g window-status-current-fg $BYOBU_HIGHLIGHT
+set-window-option -g window-status-current-bg default
+set-window-option -g window-status-current-attr reverse
+
+# window activity colors
+set-window-option -g window-status-activity-fg $BYOBU_LIGHT
+set-window-option -g window-status-activity-bg $BYOBU_DARK
+set-window-option -g window-status-activity-attr bold
+
+# message text
+set-option -g message-bg $BYOBU_DARK
+set-option -g message-fg red
 
 # clock
-set-window-option -g clock-mode-colour green #green
+set-option -g clock-mode-colour $BYOBU_ACCENT
 
 # bell
-set-window-option -g window-status-bell-style fg=black,bg=red #base02, red
+#set-window-option -g window-status-bell-style fg=$BYOBU_DARK,bg=red
