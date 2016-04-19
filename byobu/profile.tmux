@@ -30,9 +30,6 @@ setw -g monitor-activity on
 # client connected to *that window*. Much more reasonable.
 setw -g aggressive-resize on
 
-# Center the window list
-set -g status-justify centre
-
 # My attempt at a Solarized dark color scheme
 #############################################
 
@@ -55,12 +52,12 @@ set -g status-fg $BYOBU_LIGHT
 set -g status-bg $BYOBU_DARK
 
 # default window title colors
-set-window-option -g window-status-fg $BYOBU_ACCENT
+set-window-option -g window-status-fg $BYOBU_LIGHT
 set-window-option -g window-status-bg $BYOBU_DARK
 
 # active window title colors
 set-window-option -g window-status-current-fg $BYOBU_HIGHLIGHT
-set-window-option -g window-status-current-bg default
+set-window-option -g window-status-current-bg $BYOBU_BRIGHT
 set-window-option -g window-status-current-attr reverse
 
 # window activity colors
@@ -70,10 +67,7 @@ set-window-option -g window-status-activity-attr bold
 
 # message text
 set-option -g message-bg $BYOBU_DARK
-set-option -g message-fg red
+set-option -g message-fg $BYOBU_LIGHT
 
 # clock
 set-option -g clock-mode-colour $BYOBU_ACCENT
-
-# bell
-#set-window-option -g window-status-bell-style fg=$BYOBU_DARK,bg=red
