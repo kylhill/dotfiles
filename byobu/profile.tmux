@@ -66,8 +66,8 @@ set-window-option -g window-status-activity-bg $BYOBU_DARK
 set-window-option -g window-status-activity-attr bold
 
 # message text
-set-option -g message-bg $BYOBU_DARK
 set-option -g message-fg $BYOBU_LIGHT
+set-option -g message-bg $BYOBU_DARK
 
 # clock
 set-option -g clock-mode-colour $BYOBU_ACCENT
