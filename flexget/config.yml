@@ -32,7 +32,7 @@ tasks:
       path: /srv/shared/torrents/
       space: 10000
 
-    # Output entries to Deluge
+    # Output entities to Deluge
     deluge:
       main_file_only: yes
       queuetotop: yes
