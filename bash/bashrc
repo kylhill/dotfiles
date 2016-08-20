@@ -129,6 +129,9 @@ alias vi='vim'
 shopt -s cdspell
 shopt -s dirspell
 
+# Other shopts
+shopt -s cmdhist
+
 # Disable XON/XOFF flow control
 stty -ixon
 
