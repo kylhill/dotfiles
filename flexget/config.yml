@@ -10,12 +10,8 @@
 
 tasks:
   showrss:
-    # showRSS: no magnets (allows rename), no namespaces, cleaned names, per-show settings for quality, and all propers
-    rss: https://showrss.info/user/219.rss?magnets=false&namespaces=false&name=clean&quality=null&re=yes
-
-    # showrss is flaky... retry mulitple times before we give up
-    retry_failed:
-      max_retries: 10
+    # showRSS: magnets, no namespaces, cleaned names, per-show settings for quality and propers
+    rss: http://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
 
     # Download all series from the custom feed
     all_series: yes
@@ -23,6 +19,7 @@ tasks:
 
     # Lookup show metadata from TheTVDB
     thetvdb_lookup: yes
+    metainfo_series: yes
 
     # Make sure all filenames are Windows safe
     pathscrub: windows
@@ -36,7 +33,10 @@ tasks:
     deluge:
       main_file_only: yes
       queuetotop: yes
-      maxupspeed: 100.0     # don't attract too much attention
+      magnetization_timeout: 30     # wait 30s to allow for file renaming
+      ratio: 0
+      removeatratio: yes            # remove torrents as soon as they're complete
+      maxupspeed: 100.0             # don't attract too much attention
 
       # Rename files using TheTVDB metadata: "Series Name/Sx0E - Episode Name"
       content_filename: /{{ series_season }}x{{ series_episode|pad(2) }}{% if tvdb_ep_name %} - {{ tvdb_ep_name }}{% endif %}
