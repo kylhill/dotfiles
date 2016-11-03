@@ -4,10 +4,6 @@ source $BYOBU_PREFIX/share/byobu/profiles/tmux
 if-shell 'test $(tput colors) -ge 256' 'set-option -g default-terminal "tmux-256color"'
 if-shell 'test $(tput colors) -lt 256' 'set-option -g default-terminal "tmux"'
 
-# Instructs tmux to expect UTF-8 sequences
-setw -g utf8 on
-set -g status-utf8 on
-
 # Use vi-style key bindings in the status line
 set -g mode-keys vi
 
