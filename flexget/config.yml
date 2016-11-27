@@ -29,6 +29,10 @@ tasks:
       path: /srv/shared/torrents/
       space: 10000
 
+    # Extract any compressed downloads
+    decompress:
+      delete_archive: yes
+
     # Output entities to Deluge
     deluge:
       main_file_only: yes
