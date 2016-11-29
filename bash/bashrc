@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -156,4 +156,14 @@ extract () {
         echo "'$1' is not a valid file"
     fi
 }
+
+# Display MOTD along with byobu
+if [ -z "$_motd_listed" ]; then
+  case "$TMUX_PANE" in
+    %1) cat /run/motd.dynamic
+        export _motd_listed=yes
+        ;;
+    *)  ;;
+  esac
+fi
 
