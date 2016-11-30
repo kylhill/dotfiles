@@ -12,6 +12,7 @@ set lazyredraw      " redraw only when we need to
 set ttyfast         " make vim update faster
 set autoread        " reload files if they change
 set history=1000    " remember a lot of history
+set linebreak       " wrap lines at convenient points
 
 " Allow backspace past start of indent
 set backspace=indent,eol,start
@@ -50,14 +51,12 @@ set showcmd             " show command in status line
 set showmatch           " highlight matching brackets
 set noruler             " turn off the ruler
 set noshowmode          " show current mode in bottom bar
-set scrolloff=1         " always show 1 line below the cursor
 set display+=lastline   " try to show text that scrolls off the display
 
 " Spaces and Tabs
 set expandtab       " tabs are spaces
 set shiftwidth=4    " number of spaces per level of indentation
 set softtabstop=4   " number of spaces per tab
-set autoindent      " copy indentation from previous line
 
 " Searching
 set hlsearch        " highlight matches
@@ -66,17 +65,24 @@ set ignorecase      " do case insensitive matching
 set smartcase       " do smart case matching
 
 " Plugin-specific Configuration
-if exists(":NERDTree")
-    " NERDTree Configuration
-    if has("autocmd")
-        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    endif
-    map <C-n> :NERDTreeToggle<CR>
+
+" NERDTree Configuration
+if has("autocmd")
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 endif
+
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 if exists(":Ctrlp")
     " CtrlP Configuration
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
+    let g:ctrlp_show_hidden=1
 endif
 
+" Airline Configuration
+let g:airline_powerline_fonts=1
