@@ -85,4 +85,4 @@ if exists(":Ctrlp")
 endif
 
 " Airline Configuration
-let g:airline_powerline_fonts=1
+"let g:airline_powerline_fonts=1
