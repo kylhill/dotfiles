@@ -32,6 +32,11 @@
     ~/.tvnamer.json:
         create: true
         force: true
+        path: tvnamer/tvnamer.json
+    ~/.aptitude:
+        create: true
+        force: true
+        path: aptitude/
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

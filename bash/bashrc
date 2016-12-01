@@ -158,12 +158,12 @@ extract () {
 }
 
 # Display MOTD along with byobu
-if [ -z "$_motd_listed" ]; then
-  case "$TMUX_PANE" in
-    %1) cat /run/motd.dynamic
-        export _motd_listed=yes
-        ;;
-    *)  ;;
-  esac
-fi
+#if [ -z "$_motd_listed" ]; then
+#  case "$TMUX_PANE" in
+#    %1) cat /run/motd.dynamic
+#        export _motd_listed=yes
+#        ;;
+#    *)  ;;
+#  esac
+#fi
 
