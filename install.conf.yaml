@@ -37,6 +37,10 @@
         create: true
         force: true
         path: aptitude/
+    ~/.ssh/config:
+        create: true
+        force: true
+        path: ssh/config
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

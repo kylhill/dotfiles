@@ -1,0 +1,19 @@
+Host syntax
+    HostName tacomafia.net
+    User kyleh
+
+Host htpc
+    HostName htpc.tacomafia.net
+    User root
+
+Host htpc2
+    HostName htpc2.tacomafia.net
+    User root
+
+Host wap
+    HostName wap.tacomafia.net
+    User root
+
+Host cislinux
+    HostName cislinux.cis.ksu.edu
+    User kylhill

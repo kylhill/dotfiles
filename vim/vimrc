@@ -13,6 +13,7 @@ set ttyfast         " make vim update faster
 set autoread        " reload files if they change
 set history=1000    " remember a lot of history
 set linebreak       " wrap lines at convenient points
+set nowrap          " don't wrap lines
 
 " Allow backspace past start of indent
 set backspace=indent,eol,start
@@ -33,7 +34,7 @@ endif
 if has("wildmenu")
     " Enable the wildmenu
     set wildmenu
-    set wildmode=longest,list
+    set wildmode=longest,list,full
 endif
 
 " UI Configuration
@@ -63,6 +64,16 @@ set hlsearch        " highlight matches
 set incsearch       " incremental search
 set ignorecase      " do case insensitive matching
 set smartcase       " do smart case matching
+
+" Start scrolling when we're getting close to margins
+set scrolloff=5
+set sidescrolloff=10
+set sidescroll=1
+
+" Folds
+set foldmethod=indent   " Fold based on indent
+set foldnestmax=3       " Deepest fold is 3 levels
+set nofoldenable        " Don't fold by default
 
 " Plugin-specific Configuration
 
