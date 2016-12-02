@@ -66,8 +66,8 @@ set ignorecase      " do case insensitive matching
 set smartcase       " do smart case matching
 
 " Start scrolling when we're getting close to margins
-set scrolloff=5
-set sidescrolloff=10
+set scrolloff=3
+set sidescrolloff=5
 set sidescroll=1
 
 " Folds
