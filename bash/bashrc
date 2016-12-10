@@ -181,8 +181,3 @@ function extract() {
         echo "'$1' is not a valid file"
     fi
 }
-
-# find shorthand
-function f() {
-    find . -name "$1" 2>&1 | grep -v 'Permission denied'
-}
