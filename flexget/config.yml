@@ -37,7 +37,7 @@ tasks:
     deluge:
       main_file_only: yes
       queuetotop: yes
-      magnetization_timeout: 30     # wait 30s to allow for file renaming
+      magnetization_timeout: 60     # wait 60s to allow for file renaming
       ratio: 0
       removeatratio: yes            # remove torrents as soon as they're complete
       maxupspeed: 100.0             # don't attract too much attention
