@@ -11,7 +11,9 @@
 tasks:
   showrss:
     # showRSS: magnets, no namespaces, cleaned names, per-show settings for quality and propers
-    rss: http://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
+    rss:
+      url: https://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
+      all_entries: no
 
     # Download all series from the custom feed
     all_series: yes
@@ -19,7 +21,11 @@ tasks:
 
     # Lookup show metadata from TheTVDB
     thetvdb_lookup: yes
+
+    # Try to parse additional information from file names
     metainfo_series: yes
+    parsing:
+      series: guessit
 
     # Make sure all filenames are Windows safe
     pathscrub: windows
@@ -32,6 +38,9 @@ tasks:
     # Extract any compressed downloads
     decompress:
       delete_archive: yes
+
+    # Look at torrents manually downloaded in Deluge to help filter duplicates
+    from_deluge: yes
 
     # Output entities to Deluge
     deluge:
