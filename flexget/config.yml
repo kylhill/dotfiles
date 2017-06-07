@@ -39,9 +39,6 @@ tasks:
     decompress:
       delete_archive: yes
 
-    # Look at torrents manually downloaded in Deluge to help filter duplicates
-    from_deluge: yes
-
     # Output entities to Deluge
     deluge:
       main_file_only: yes
