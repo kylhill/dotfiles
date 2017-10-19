@@ -24,8 +24,8 @@ unbind [
 bind Escape copy-mode
 unbind p
 bind p paste-buffer
-bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-selection
+bind -T copy-mode-vi 'v' begin-selection
+bind -T copy-mode-vi 'y' copy-selection
 
 # Smart pane switching with awareness of vim splits
 # See: https://github.com/christoomey/vim-tmux-navigator
