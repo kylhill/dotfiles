@@ -13,7 +13,7 @@ tasks:
     # showRSS: magnets, no namespaces, cleaned names, per-show settings for quality and propers
     rss:
       url: https://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
-      all_entries: no
+      #all_entries: no
 
     # Download all series from the custom feed
     all_series: yes

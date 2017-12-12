@@ -53,7 +53,7 @@
     "move_files_destination": ".",
     "move_files_destination_date": ".",
     "move_files_destination_is_filepath": false,
-    "move_files_enable": true,
+    "move_files_enable": false,
     "move_files_fullpath_replacements": [],
     "move_files_lowercase_destination": false,
     "move_files_only": false,
