@@ -10,6 +10,10 @@ Host htpc2
     HostName htpc2.tacomafia.net
     User root
 
+Host htpc3
+    HostName htpc3.tacomafia.net
+    User root
+
 Host wap
     HostName wap.tacomafia.net
     User root
