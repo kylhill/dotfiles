@@ -11,9 +11,7 @@
 tasks:
   showrss:
     # showRSS: magnets, no namespaces, cleaned names, per-show settings for quality and propers
-    rss:
-      url: https://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
-      #all_entries: no
+    rss: https://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
 
     # Download all series from the custom feed
     all_series: yes
@@ -34,10 +32,6 @@ tasks:
     free_space:
       path: /srv/shared/torrents/
       space: 10000
-
-    # Extract any compressed downloads
-    decompress:
-      delete_archive: yes
 
     # Output entities to Deluge
     deluge:
