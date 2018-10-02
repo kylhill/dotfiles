@@ -44,6 +44,10 @@ if &t_Co >= 256
     silent! colorscheme solarized
     set cursorline      " show the cursor line
     set number          " show line numbers
+
+    " Airline Configuration
+    let g:airline_theme='solarized'
+    let g:airline_solarized_bg='dark'
 endif
 
 set background=dark     " use a dark background
@@ -88,13 +92,3 @@ endif
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
-if exists(":Ctrlp")
-    " CtrlP Configuration
-    let g:ctrlp_map = '<c-p>'
-    let g:ctrlp_cmd = 'CtrlP'
-    let g:ctrlp_show_hidden=1
-endif
-
-" Airline Configuration
-let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'

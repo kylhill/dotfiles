@@ -135,7 +135,6 @@ shopt -s cmdhist
 # Disable XON/XOFF flow control
 stty -ixon
 
-
 # Easier navigation: .., ..., ~ and -
 alias ..="cd .."
 alias cd..="cd .."
