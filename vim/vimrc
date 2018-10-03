@@ -6,13 +6,12 @@ silent! execute pathogen#infect()
 " General Settings
 set nocompatible    " disable compatibility mode
 set hidden          " hide buffers when they are abandoned
+set autoread        " reload files if they change
 set autowrite       " automatically save before certain commands
 set autochdir       " automatically set current directory to directory of last opened file
-set lazyredraw      " redraw only when we need to
-set ttyfast         " make vim update faster
-set autoread        " reload files if they change
+set lazyredraw      " do not redraw while executing macros or commands that aren't typed
+set ttyfast         " send more characters to the screen for redrawing
 set history=1000    " remember a lot of history
-set linebreak       " wrap lines at convenient points
 set nowrap          " don't wrap lines
 
 " Allow backspace past start of indent
@@ -20,7 +19,7 @@ set backspace=indent,eol,start
 
 if has("syntax")
     " Enable syntax highlighting
-    syntax on
+    syntax enable
 endif
 
 if has("autocmd")
@@ -42,8 +41,7 @@ colorscheme elflord
 if &t_Co >= 256
     " Try to use solarized if term is 256 color
     silent! colorscheme solarized
-    set cursorline      " show the cursor line
-    set number          " show line numbers
+    set number
 
     " Airline Configuration
     let g:airline_theme='solarized'
@@ -52,27 +50,30 @@ endif
 
 set background=dark     " use a dark background
 set laststatus=2        " always show the status line
-set showcmd             " show command in status line
 set showmatch           " highlight matching brackets
-set noruler             " turn off the ruler
-set noshowmode          " show current mode in bottom bar
-set display+=lastline   " try to show text that scrolls off the display
+set noshowmode          " don't show current mode in bottom bar, Airline handles this
+
+" Indent
+set smartindent         " smartly indent based on syntax
+set autoindent          " copy indent from current line when starting a new line
 
 " Spaces and Tabs
-set expandtab       " tabs are spaces
-set shiftwidth=4    " number of spaces per level of indentation
-set softtabstop=4   " number of spaces per tab
+set smarttab            " use shiftwidth when tab is at the start of lines
+set expandtab           " tabs are spaces
+set shiftwidth=4        " number of spaces per level of indentation
+set softtabstop=4       " number of spaces per tab
 
 " Searching
-set hlsearch        " highlight matches
-set incsearch       " incremental search
-set ignorecase      " do case insensitive matching
-set smartcase       " do smart case matching
+set hlsearch            " highlight matches
+set incsearch           " incremental search
+set ignorecase          " do case insensitive matching
+set smartcase           " do smart case matching
 
 " Start scrolling when we're getting close to margins
 set scrolloff=3
 set sidescrolloff=5
 set sidescroll=1
+set display+=lastline   " try to show text that scrolls off the display
 
 " Folds
 set foldmethod=indent   " Fold based on indent
@@ -91,4 +92,6 @@ endif
 
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+let NERDTreeDirArrows=1
+let NERDTreeAutoDeleteBuffer=1
 
