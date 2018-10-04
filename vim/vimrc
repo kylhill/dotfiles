@@ -6,34 +6,16 @@ silent! execute pathogen#infect()
 " General Settings
 set nocompatible    " disable compatibility mode
 set hidden          " hide buffers when they are abandoned
-set autoread        " reload files if they change
 set autowrite       " automatically save before certain commands
 set autochdir       " automatically set current directory to directory of last opened file
 set lazyredraw      " do not redraw while executing macros or commands that aren't typed
 set ttyfast         " send more characters to the screen for redrawing
-set history=1000    " remember a lot of history
 set nowrap          " don't wrap lines
-
-" Allow backspace past start of indent
-set backspace=indent,eol,start
-
-if has("syntax")
-    " Enable syntax highlighting
-    syntax enable
-endif
+set sidescroll=1
 
 if has("autocmd")
     " Jump to the last file position when reopening a file
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-    " Enable file type identification
-    filetype plugin indent on
-endif
-
-if has("wildmenu")
-    " Enable the wildmenu
-    set wildmenu
-    set wildmode=longest,list,full
 endif
 
 " UI Configuration
@@ -49,38 +31,19 @@ if &t_Co >= 256
 endif
 
 set background=dark     " use a dark background
-set laststatus=2        " always show the status line
 set showmatch           " highlight matching brackets
 set noshowmode          " don't show current mode in bottom bar, Airline handles this
 
-" Indent
-set smartindent         " smartly indent based on syntax
-set autoindent          " copy indent from current line when starting a new line
-
 " Spaces and Tabs
-set smarttab            " use shiftwidth when tab is at the start of lines
+set smartindent         " smartly indent based on syntax
 set expandtab           " tabs are spaces
 set shiftwidth=4        " number of spaces per level of indentation
 set softtabstop=4       " number of spaces per tab
 
 " Searching
 set hlsearch            " highlight matches
-set incsearch           " incremental search
 set ignorecase          " do case insensitive matching
 set smartcase           " do smart case matching
-
-" Start scrolling when we're getting close to margins
-set scrolloff=3
-set sidescrolloff=5
-set sidescroll=1
-set display+=lastline   " try to show text that scrolls off the display
-
-" Folds
-set foldmethod=indent   " Fold based on indent
-set foldnestmax=3       " Deepest fold is 3 levels
-set nofoldenable        " Don't fold by default
-
-" Plugin-specific Configuration
 
 " NERDTree Configuration
 if has("autocmd")
