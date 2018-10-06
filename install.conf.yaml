@@ -1,46 +1,34 @@
+- defaults:
+    link:
+      create: true
+      force: true
+
 - clean: ['~']
 
 - link:
+    ~/.aptitude:
+        path: aptitude/
     ~/.bashrc:
-        create: true
-        force: true
         path: bash/bashrc
     ~/.byobu:
-        create: true
-        force: true
         path: byobu/
     ~/.dircolors:
-        create: true
-        force: true
         path: bash/dircolors/
     ~/.flexget/config.yml:
-        create: true
-        force: true
         path: flexget/config.yml
     ~/.gitconfig:
-        create: true
-        force: true
         path: git/gitconfig
+    ~/.inputrc:
+        path: bash/inputrc
+    ~/.ssh/config:
+        path: ssh/config
+    ~/.tvnamer.json:
+        path: tvnamer/tvnamer.json
     ~/.vim:
-        create: true
-        force: true
         path: vim/vim/
     ~/.vimrc:
-        create: true
-        force: true
         path: vim/vimrc
-    ~/.tvnamer.json:
-        create: true
-        force: true
-        path: tvnamer/tvnamer.json
-    ~/.aptitude:
-        create: true
-        force: true
-        path: aptitude/
-    ~/.ssh/config:
-        create: true
-        force: true
-        path: ssh/config
 
 - shell:
+  - touch ~/.hushlogin
   - [git submodule update --init --recursive, Installing submodules]
