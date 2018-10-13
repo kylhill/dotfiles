@@ -11,9 +11,6 @@ set-window-option -g pane-base-index 1
 # Renumber windows sequentially after closing any of them
 set-option -g renumber-windows on
 
-# Don't constrain tmux size when not needed
-setw -g aggressive-resize on
-
 # Don't show hardcoded byobu date/time
 set-option -g status-right '#(byobu-status tmux_right)'
 
