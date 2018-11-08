@@ -36,6 +36,7 @@ tasks:
     # Output entities to Deluge
     deluge:
       main_file_only: yes
+      keep_subs: no
       queuetotop: yes
       magnetization_timeout: 60     # wait up to 60s to allow for file renaming
       ratio: 0
