@@ -36,14 +36,15 @@ tasks:
     # Output entities to Deluge
     deluge:
       main_file_only: yes
+      hide_sparse_files: no
       keep_subs: no
-      queuetotop: yes
+      queue_to_top: yes
       magnetization_timeout: 60     # wait up to 60s to allow for file renaming
       ratio: 0
-      removeatratio: yes            # remove torrents as soon as they're complete
-      maxupspeed: 100.0             # don't attract too much attention
+      remove_at_ratio: yes          # remove torrents as soon as they're complete
+      max_up_speed: 100.0           # don't attract too much attention
 
       # Rename files using TheTVDB metadata: "Series Name/Sx0E - Episode Name"
       content_filename: /{{ series_season }}x{{ series_episode|pad(2) }}{% if tvdb_ep_name %} - {{ tvdb_ep_name }}{% endif %}
-      movedone: /srv/shared/torrents/{{ tvdb_series_name|default(series_name) }}
+      move_completed_path: /srv/shared/torrents/{{ tvdb_series_name|default(series_name) }}
 
