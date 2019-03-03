@@ -2,21 +2,10 @@
 #
 # Kyle's Custom Flexget Configuration
 #
-# This script checks custom rss feeds and downloads all of the series
-# that it matches from it.  It then passes the torrents straight to
-# Deluge for downloading.
-#
 ###############################################################################
 
-tasks:
-  showrss:
-    # showRSS: magnets, no namespaces, cleaned names, per-show settings for quality and propers
-    rss: https://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
-
-    # Download all series from the custom feed
-    all_series: yes
-    accept_all: yes
-
+templates:
+  tv:
     # Lookup show metadata from TheTVDB
     thetvdb_lookup: yes
 
@@ -35,16 +24,79 @@ tasks:
 
     # Output entities to Deluge
     deluge:
-      main_file_only: yes
-      hide_sparse_files: no
-      keep_subs: no
       queue_to_top: yes
-      magnetization_timeout: 60     # wait up to 60s to allow for file renaming
-      ratio: 0
-      remove_at_ratio: yes          # remove torrents as soon as they're complete
-      max_up_speed: 100.0           # don't attract too much attention
+      remove_at_ratio: yes
 
       # Rename files using TheTVDB metadata: "Series Name/Sx0E - Episode Name"
       content_filename: /{{ series_season }}x{{ series_episode|pad(2) }}{% if tvdb_ep_name %} - {{ tvdb_ep_name }}{% endif %}
       move_completed_path: /srv/shared/torrents/{{ tvdb_series_name|default(series_name) }}
+
+tasks:
+  tv-private:
+    template: tv
+    priority: 1
+
+    # Private RSS feed for TV shows from morethan.tv
+    rss:
+      url: https://www.morethan.tv/feeds.php?feed=torrents_tv&user=29212&auth=56334d999e47d093a963b47ea822356f&passkey=ah6polqnqemxtw50i0ggnivc76e0lbic&authkey=mkhit4lab7s78t1lfu0qghxz1mhy13l7
+      all_entries: no
+
+    # Download 720p h264 series
+    series:
+      settings:
+        720p h264:
+          # Download new season packs as they become available
+          season_packs: always
+
+      720p h264:
+        - Archer (2009)
+        - Arrested Development
+        - Ask the StoryBots
+        - Blaze and the Monster Machines
+        - Bull (2016)
+        - Curious George
+        - Daniel Tiger's Neighborhood
+        - Dinosaur Train
+        - Dinotrux
+        - DuckTales (2017)
+        - Grey's Anatomy
+        - LEGO Star Wars
+        - Modern Family
+        - MythBusters
+        - PJ Masks
+        - Star Trek Discovery
+        - Star Wars Resistance
+        - The Big Bang Theory
+        - The Marvelous Mrs. Maisel
+        - The Magic School Bus Rides Again
+        - The Simpsons
+        - This is Us
+        - Tidying Up with Marie Kondo
+        - Tom Clancy's Jack Ryan
+        - Whose Line is it Anyway? (US)
+        - Wild Kratts
+        - Young Sheldon
+
+    deluge:
+      ratio: 0.5
+
+  #tv-public:
+    #template: tv
+    #priority: 2
+
+    # showRSS: magnets, no namespaces, cleaned names, per-show settings for quality and propers
+    #rss: https://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
+
+    # Download all series from the custom feed
+    #all_series: yes
+    #accept_all: yes
+
+    # Deluge settings for public torrents
+    #deluge:
+      #main_file_only: yes
+      #hide_sparse_files: no
+      #keep_subs: no
+      #magnetization_timeout: 60     # wait up to 60s to allow for file renaming
+      #ratio: 0
+      #max_up_speed: 100.0           # don't attract too much attention
 
