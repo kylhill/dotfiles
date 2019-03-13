@@ -65,7 +65,7 @@
     "overwrite_destination_on_move": false,
     "overwrite_destination_on_rename": false,
     "recursive": false,
-    "replace_invalid_characters_with": "",
+    "replace_invalid_characters_with": " -",
     "search_all_languages": false,
     "select_first": true,
     "series_id": null,
