@@ -77,7 +77,7 @@ tasks:
         - Young Sheldon
 
     deluge:
-      ratio: 0.33
+      ratio: 0.25
 
   #tv-public:
     #template: tv
