@@ -38,7 +38,7 @@ tasks:
     series:
       settings:
         shows:
-          quality: 720p webrip+ h264
+          quality: 720p
 
           # Download higher quality sources as they become available
           #upgrade: yes
