@@ -1,0 +1,12 @@
+[Unit]
+Description=Google Drive backup task
+
+[Timer]
+OnCalendar=weekly
+AccuracySec=1h
+RandomizedDelaySec=5h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+

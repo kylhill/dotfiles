@@ -1,0 +1,10 @@
+[Unit]
+Description=Download new torrents with flexget
+
+[Service]
+Type=oneshot
+ExecStart=/home/kyleh/flexget/bin/python -W ignore /home/kyleh/flexget/bin/flexget --cron execute
+
+[Install]
+WantedBy=default.target
+
