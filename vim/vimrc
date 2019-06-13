@@ -4,14 +4,11 @@
 silent! execute pathogen#infect()
 
 " General Settings
-set nocompatible    " disable compatibility mode
 set hidden          " hide buffers when they are abandoned
 set autowrite       " automatically save before certain commands
 set autochdir       " automatically set current directory to directory of last opened file
 set lazyredraw      " do not redraw while executing macros or commands that aren't typed
-set ttyfast         " send more characters to the screen for redrawing
 set nowrap          " don't wrap lines
-set sidescroll=1
 
 if has("autocmd")
     " Jump to the last file position when reopening a file
@@ -33,6 +30,7 @@ endif
 set background=dark     " use a dark background
 set showmatch           " highlight matching brackets
 set noshowmode          " don't show current mode in bottom bar, Airline handles this
+"set cursorline         " enable current line highlighting
 
 " Spaces and Tabs
 set smartindent         " smartly indent based on syntax

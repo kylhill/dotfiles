@@ -118,12 +118,16 @@ if ! shopt -oq posix; then
 fi
 
 # Kyle's customizations:
-export VISUAL=/usr/bin/vim
+export PAGER=/usr/bin/less
+export VISUAL=/usr/bin/nvim
 export EDITOR="$VISUAL"
 
 # Use vi editing mode
 set -o vi
-alias vi='vim'
+alias vi="nvim"
+alias vim="nvim"
+alias oldvim="\vim"
+alias vimdiff="nvim -d"
 
 # Autocorrect typos path names
 shopt -s cdspell
