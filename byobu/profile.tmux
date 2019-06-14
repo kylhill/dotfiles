@@ -2,6 +2,7 @@ source $BYOBU_PREFIX/share/byobu/profiles/tmux
 
 # Use 256 color tmux if terminal supports it
 if-shell 'test $(tput colors) -ge 256' 'set-option -g default-terminal "tmux-256color"'
+if-shell 'test $(tput colors) -ge 256' 'set-option -sa terminal-overrides ",*-256color:Tc"'
 if-shell 'test $(tput colors) -lt 256' 'set-option -g default-terminal "tmux"'
 
 # Start window numbers at 1 to match keyboard order with tmux window order

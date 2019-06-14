@@ -74,7 +74,6 @@ esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    #test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     eval `dircolors ~/.dircolors/dircolors-solarized/dircolors.256dark`
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
@@ -117,74 +116,20 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Kyle's customizations:
-export PAGER=/usr/bin/less
-export VISUAL=/usr/bin/nvim
-export EDITOR="$VISUAL"
-
-# Use vi editing mode
-set -o vi
-alias vi="nvim"
-alias vim="nvim"
-alias oldvim="\vim"
-alias vimdiff="nvim -d"
-
-# Autocorrect typos path names
+# Kyle's shell options
 shopt -s cdspell
 shopt -s dirspell
-
-# Other shopts
 shopt -s cmdhist
 
 # Disable XON/XOFF flow control
 stty -ixon
 
-# Easier navigation: .., ..., ~ and -
-alias ..="cd .."
-alias cd..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
+# Use vi editing mode
+set -o vi
 
-# Extract archives - use: extract <file>
-# Based on http://dotfiles.org/~pseup/.bashrc
-function extract() {
-    if [ -f "$1" ] ; then
-        local filename=$(basename "$1")
-        local foldername="${filename%%.*}"
-        local fullpath=`perl -e 'use Cwd "abs_path";print abs_path(shift)' "$1"`
-        local didfolderexist=false
-        if [ -d "$foldername" ]; then
-            didfolderexist=true
-            read -p "$foldername already exists, do you want to overwrite it? (y/n) " -n 1
-            echo
-            if [[ $REPLY =~ ^[Nn]$ ]]; then
-                return
-            fi
-        fi
-        mkdir -p "$foldername" && cd "$foldername"
-        case $1 in
-            *.tar.bz2) tar xjf "$fullpath" ;;
-            *.tar.gz) tar xzf "$fullpath" ;;
-            *.tar.xz) tar Jxvf "$fullpath" ;;
-            *.tar.Z) tar xzf "$fullpath" ;;
-            *.tar) tar xf "$fullpath" ;;
-            *.taz) tar xzf "$fullpath" ;;
-            *.tb2) tar xjf "$fullpath" ;;
-            *.tbz) tar xjf "$fullpath" ;;
-            *.tbz2) tar xjf "$fullpath" ;;
-            *.tgz) tar xzf "$fullpath" ;;
-            *.txz) tar Jxvf "$fullpath" ;;
-            *.zip) unzip "$fullpath" ;;
-            *) echo "'$1' cannot be extracted via extract()" && cd .. && ! $didfolderexist && rm -r "$foldername" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
+# Kyle's Aliases
+if [ -x /usr/bin/nvim ]
+    alias vim="/usr/bin/nvim"
+    alias vimdiff="/usr/bin/nvim -d"
+fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -4,6 +4,7 @@
 silent! execute pathogen#infect()
 
 " General Settings
+set nocompatible    " disable compatibility mode
 set hidden          " hide buffers when they are abandoned
 set autowrite       " automatically save before certain commands
 set autochdir       " automatically set current directory to directory of last opened file
@@ -30,7 +31,7 @@ endif
 set background=dark     " use a dark background
 set showmatch           " highlight matching brackets
 set noshowmode          " don't show current mode in bottom bar, Airline handles this
-"set cursorline         " enable current line highlighting
+"set cursorline         " enable current line highlighting (slows down scrolling)
 
 " Spaces and Tabs
 set smartindent         " smartly indent based on syntax
@@ -45,9 +46,10 @@ set smartcase           " do smart case matching
 
 " NERDTree Configuration
 if has("autocmd")
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    " Open NERDTree automatically if opening a directory
     autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+    " Close NERDTree if it's the only window left open
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 endif
 

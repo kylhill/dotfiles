@@ -20,8 +20,8 @@
         path: git/gitconfig
     ~/.inputrc:
         path: bash/inputrc
-    ~/.ssh/config:
-        path: ssh/config
+    ~/.profile:
+        path: bash/profile
     ~/.tvnamer.json:
         path: tvnamer/tvnamer.json
     ~/.vim:
@@ -36,6 +36,8 @@
         path: systemd/user/rclone.service
     ~/.config/systemd/user/rclone.timer:
         path: systemd/user/rclone.timer
+    ~/.ssh/config:
+        path: ssh/config
 
 - shell:
   - touch ~/.hushlogin
