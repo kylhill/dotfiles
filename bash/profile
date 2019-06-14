@@ -27,12 +27,12 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # set PAGER to less
-if [ -x /usr/bin/less ]
+if [ -x /usr/bin/less ]; then
     export PAGER=/usr/bin/less
 fi
 
 # set default edtior to nvim, if it exists, otherwise use vim
-if [ -x /usr/bin/nvim ]
+if [ -x /usr/bin/nvim ]; then
     export VISUAL=/usr/bin/nvim
     export EDITOR=/usr/bin/nvim
 else

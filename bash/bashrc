@@ -128,7 +128,7 @@ stty -ixon
 set -o vi
 
 # Kyle's Aliases
-if [ -x /usr/bin/nvim ]
+if [ -x /usr/bin/nvim ]; then
     alias vim="/usr/bin/nvim"
     alias vimdiff="/usr/bin/nvim -d"
 fi
