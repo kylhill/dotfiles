@@ -77,7 +77,7 @@ if [ -x /usr/bin/dircolors ]; then
     eval `dircolors ~/.dircolors/dircolors-solarized/dircolors.256dark`
     #eval `dircolors ~/.dircolors/dircolors-solarized/dircolors.ansi-dark`
 
-    alias ls='ls --color=auto'
+    alias ls='ls --color=auto -F -h -v'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 
@@ -128,9 +128,6 @@ shopt -s autocd
 
 # Disable XON/XOFF flow control
 stty -ixon
-
-# Use vi editing mode
-set -o vi
 
 # Alias vim to nvim, if available
 if [ -x /usr/bin/nvim ]; then
