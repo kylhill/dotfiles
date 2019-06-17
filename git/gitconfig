@@ -1,13 +1,11 @@
-# This is Git's per-user configuration file.
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    ui = true
+    ui = auto
 [core]
-    editor = /usr/bin/nvim
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[push]
+    default = simple
 [user]
     name = Kyle Hill
     email = kylhill@gmail.com
-[push]
-    default = simple
+[github]
+    user = kylhill
