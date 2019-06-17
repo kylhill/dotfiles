@@ -5,7 +5,7 @@
     branch = auto
     ui = true
 [core]
-    editor = vim
+    editor = /usr/bin/nvim
 [user]
     name = Kyle Hill
     email = kylhill@gmail.com

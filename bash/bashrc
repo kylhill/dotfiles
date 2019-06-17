@@ -75,6 +75,8 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     eval `dircolors ~/.dircolors/dircolors-solarized/dircolors.256dark`
+    #eval `dircolors ~/.dircolors/dircolors-solarized/dircolors.ansi-dark`
+
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -82,6 +84,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+
+    alias diff='diff --color=auto'
 fi
 
 # colored GCC warnings and errors
@@ -127,9 +131,16 @@ stty -ixon
 # Use vi editing mode
 set -o vi
 
-# Kyle's Aliases
+# Alias vim to nvim, if available
 if [ -x /usr/bin/nvim ]; then
     alias vim="/usr/bin/nvim"
     alias vimdiff="/usr/bin/nvim -d"
 fi
 
+# Solarized colors for less
+export LESS_TERMCAP_mb=$'\E[01;31m' # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m' # begin bold
+export LESS_TERMCAP_me=$'\E[0m' # end mode
+export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m' # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m' # end underline
