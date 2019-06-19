@@ -5,6 +5,10 @@ if-shell 'test $(tput colors) -ge 256' 'set-option -g default-terminal "screen.x
 if-shell 'test $(tput colors) -ge 256' 'set-option -ga terminal-overrides ",*-256color:Tc"'
 if-shell 'test $(tput colors) -lt 256' 'set-option -g default-terminal "screen.xterm"'
 
+# Make Ctrl+Left and Ctrl+Right work properly
+set -ga terminal-overrides "xterm*:kLFT5=\eOD:kRIT5=\eOC:kUP5=\eOA:kDN5=\eOB:smkx@:rmkx@"
+
+# Update terminal window title dynamically
 set-option -g set-titles on
 set-option -g set-titles-string '#(whoami)@#H: - #{pane_current_command}'
 
