@@ -9,7 +9,7 @@ set -ga terminal-overrides "xterm*:kLFT5=\eOD:kRIT5=\eOC:kUP5=\eOA:kDN5=\eOB:smk
 
 # Update terminal window title dynamically
 set-option -g set-titles on
-set-option -g set-titles-string '#(whoami)@#H: - #{pane_current_command}'
+set-option -g set-titles-string '#(whoami)@#(hostname -f): - #{pane_current_command}'
 
 # Start window numbers at 1 to match keyboard order with tmux window order
 set-option -g base-index 1
