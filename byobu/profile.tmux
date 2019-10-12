@@ -25,43 +25,33 @@ set-option -g status-right '#(byobu-status tmux_right)'
 #############################################
 
 # pane border
-set-option -g pane-active-border-bg $BYOBU_DARK
-#set-option -g pane-active-border-fg $BYOBU_HIGHLIGHT
-#set-option -g pane-border-fg $BYOBU_ACCENT
-set-option -g pane-border-bg $BYOBU_DARK
-
-# pane number display
-#set-option -g display-panes-colour $BYOBU_ACCENT
-#set-option -g display-panes-active-colour $BYOBU_HIGHLIGHT
-
-# clock
-#set-option -g clock-mode-colour $BYOBU_ACCENT
+set-option -g  pane-active-border-style bg=$BYOBU_DARK
+set-option -ga pane-active-border-style fg=$BYOBU_HIGHLIGHT
+set-option -g  pane-border-style fg=$BYOBU_ACCENT
+set-option -ga pane-border-style bg=$BYOBU_DARK
 
 # window mode
-set-option -g mode-bg $BYOBU_DARK
-#set-option -g mode-fg $BYOBU_LIGHT
+set-option -g  mode-style bg=$BYOBU_DARK
+set-option -ga mode-style fg=$BYOBU_LIGHT
 
 
 # default window title colors
-#set-window-option -g window-status-attr default
-#set-window-option -g window-status-bg $BYOBU_DARK
-#set-window-option -g window-status-fg $BYOBU_LIGHT
+set-window-option -g  window-status-style bg=$BYOBU_DARK
+set-window-option -ga window-status-style fg=$BYOBU_LIGHT
 
 # active window title colors
-#set-window-option -g window-status-current-attr reverse
-set-window-option -g window-status-current-bg $BYOBU_BRIGHT
-set-window-option -g window-status-current-fg $BYOBU_HIGHLIGHT
+set-window-option -g  window-status-current-style bg=$BYOBU_HIGHLIGHT
+set-window-option -ga window-status-current-style fg=$BYOBU_BRIGHT
 
 # window activity colors
-#set-window-option -g window-status-activity-bg $BYOBU_DARK
-#set-window-option -g window-status-activity-fg $BYOBU_LIGHT
-#set-window-option -g window-status-activity-attr bold
+set-window-option -g  window-status-activity-style bg=$BYOBU_DARK
+set-window-option -ga window-status-activity-style fg=$BYOBU_LIGHT
 
 # default status bar colors
-#set-option -g status-bg $BYOBU_DARK
-#set-option -g status-fg $BYOBU_LIGHT
+set-option -g  status-style bg=$BYOBU_DARK
+set-option -ga status-style fg=$BYOBU_LIGHT
 
 # message text
-set-option -g message-bg $BYOBU_DARK
-set-option -g message-fg $BYOBU_LIGHT
+set-option -g  message-style bg=$BYOBU_DARK
+set-option -ga message-style fg=$BYOBU_LIGHT
 
