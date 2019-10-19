@@ -17,3 +17,8 @@ Host htpc3
 Host cislinux
     HostName cislinux.cis.ksu.edu
     User kylhill
+
+Host *
+	ControlPath ~/.ssh/%C.sock
+	ControlMaster auto
+	ControlPersist 10m

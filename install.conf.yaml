@@ -38,6 +38,8 @@
         path: systemd/user/rclone.timer
     ~/.ssh/config:
         path: ssh/config
+    ~/.ssh/authorized_keys:
+        path: ssh/authorized_keys
 
 - shell:
   - touch ~/.hushlogin
