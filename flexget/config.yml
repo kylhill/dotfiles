@@ -33,15 +33,18 @@ tasks:
     # Private RSS feed for TV shows from morethan.tv
     rss:
       url: https://www.morethan.tv/feeds.php?feed=torrents_tv&user=29212&auth=56334d999e47d093a963b47ea822356f&passkey=ah6polqnqemxtw50i0ggnivc76e0lbic&authkey=mkhit4lab7s78t1lfu0qghxz1mhy13l7
-      all_entries: no
+      #all_entries: no
 
     series:
       settings:
         shows:
-          quality: 720p
+          # Wait for a 720p hdtv (or better) release for 24 hours, after that
+          # download the best episode seen (can be higher or lower quality).
+          timeframe: 24 hours
+          target: 720p hdtv+
 
-          # Download higher quality sources as they become available
-          #upgrade: yes
+          # Download the target quality if it becomes available after the timeframe
+          upgrade: yes
 
           # Download new season packs as they become available
           #season_packs: always
@@ -75,7 +78,7 @@ tasks:
         - Young Sheldon
 
     deluge:
-      ratio: 0.5
+      ratio: 0.33
 
   #tv-public:
     #template: tv
