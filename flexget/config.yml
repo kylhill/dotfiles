@@ -4,7 +4,6 @@ templates:
     thetvdb_lookup: yes
 
     # Try to parse additional information from file names
-    metainfo_series: yes
     parsing:
       series: guessit
 
@@ -33,15 +32,16 @@ tasks:
     # Private RSS feed for TV shows from morethan.tv
     rss:
       url: https://www.morethan.tv/feeds.php?feed=torrents_tv&user=29212&auth=56334d999e47d093a963b47ea822356f&passkey=ah6polqnqemxtw50i0ggnivc76e0lbic&authkey=mkhit4lab7s78t1lfu0qghxz1mhy13l7
-      #all_entries: no
+      all_entries: no
 
     series:
       settings:
         shows:
           # Wait for a 720p hdtv (or better) release for 24 hours, after that
-          # download the best episode seen (can be higher or lower quality).
+          # download the best episode seen, up to 1080p.
           timeframe: 24 hours
           target: 720p hdtv+
+          quality: <=1080p webrip+
 
           # Download the target quality if it becomes available after the timeframe
           upgrade: yes
@@ -63,13 +63,15 @@ tasks:
         - DuckTales (2017)
         - Grey's Anatomy
         - LEGO Star Wars
+        - LEGO Ninjago Masters of Spinjitzu
         - Modern Family
         - PJ Masks
         - Pete the Cat
-        - Star Trek Discovery
         - Star Wars Resistance
+        - The Boss Baby Back in Business
         - The Marvelous Mrs. Maisel
         - The Magic School Bus Rides Again
+        - The Mandalorian
         - The Simpsons
         - This is Us
         - Tom Clancy's Jack Ryan

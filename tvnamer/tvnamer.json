@@ -1,5 +1,5 @@
 {
-    "always_move": false,
+    "always_move": true,
     "always_rename": true,
     "batch": false,
     "custom_filename_character_blacklist": "",
@@ -67,7 +67,7 @@
     "recursive": false,
     "replace_invalid_characters_with": " -",
     "search_all_languages": false,
-    "select_first": true,
+    "select_first": false,
     "series_id": null,
     "skip_file_on_error": true,
     "titlecase_filename": false,
