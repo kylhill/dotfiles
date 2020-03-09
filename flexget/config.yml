@@ -56,8 +56,8 @@ tasks:
         - Blaze and the Monster Machines
         - Bluey (2018)
         - Bull (2016)
+        - Cosmos A Spacetime Odyssey
         - Curious George
-        - Dino Dana
         - Dinotrux
         - Derry Girls
         - DuckTales (2017)
@@ -67,7 +67,6 @@ tasks:
         - LEGO Ninjago Masters of Spinjitzu
         - Modern Family
         - PJ Masks
-        - Pete the Cat
         - Schitt's Creek
         - Star Trek Picard
         - Star Wars Resistance
@@ -83,7 +82,7 @@ tasks:
         - Young Sheldon
 
     deluge:
-      ratio: 0.33
+      ratio: 0.25
 
   #tv-public:
     #template: tv
