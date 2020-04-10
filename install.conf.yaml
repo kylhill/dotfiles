@@ -32,6 +32,10 @@
         path: systemd/user/flexget.service
     ~/.config/systemd/user/flexget.timer:
         path: systemd/user/flexget.timer
+    ~/.config/systemd/user/flexget-cleanup.service:
+        path: systemd/user/flexget-cleanup.service
+    ~/.config/systemd/user/flexget-cleanup.timer:
+        path: systemd/user/flexget-cleanup.timer
     ~/.config/systemd/user/rclone.service:
         path: systemd/user/rclone.service
     ~/.config/systemd/user/rclone.timer:
