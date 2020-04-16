@@ -1,0 +1,7 @@
+[Unit]
+Description=clean up flexget database
+
+[Service]
+Type=oneshot
+ExecStart=/home/kyleh/flexget/bin/python -W ignore /home/kyleh/flexget/bin/flexget --cron database cleanup; /home/kyleh/flexget/bin/python -W ignore /home/kyleh/flexget/bin/flexget --cron database vacuum
+
