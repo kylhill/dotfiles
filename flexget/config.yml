@@ -57,7 +57,7 @@ tasks:
 
     # Deluge settings for private torrents
     deluge:
-      ratio: 0.25
+      ratio: 0.10
 
   #tv-public:
     #template: tv

@@ -3,5 +3,5 @@ Description=Google Drive backup with rclone
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/rclone sync drive:/ "/srv/backup/xps13/Google Drive/" --exclude "/Google Photos/**" --quiet
+ExecStart=/usr/bin/rclone sync drive:/ "/srv/backup/xps13/Google Drive/" --quiet
 
