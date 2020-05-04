@@ -40,11 +40,10 @@ tasks:
         filesystem: /srv/shared/video/Series/
 
       settings:
-        # Wait for a 720p hdtv (or better) release for 24 hours, after that
-        # download the best episode seen, up to 1080p.
+        # Wait for a 720p hdtv (or better) release for 24 hours, after that download the best episode seen, up to 1080p.
         timeframe: 24 hours
         target: 720p hdtv+
-        quality: <=1080p webrip+
+        quality: <=1080p webrip+ h264+
 
         # Download the target quality if it becomes available after the timeframe
         upgrade: yes
@@ -58,6 +57,13 @@ tasks:
     # Deluge settings for private torrents
     deluge:
       ratio: 0.10
+
+    # Force strict checking to avoid downloading stuff we don't want
+    series:
+      - "Law & Order":
+          exact: yes
+      - "The War":
+          exact: yes
 
   #tv-public:
     #template: tv
