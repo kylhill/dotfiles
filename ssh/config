@@ -1,3 +1,6 @@
+Host tacomafia.net
+    User kyleh
+
 Host syntax
     HostName tacomafia.net
     User kyleh
@@ -19,6 +22,6 @@ Host cislinux
     User kylhill
 
 Host *
-	ControlPath ~/.ssh/%C.sock
-	ControlMaster auto
-	ControlPersist 10m
+    ControlPath ~/.ssh/%C.sock
+    ControlMaster auto
+    ControlPersist 10m

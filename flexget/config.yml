@@ -40,8 +40,8 @@ tasks:
         filesystem: /srv/shared/video/Series/
 
       settings:
-        # Wait for a 720p hdtv (or better) release for 24 hours, after that download the best episode seen, up to 1080p.
-        timeframe: 24 hours
+        # Wait for a 720p hdtv (or better) release for 12 hours, after that download the best episode seen, up to 1080p.
+        timeframe: 12 hours
         target: 720p hdtv+
         quality: <=1080p webrip+ h264+
 
