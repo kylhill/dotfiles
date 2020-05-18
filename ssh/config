@@ -22,6 +22,6 @@ Host cislinux
     User kylhill
 
 Host *
-    ControlPath ~/.ssh/%C.sock
+    ControlPath ~/.ssh/control-%h-%p-%r.sock
     ControlMaster auto
     ControlPersist 10m
