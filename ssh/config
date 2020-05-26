@@ -21,6 +21,11 @@ Host cislinux
     HostName cislinux.cis.ksu.edu
     User kylhill
 
+Host gateway
+    HostName gateway.tacomafia.net
+    user kyleh
+    IdentityFile ~/.ssh/ubnt
+
 Host *
     ControlPath ~/.ssh/control-%h-%p-%r.sock
     ControlMaster auto
