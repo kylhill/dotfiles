@@ -5,10 +5,6 @@ Host syntax
     HostName tacomafia.net
     User kyleh
 
-Host syntax2
-    HostName syntax2.tacomafia.net
-    User kyleh
-
 Host htpc
     HostName htpc.tacomafia.net
     User root
