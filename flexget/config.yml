@@ -10,11 +10,6 @@ templates:
     # Make sure all filenames are Windows safe
     pathscrub: windows
 
-    # Don't download if we have less than 10 GB of free space
-    free_space:
-      path: /srv/shared/torrents/
-      space: 10000
-
     # Output entities to Deluge
     deluge:
       queue_to_top: yes
@@ -37,7 +32,9 @@ tasks:
     configure_series:
       from:
         # Download shows from any series that we already have
-        filesystem: /srv/shared/video/Series/
+        filesystem:
+          path: /srv/shared/video/Series/
+          retrieve: dirs
 
       settings:
         # Wait for a 720p hdtv (or better) release for 12 hours, after that download the best episode seen, up to 1080p.

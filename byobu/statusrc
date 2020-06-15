@@ -37,14 +37,14 @@
 #RELEASE_ABBREVIATED=1
 
 # Default: /
-MONITORED_DISK=/srv
+MONITORED_DISK=/dev/sda
 
 # Minimum disk throughput that triggers the notification (in kB/s)
 # Default: 50
-#DISK_IO_THRESHOLD=50
+DISK_IO_THRESHOLD=100
 
 # Default: eth0
-#MONITORED_NETWORK=eth0
+MONITORED_NETWORK=enp5s0
 
 # Unit used for network throughput (either bits per second or bytes per second)
 # Default: bits
@@ -52,7 +52,7 @@ NETWORK_UNITS=bytes
 
 # Minimum network throughput that triggers the notification (in kbit/s)
 # Default: 20
-#NETWORK_THRESHOLD=20
+NETWORK_THRESHOLD=100
 
 # You can add an additional source of temperature here
 #MONITORED_TEMP=/proc/acpi/thermal_zone/THM0/temperature

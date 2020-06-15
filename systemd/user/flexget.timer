@@ -2,9 +2,9 @@
 Description=Periodic flexget task
 
 [Timer]
-OnCalendar=00/3:00
-AccuracySec=15m
-RandomizedDelaySec=15m
+OnCalendar=00/2:00
+AccuracySec=10m
+RandomizedDelaySec=10m
 Persistent=true
 
 [Install]
