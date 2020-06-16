@@ -37,7 +37,7 @@
 #RELEASE_ABBREVIATED=1
 
 # Default: /
-MONITORED_DISK=/dev/sda
+MONITORED_DISK=/srv
 
 # Minimum disk throughput that triggers the notification (in kB/s)
 # Default: 50
