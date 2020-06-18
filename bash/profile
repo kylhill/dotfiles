@@ -34,10 +34,9 @@ fi
 # set default edtior to nvim, if it exists, otherwise use vim
 if [ -x /usr/bin/nvim ]; then
     export VISUAL=/usr/bin/nvim
-    export EDITOR=/usr/bin/nvim
 else
     export VISUAL=/usr/bin/vim
-    export EDITOR=/usr/bin/vim
 fi
+export EDITOR="$VISUAL"
 
 _byobu_sourced=1 . /usr/bin/byobu-launch 2>/dev/null || true

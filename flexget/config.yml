@@ -37,10 +37,12 @@ tasks:
           retrieve: dirs
 
       settings:
-        # Wait for a 720p hdtv (or better) release for 12 hours, after that download the best episode seen, up to 1080p.
+        # Wait for a (720p hdtv+ h264+) or (1080p hdtv+ h265+) release for 12 hours, after that download the best (720p-1080p webprip+ h264+) episode available.
         timeframe: 12 hours
-        target: 720p hdtv+
-        quality: <=1080p webrip+ h264+
+        qualities:
+          - 720p hdtv+ h264+
+          - 1080p hdtv+ h265+
+        quality: 720p-1080p webrip+ h264+
 
         # Download the target quality if it becomes available after the timeframe
         upgrade: yes
@@ -52,8 +54,8 @@ tasks:
         #season_packs: always
 
     # Deluge settings for private torrents
-    deluge:
-      ratio: 0.10
+    #deluge:
+      #ratio: 0.33
 
     # Force strict checking to avoid downloading stuff we don't want
     series:
@@ -82,3 +84,12 @@ tasks:
       #ratio: 0
       #max_up_speed: 100.0           # don't attract too much attention
 
+#web_server:
+  #bind: 127.0.0.1
+  #base_url: /flexget
+
+schedules:
+  - tasks: [tv-private]
+    interval:
+      hours: 1
+      jitter: 300
