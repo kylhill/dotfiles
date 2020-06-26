@@ -1,7 +1,0 @@
-[Unit]
-Description=Download new torrents with flexget
-
-[Service]
-Type=oneshot
-ExecStart=/home/kyleh/flexget/bin/flexget execute
-

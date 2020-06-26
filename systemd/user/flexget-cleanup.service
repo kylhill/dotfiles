@@ -1,8 +1,0 @@
-[Unit]
-Description=clean up flexget database
-
-[Service]
-Type=oneshot
-ExecStart=/home/kyleh/flexget/bin/flexget database cleanup
-ExecStart=/home/kyleh/flexget/bin/flexget database vacuum
-
