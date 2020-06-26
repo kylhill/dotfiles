@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Sync Google Drive to backup directory
+/usr/bin/rclone sync drive:/ "/srv/backup/xps13/Google Drive/" --quiet
+
+exit 0
