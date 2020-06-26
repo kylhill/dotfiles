@@ -26,10 +26,6 @@
         path: vim/vim/
     ~/.vimrc:
         path: vim/vimrc
-    ~/.config/systemd/user/rclone.service:
-        path: systemd/user/rclone.service
-    ~/.config/systemd/user/rclone.timer:
-        path: systemd/user/rclone.timer
     ~/.ssh/config:
         path: ssh/config
     ~/.ssh/authorized_keys:

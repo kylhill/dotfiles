@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Generate updated shared file directory listings to aid in recovery
+find -O3 /srv/shared/ -maxdepth 3 -type d -print | sort -h > syntax_dirlist.txt
+ls /srv/shared/books/ > books_list.txt
+ls /srv/shared/video/Movies/ > movies_list.txt
+
+exit 0
