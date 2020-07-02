@@ -135,6 +135,11 @@ if [ -x /usr/bin/nvim ]; then
     alias vimdiff="/usr/bin/nvim -d"
 fi
 
+# Alias dstat-zfs
+if [ -x /usr/bin/dstat ]; then
+    alias dstat-zfs="dstat -d --zfs-arc --zfs-l2arc --zfs-zil --nocolor"
+fi
+
 # Solarized colors for less
 export LESS_TERMCAP_mb=$'\E[01;31m' # begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;74m' # begin bold
