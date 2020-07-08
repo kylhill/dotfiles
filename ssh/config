@@ -31,6 +31,11 @@ Host wap
     user kyleh
     IdentityFile ~/.ssh/ubnt
 
+Host wap2
+    HostName wap2.tacomafia.net
+    user kyleh
+    IdentityFile ~/.ssh/ubnt
+
 Host *
     ControlPath ~/.ssh/control-%h-%p-%r.sock
     ControlMaster auto
