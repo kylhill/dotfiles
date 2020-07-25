@@ -24,7 +24,7 @@ Host cislinux
 Host gateway
     HostName gateway.tacomafia.net
     user kyleh
-    IdentityFile ~/.ssh/old
+    IdentityFile ~/.ssh/ubnt
 
 Host wap
     HostName wap.tacomafia.net
