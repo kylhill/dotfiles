@@ -24,7 +24,7 @@ Host cislinux
 Host gateway
     HostName gateway.tacomafia.net
     user kyleh
-    IdentityFile ~/.ssh/ubnt
+    IdentityFile ~/.ssh/old
 
 Host wap
     HostName wap.tacomafia.net
@@ -37,6 +37,7 @@ Host wap2
     IdentityFile ~/.ssh/ubnt
 
 Host *
+    AddKeysToAgent yes
     ControlPath ~/.ssh/control-%h-%p-%r.sock
     ControlMaster auto
     ControlPersist 10m
