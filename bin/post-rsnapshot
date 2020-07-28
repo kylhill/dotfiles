@@ -11,12 +11,12 @@ if [ -f $ZIP_FILE ]; then
 fi
 
 # Zip up the most recent backup
-/usr/bin/zip -q -r $ZIP_FILE ./* > /dev/null 2>&1
+/usr/bin/zip -q -P 'Facesol1!' -r $ZIP_FILE ./* > /dev/null 2>&1
 
 # Copy to Google Drive
 /usr/bin/rclone copy $ZIP_FILE drive:/Backup/syntax/
 
 # rsync backups to cislinux for off-site storage
-rsync -az --delete /srv/backup/ cislinux:~/backup/
+rsync -az --delete --exclude '.zfs' /srv/backup/ cislinux:~/backup/
 
 exit 0
