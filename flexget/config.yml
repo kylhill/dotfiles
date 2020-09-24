@@ -64,32 +64,34 @@ tasks:
       - "The War":
           exact: yes
 
-  #tv-public:
-    #template: tv
-    #priority: 2
+  tv-showrss:
+    template: tv
+    priority: 2
 
-    # showRSS: magnets, no namespaces, cleaned names, per-show settings for quality and propers
-    #rss: https://showrss.info/user/219.rss?magnets=true&namespaces=false&name=clean&quality=null&re=null
+    # showRSS: magnets, no namespaces, raw names, per-show settings for quality and propers
+    rss:
+      url: https://showrss.info/user/246806.rss?magnets=true&namespaces=false&name=null&quality=null&re=null
+      all_entries: yes
 
     # Download all series from the custom feed
-    #all_series: yes
-    #accept_all: yes
+    all_series: yes
+    accept_all: yes
 
     # Deluge settings for public torrents
-    #deluge:
-      #main_file_only: yes
-      #hide_sparse_files: no
-      #keep_subs: no
-      #magnetization_timeout: 60     # wait up to 60s to allow for file renaming
-      #ratio: 0
-      #max_up_speed: 100.0           # don't attract too much attention
+    deluge:
+      main_file_only: yes
+      hide_sparse_files: no
+      keep_subs: no
+      magnetization_timeout: 60     # wait up to 60s to allow for file renaming
+      ratio: 0
+      max_up_speed: 100.0           # don't attract too much attention
 
 #web_server:
   #bind: 127.0.0.1
   #base_url: /flexget
 
 schedules:
-  - tasks: [tv-private]
+ - tasks: [tv-private, tv-showrss]
     interval:
       hours: 1
       jitter: 300
