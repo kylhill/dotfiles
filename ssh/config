@@ -1,4 +1,5 @@
 Host tacomafia.net
+    Port 843
     User kyleh
 
 Host syntax
