@@ -3,6 +3,7 @@ Host tacomafia.net
 
 Host syntax
     HostName tacomafia.net
+    Port 843
     User kyleh
 
 Host htpc
