@@ -18,7 +18,7 @@ endif
 
 " UI Configuration
 if &t_Co >= 256
-    if has("termguicolors") && has('nvim')
+    if has("termguicolors")
         set termguicolors
         silent! colorscheme solarized8
     else
@@ -39,7 +39,7 @@ set cursorline          " enable current line highlighting (slows down scrolling
 set number              " enable line numbering
 
 " Spaces and Tabs
-set smartindent         " smartly indent based on syntax
+"set smartindent         " smartly indent based on syntax
 set expandtab           " tabs are spaces
 set shiftwidth=4        " number of spaces per level of indentation
 set softtabstop=4       " number of spaces per tab
