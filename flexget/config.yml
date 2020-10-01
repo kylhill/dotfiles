@@ -87,7 +87,7 @@ tasks:
       max_up_speed: 100.0           # don't attract too much attention
 
 schedules:
- - tasks: [tv-private, tv-showrss]
+  - tasks: [tv-private, tv-showrss]
     interval:
       hours: 1
       jitter: 300

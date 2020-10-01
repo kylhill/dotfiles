@@ -1,7 +1,7 @@
 source $BYOBU_PREFIX/share/byobu/profiles/tmux
 
 # Use 256 color tmux if terminal supports it
-if-shell 'test $(tput colors) -ge 256' 'set-option -g default-terminal "screen.xterm-256color"'
+if-shell 'test $(tput colors) -ge 256' 'set-option -g default-terminal "screen-256color"'
 if-shell 'test $(tput colors) -ge 256' 'set-option -ga terminal-overrides ",*-256color:Tc"'
 
 # Make Ctrl+Left and Ctrl+Right work properly
