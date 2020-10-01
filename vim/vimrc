@@ -20,21 +20,23 @@ endif
 if &t_Co >= 256
     if has("termguicolors") && has('nvim')
         set termguicolors
-        let g:solarized_termcolors=256
         silent! colorscheme solarized8
+    else
+        silent! colorscheme solarized
     endif
 
-    set number
-
-    " Airline Configuration
+    let g:solarized_termcolors=256
     let g:airline_theme='solarized'
     let g:airline_solarized_bg='dark'
+else
+    colorscheme default
 endif
 
 set background=dark     " use a dark background
 set showmatch           " highlight matching brackets
 set noshowmode          " don't show current mode in bottom bar, Airline handles this
 set cursorline          " enable current line highlighting (slows down scrolling)
+set number              " enable line numbering
 
 " Spaces and Tabs
 set smartindent         " smartly indent based on syntax
