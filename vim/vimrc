@@ -18,14 +18,14 @@ endif
 
 " UI Configuration
 if &t_Co >= 256
-    if has("termguicolors")
+    if has("termguicolors") && has('nvim')
         set termguicolors
         silent! colorscheme solarized8
+        let g:solarized_termcolors=256
     else
         silent! colorscheme solarized
     endif
 
-    let g:solarized_termcolors=256
     let g:airline_theme='solarized'
     let g:airline_solarized_bg='dark'
 else
