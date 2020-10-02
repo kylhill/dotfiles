@@ -27,8 +27,6 @@ if &t_Co >= 256
 
     let g:airline_theme='solarized'
     let g:airline_solarized_bg='dark'
-else
-    colorscheme default
 endif
 
 set background=dark     " use a dark background

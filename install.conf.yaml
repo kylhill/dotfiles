@@ -30,6 +30,8 @@
         path: ssh/config
     ~/.ssh/authorized_keys:
         path: ssh/authorized_keys
+    ~/.local/bin:
+        path: bin/
 
 - shell:
   - touch ~/.hushlogin
