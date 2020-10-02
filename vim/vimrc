@@ -25,6 +25,7 @@ if &t_Co >= 256
         silent! colorscheme solarized
     endif
 
+    let g:solarized_termtrans=1
     let g:airline_theme='solarized'
     let g:airline_solarized_bg='dark'
 endif
@@ -33,10 +34,9 @@ set background=dark     " use a dark background
 set showmatch           " highlight matching brackets
 set noshowmode          " don't show current mode in bottom bar, Airline handles this
 set cursorline          " enable current line highlighting (slows down scrolling)
-set number              " enable line numbering
+"set number              " enable line numbering
 
 " Spaces and Tabs
-"set smartindent         " smartly indent based on syntax
 set expandtab           " tabs are spaces
 set shiftwidth=4        " number of spaces per level of indentation
 set softtabstop=4       " number of spaces per tab
