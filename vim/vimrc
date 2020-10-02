@@ -21,7 +21,6 @@ if &t_Co >= 256
     if has("termguicolors") && has('nvim')
         set termguicolors
         silent! colorscheme solarized8
-        let g:solarized_termcolors=256
     else
         silent! colorscheme solarized
     endif
