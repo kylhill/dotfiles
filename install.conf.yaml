@@ -10,8 +10,14 @@
         path: aptitude/
     ~/.bashrc:
         path: bash/bashrc
-    ~/.byobu:
-        path: byobu/
+    ~/.byobu/color.tmux:
+        path: byobu/color.tmux
+    ~/.byobu/status:
+        path: byobu/status
+    ~/.byobu/statusrc:
+        path: byobu/statusrc
+    ~/.byobu/.tmux.conf:
+        path: byobu/tmux.conf
     ~/.dircolors:
         path: bash/dircolors/
     ~/.gitconfig:
