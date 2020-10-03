@@ -1,6 +1,4 @@
 BYOBU_DARK=black
-BYOBU_LIGHT=colour12
+BYOBU_LIGHT=brightcyan
 BYOBU_ACCENT=blue
 BYOBU_HIGHLIGHT=yellow
-
-BYOBU_BRIGHT=white

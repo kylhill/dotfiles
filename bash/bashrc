@@ -136,7 +136,7 @@ fi
 
 # Alias dstat-zfs
 if [ -x /usr/bin/dstat ]; then
-    alias dstat-zfs="dstat -d --zfs-arc --zfs-l2arc --zfs-zil --nocolor"
+    alias dstat-zfs="/usr/bin/dstat -d --zfs-arc --zfs-l2arc --zfs-zil --nocolor"
 fi
 
 # Solarized colors for less
@@ -146,6 +146,11 @@ export LESS_TERMCAP_me=$'\E[0m' # end mode
 export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
 export LESS_TERMCAP_so=$'\E[38;5;246m' # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m' # end underline
+
+# Hack to automatically rename tmux windows
+if [ -x "$(command -v tmux)" ]; then
+    tmux setw automatic-rename
+fi
 
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
