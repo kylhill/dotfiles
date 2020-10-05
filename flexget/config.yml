@@ -20,13 +20,13 @@ templates:
       move_completed_path: /srv/shared/torrents/{{ tvdb_series_name|default(series_name) }}
 
 tasks:
-  tv-private:
+  tv-mtv:
     template: tv
     priority: 1
 
-    # Private RSS feed for TV shows from morethan.tv
+    # Private RSS feed for TV shows from morethantv.me
     rss:
-      url: https://www.morethan.tv/feeds.php?feed=torrents_tv&user=29212&auth=56334d999e47d093a963b47ea822356f&passkey=ah6polqnqemxtw50i0ggnivc76e0lbic&authkey=mkhit4lab7s78t1lfu0qghxz1mhy13l7
+      url: https://www.morethantv.me/feeds.php?feed=torrents_tv&user=29212&auth=56334d999e47d093a963b47ea822356f&passkey=ah6polqnqemxtw50i0ggnivc76e0lbic&authkey=mkhit4lab7s78t1lfu0qghxz1mhy13l7
       all_entries: no
 
     configure_series:
@@ -49,9 +49,6 @@ tasks:
 
         # Don't download specials
         specials: no
-
-        # Download new season packs as they become available
-        #season_packs: always
 
     # Deluge settings for private torrents
     #deluge:
@@ -87,7 +84,8 @@ tasks:
       max_up_speed: 100.0           # don't attract too much attention
 
 schedules:
-  - tasks: [tv-private, tv-showrss]
+ #- tasks: [tv-mtv, tv-showrss]
+  - tasks: [tv-showrss]
     interval:
       hours: 1
       jitter: 300
