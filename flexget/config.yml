@@ -68,7 +68,7 @@ tasks:
     # showRSS: magnets, no namespaces, raw names, per-show settings for quality and propers
     rss:
       url: https://showrss.info/user/246806.rss?magnets=true&namespaces=false&name=null&quality=null&re=null
-      all_entries: yes
+      all_entries: no
 
     # Download all series from the custom feed
     all_series: yes
@@ -76,9 +76,6 @@ tasks:
 
     # Deluge settings for public torrents
     deluge:
-      main_file_only: yes
-      hide_sparse_files: no
-      keep_subs: no
       magnetization_timeout: 60     # wait up to 60s to allow for file renaming
       ratio: 0
       max_up_speed: 100.0           # don't attract too much attention
