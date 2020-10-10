@@ -19,6 +19,10 @@ Host htpc3
     HostName htpc3.tacomafia.net
     User root
 
+Host htpc4
+    HostName htpc4.tacomafia.net
+    User root
+
 Host cislinux
     HostName cislinux.cis.ksu.edu
     User kylhill
