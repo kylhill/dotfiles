@@ -84,7 +84,6 @@ tasks:
       keep_subs: no
 
 schedules:
- #- tasks: [tv-mtv, tv-showrss]
   - tasks: [tv-showrss]
     interval:
       hours: 1
