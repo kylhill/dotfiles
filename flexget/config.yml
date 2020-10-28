@@ -20,46 +20,46 @@ templates:
       move_completed_path: /srv/shared/torrents/{{ tvdb_series_name|default(series_name) }}
 
 tasks:
-  tv-mtv:
-    template: tv
-    priority: 1
-
-    # Private RSS feed for TV shows from morethantv.me
-    rss:
-      url: https://www.morethantv.me/feeds.php?feed=torrents_tv&user=29212&auth=56334d999e47d093a963b47ea822356f&passkey=ah6polqnqemxtw50i0ggnivc76e0lbic&authkey=mkhit4lab7s78t1lfu0qghxz1mhy13l7
-      all_entries: no
-
-    configure_series:
-      from:
-        # Download shows from any series that we already have
-        filesystem:
-          path: /srv/shared/video/Series/
-          retrieve: dirs
-
-      settings:
-        # Wait for a (720p hdtv+ h264+) or (1080p hdtv+ h265+) release for 12 hours, after that download the best (720p-1080p webprip+ h264+) episode available.
-        timeframe: 12 hours
-        qualities:
-          - 720p hdtv+ h264+
-          - 1080p hdtv+ h265+
-        quality: 720p-1080p webrip+ h264+
-
-        # Download the target quality if it becomes available after the timeframe
-        upgrade: yes
-
-        # Don't download specials
-        specials: no
-
-    # Deluge settings for private torrents
-    #deluge:
-      #ratio: 0.33
-
-    # Force strict checking to avoid downloading stuff we don't want
-    series:
-      - "Law & Order":
-          exact: yes
-      - "The War":
-          exact: yes
+#  tv-mtv:
+#    template: tv
+#    priority: 1
+#
+#    # Private RSS feed for TV shows from morethantv.me
+#    rss:
+#      url: https://www.morethantv.me/feeds.php?feed=torrents_tv&user=29212&auth=56334d999e47d093a963b47ea822356f&passkey=ah6polqnqemxtw50i0ggnivc76e0lbic&authkey=mkhit4lab7s78t1lfu0qghxz1mhy13l7
+#      all_entries: no
+#
+#    configure_series:
+#      from:
+#        # Download shows from any series that we already have
+#        filesystem:
+#          path: /srv/shared/video/Series/
+#          retrieve: dirs
+#
+#      settings:
+#        # Wait for a (720p hdtv+ h264+) or (1080p hdtv+ h265+) release for 12 hours, after that download the best (720p-1080p webprip+ h264+) episode available.
+#        timeframe: 12 hours
+#        qualities:
+#          - 720p hdtv+ h264+
+#          - 1080p hdtv+ h265+
+#        quality: 720p-1080p webrip+ h264+
+#
+#        # Download the target quality if it becomes available after the timeframe
+#        upgrade: yes
+#
+#        # Don't download specials
+#        specials: no
+#
+#    # Deluge settings for private torrents
+#    #deluge:
+#      #ratio: 0.33
+#
+#    # Force strict checking to avoid downloading stuff we don't want
+#    series:
+#      - "Law & Order":
+#          exact: yes
+#      - "The War":
+#          exact: yes
 
   tv-showrss:
     template: tv
@@ -79,6 +79,9 @@ tasks:
       magnetization_timeout: 60     # wait up to 60s to allow for file renaming
       ratio: 0
       max_up_speed: 100.0           # don't attract too much attention
+      main_file_only: yes
+      hide_sparse_files: no
+      keep_subs: no
 
 schedules:
  #- tasks: [tv-mtv, tv-showrss]
