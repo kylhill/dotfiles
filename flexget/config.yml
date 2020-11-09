@@ -79,9 +79,9 @@ tasks:
       magnetization_timeout: 60     # wait up to 60s to allow for file renaming
       ratio: 0
       max_up_speed: 100.0           # don't attract too much attention
-      main_file_only: yes
-      hide_sparse_files: no
-      keep_subs: no
+      #main_file_only: yes
+      #hide_sparse_files: no
+      #keep_subs: no
 
 schedules:
   - tasks: [tv-showrss]
