@@ -16,7 +16,10 @@ fi
 # Copy to Google Drive
 /usr/bin/rclone copy $ZIP_FILE drive:/Backup/syntax/
 
+# Sync /opt (too large to backup to Google Drive)
+rsync -a --delete --quiet /opt/ /srv/backup/syntax/opt/
+
 # rsync backups to cislinux for off-site storage
-rsync -az --delete --exclude '.zfs' /srv/backup/ cislinux:~/backup/
+rsync -az --delete --quiet --exclude '.zfs' /srv/backup/ cislinux:~/backup/
 
 exit 0
