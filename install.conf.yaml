@@ -10,6 +10,8 @@
         path: aptitude/
     ~/.bashrc:
         path: bash/bashrc
+    ~/.bash_aliases:
+        path: bash/bash_aliases
     ~/.byobu/color.tmux:
         path: byobu/color.tmux
     ~/.byobu/status:
