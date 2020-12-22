@@ -153,6 +153,7 @@ if [ -x "$(command -v tmux)" ]; then
     tmux setw automatic-rename
 fi
 
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Easy Docker shell
+dbash() {
+    docker exec -it "$1" /bin/bash
+}

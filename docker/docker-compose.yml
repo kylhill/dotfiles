@@ -1,0 +1,68 @@
+version: "2.1"
+services:
+  unifi-controller:
+    image: ghcr.io/linuxserver/unifi-controller
+    container_name: unifi-controller
+    environment:
+      - PUID=115
+      - PGID=121
+      - MEM_LIMIT=256M
+    volumes:
+      - /opt/appdata/unifi:/config
+    ports:
+      - 3478:3478/udp
+      - 10001:10001/udp
+      - 8080:8080
+      - 127.0.0.1:8443:8443
+    restart: unless-stopped
+  kanzi:
+    image: ghcr.io/linuxserver/kanzi
+    container_name: kanzi
+    environment:
+      - PUID=119
+      - PGID=123
+      - TZ=America/Chicago
+      - INVOCATION_NAME=kodi
+      - URL_ENDPOINT=https://kanzi.tacomafia.net
+    volumes:
+      - /opt/appdata/kanzi:/config
+    ports:
+      - 127.0.0.1:8000:8000
+    restart: unless-stopped
+  flexget:
+    image: wiserain/flexget
+    container_name: flexget
+    environment:
+      - PUID=114
+      - GUID=124
+      - TZ=America/Chicago
+    volumes:
+      - /opt/appdata/flexget:/config
+    restart: unless-stopped
+  freshrss:
+    image: ghcr.io/linuxserver/freshrss
+    container_name: freshrss
+    environment:
+      - PUID=120
+      - PGID=125
+      - TZ=America/Chicago
+    volumes:
+      - /opt/appdata/freshrss:/config
+    ports:
+      - 127.0.0.1:8001:80
+    restart: unless-stopped
+  deluge:
+    image: ghcr.io/linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=America/Chicago
+      - UMASK_SET=022
+      - DELUGE_LOGLEVEL=warning
+    volumes:
+      - /opt/appdata/deluge:/config
+      - /var/working:/var/working
+      - /srv/shared/torrents:/srv/shared/torrents
+    restart: unless-stopped
