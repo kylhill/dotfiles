@@ -1,5 +1,11 @@
 #!/bin/sh
 
+####
+# Sync /opt to /srv/backup/syntax (too large to backup to Google Drive)
+rsync -a --delete --quiet /opt/ /srv/backup/syntax/opt/
+
+####
+# Zip Syntax backup and copy to Google Drive
 CWD=/srv/backup/syntax/daily.0/syntax
 ZIP_FILE=../../syntax.zip
 
@@ -16,10 +22,8 @@ fi
 # Copy to Google Drive
 /usr/bin/rclone copy $ZIP_FILE drive:/Backup/syntax/
 
-# Sync /opt (too large to backup to Google Drive)
-rsync -a --delete --quiet /opt/ /srv/backup/syntax/opt/
-
-# rsync backups to cislinux for off-site storage
+####
+# rsync all backups to cislinux for off-site storage
 rsync -az --delete --quiet --exclude '.zfs' /srv/backup/ cislinux:~/backup/
 
 exit 0

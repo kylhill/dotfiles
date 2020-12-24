@@ -34,8 +34,9 @@ services:
     container_name: flexget
     environment:
       - PUID=114
-      - GUID=124
+      - PGID=124
       - TZ=America/Chicago
+      - FG_LOG_LEVEL=info
     volumes:
       - /opt/appdata/flexget:/config
     restart: unless-stopped
