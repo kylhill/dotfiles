@@ -4,10 +4,10 @@ set -e
 
 BLACKLIST=/var/cache/dnscrypt-proxy/blacklist.txt
 
-cd /opt/generate-domains-blocklist/
+cd /opt/gen-dnsbl/
 
 SHA_PRE=$(shasum "$BLACKLIST" | cut -d' ' -f1)
-python3 generate-domains-blocklist.py -o $BLACKLIST
+python3 generate-domains-blocklist.py -o "$BLACKLIST"
 
 SHA_POST=$(shasum "$BLACKLIST" | cut -d' ' -f1)
 
