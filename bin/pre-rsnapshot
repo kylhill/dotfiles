@@ -1,6 +1,6 @@
 #!/bin/sh
 
 # Sync Google Drive to backup directory
-/usr/bin/rclone sync drive:/ "/srv/backup/laptop/Google Drive/" --quiet
+/usr/bin/rclone sync drive:/ "/srv/backup/google_drive/" --quiet
 
 exit 0
