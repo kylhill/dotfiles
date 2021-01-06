@@ -8,19 +8,19 @@ Host syntax
     User kyleh
 
 Host htpc
-    HostName htpc.tacomafia.net
+    HostName htpc.l.tacomafia.net
     User root
 
 Host htpc2
-    HostName htpc2.tacomafia.net
+    HostName htpc2.l.tacomafia.net
     User root
 
 Host htpc3
-    HostName htpc3.tacomafia.net
+    HostName htpc3.l.tacomafia.net
     User root
 
 Host htpc4
-    HostName htpc4.tacomafia.net
+    HostName htpc4.l.tacomafia.net
     User root
 
 Host cislinux
@@ -28,17 +28,17 @@ Host cislinux
     User kylhill
 
 Host gateway
-    HostName gateway.tacomafia.net
+    HostName gateway.l.tacomafia.net
     user kyleh
     IdentityFile ~/.ssh/ubnt
 
 Host wap
-    HostName wap.tacomafia.net
+    HostName wap.l.tacomafia.net
     user kyleh
     IdentityFile ~/.ssh/ubnt
 
 Host wap2
-    HostName wap2.tacomafia.net
+    HostName wap2.l.tacomafia.net
     user kyleh
     IdentityFile ~/.ssh/ubnt
 
