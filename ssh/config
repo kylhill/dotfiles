@@ -3,8 +3,7 @@ Host tacomafia.net
     User kyleh
 
 Host syntax
-    HostName tacomafia.net
-    Port 993
+    HostName syntax.l.tacomafia.net
     User kyleh
 
 Host htpc
