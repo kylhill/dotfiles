@@ -5,7 +5,6 @@ command -v bc > /dev/null || { echo "bc was not found. Please install bc."; exit
 
 PROVIDERS="
 192.168.1.30#syntax
-192.168.1.1#gateway
 1.1.1.1#cloudflare
 4.2.2.1#level3
 8.8.8.8#google
