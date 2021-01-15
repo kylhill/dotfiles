@@ -2,7 +2,7 @@ version: "2.1"
 services:
   unifi-controller:
     image: ghcr.io/linuxserver/unifi-controller
-    container_name: unifi-controller
+    container_name: unifi
     environment:
       - PUID=115
       - PGID=121
@@ -67,3 +67,13 @@ services:
       - /var/working:/var/working
       - /srv/shared/torrents:/srv/shared/torrents
     restart: unless-stopped
+  fulltextrss:
+    image: heussd/fivefilters-full-text-rss
+    container_name: fulltextrss
+    volumes:
+      - /var/www/html/cache
+      - /opt/appdata/fulltextrss/ftr-site-config:/var/www/html/site_config/standard
+      - /opt/appdata/fulltextrss/custom_config.php:/var/www/html/custom_config.php
+      - /opt/appdata/fulltextrss/mpm_prefork.conf:/etc/apache2/mods-enabled/mpm_prefork.conf
+    ports:
+        - 127.0.0.1:8002:80
