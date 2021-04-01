@@ -1,5 +1,5 @@
 alias sudo='sudo '
-alias dcp='docker-compose -f /opt/docker-compose.yml '
-alias dcpull='docker-compose -f /opt/docker-compose.yml pull'
-alias dclogs='docker-compose -f /opt/docker-compose.yml logs -tf --tail="50" '
 alias dtail='docker logs -tf --tail="50" "$@"'
+alias dcp='docker-compose -f /opt/docker-compose.yml '
+alias dprune='docker image prune'
+alias dprunesys='docker system prune --all'

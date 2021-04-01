@@ -42,6 +42,7 @@ Host wap2
     IdentityFile ~/.ssh/ubnt-20210331
 
 Host *
+    ForwardAgent yes
     AddKeysToAgent yes
     ControlPath ~/.ssh/control-%h-%p-%r.sock
     ControlMaster auto
