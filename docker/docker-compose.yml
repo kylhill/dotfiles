@@ -14,6 +14,7 @@ services:
       - 10001:10001/udp
       - 8080:8080
       - 127.0.0.1:8443:8443
+      - 1900:1900/udp
     restart: unless-stopped
   kanzi:
     image: ghcr.io/linuxserver/kanzi
