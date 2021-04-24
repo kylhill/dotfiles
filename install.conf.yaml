@@ -34,6 +34,8 @@
         path: vim/vim/
     ~/.vimrc:
         path: vim/vimrc
+    ~/.config/nvim/init.vim:
+        path: vim/init.vim
     ~/.ssh/config:
         path: ssh/config
     ~/.ssh/authorized_keys:
