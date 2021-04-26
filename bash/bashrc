@@ -149,9 +149,9 @@ export LESS_TERMCAP_so=$'\E[38;5;246m' # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m' # end underline
 
 # Hack to automatically rename tmux windows
-if [ -x "$(command -v tmux)" ]; then
-    tmux setw automatic-rename
-fi
+#if [ -x "$(command -v tmux)" ]; then
+#    tmux setw automatic-rename
+#fi
 
 # Easy Docker shell
 dbash() {
