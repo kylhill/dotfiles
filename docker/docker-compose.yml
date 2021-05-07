@@ -40,6 +40,7 @@ services:
       - FG_LOG_LEVEL=info
     volumes:
       - /opt/appdata/flexget:/config
+      - /srv/shared/video/Series:/srv/shared/video/Series:ro
     restart: unless-stopped
   freshrss:
     image: ghcr.io/linuxserver/freshrss
@@ -73,9 +74,9 @@ services:
     container_name: fulltextrss
     volumes:
       - /var/www/html/cache
-      - /opt/appdata/fulltextrss/ftr-site-config:/var/www/html/site_config/standard
-      - /opt/appdata/fulltextrss/custom_config.php:/var/www/html/custom_config.php
-      - /opt/appdata/fulltextrss/mpm_prefork.conf:/etc/apache2/mods-enabled/mpm_prefork.conf
+      - /opt/appdata/fulltextrss/ftr-site-config:/var/www/html/site_config/standard:ro
+      - /opt/appdata/fulltextrss/custom_config.php:/var/www/html/custom_config.php:ro
+      - /opt/appdata/fulltextrss/mpm_prefork.conf:/etc/apache2/mods-enabled/mpm_prefork.conf:ro
     ports:
       - 127.0.0.1:8002:80
     restart: unless-stopped
