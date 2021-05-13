@@ -1,26 +1,33 @@
 Host tacomafia.net
     Port 993
     User kyleh
+    ForwardAgent yes
+    VerifyHostKeyDNS Yes
 
 Host syntax
     HostName syntax.l.tacomafia.net
     User kyleh
+    ForwardAgent yes
 
 Host htpc
     HostName htpc.l.tacomafia.net
     User root
+    ForwardAgent yes
 
 Host htpc2
     HostName htpc2.l.tacomafia.net
     User root
+    ForwardAgent yes
 
 Host htpc3
     HostName htpc3.l.tacomafia.net
     User root
+    ForwardAgent yes
 
 Host htpc4
     HostName htpc4.l.tacomafia.net
     User root
+    ForwardAgent yes
 
 Host cislinux
     HostName cislinux.cis.ksu.edu
@@ -30,19 +37,21 @@ Host gateway
     HostName gateway.l.tacomafia.net
     user kyleh
     IdentityFile ~/.ssh/ubnt-20210331
+    ForwardAgent yes
 
 Host wap
     HostName wap.l.tacomafia.net
     user kyleh
     IdentityFile ~/.ssh/ubnt-20210331
+    ForwardAgent yes
 
 Host wap2
     HostName wap2.l.tacomafia.net
     user kyleh
     IdentityFile ~/.ssh/ubnt-20210331
+    ForwardAgent yes
 
 Host *
-    ForwardAgent yes
     AddKeysToAgent yes
     ControlPath ~/.ssh/control-%h-%p-%r.sock
     ControlMaster auto
