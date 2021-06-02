@@ -2,13 +2,13 @@ version: "2.1"
 services:
   unifi-controller:
     image: ghcr.io/linuxserver/unifi-controller
-    container_name: unifi
+    container_name: unifi-controller
     environment:
       - PUID=115
       - PGID=121
       - MEM_LIMIT=256M
     volumes:
-      - /opt/appdata/unifi:/config
+      - /opt/appdata/unifi-controller:/config
     ports:
       - 3478:3478/udp
       - 10001:10001/udp
@@ -90,5 +90,16 @@ services:
     volumes:
       - /opt/appdata/grocy:/config
     ports:
-      - 8003:80
+      - 127.0.0.1:8003:80
+    restart: unless-stopped
+  doh-server:
+    image: satishweb/doh-server
+    container_name: doh-server
+    environment:
+      DEBUG: "0"
+      UPSTREAM_DNS_SERVER: "udp:192.168.1.30:53"
+      DOH_HTTP_PREFIX: "/q"
+      DOH_SERVER_LISTEN: ":8053"
+    ports:
+      - 127.0.0.1:8053:8053
     restart: unless-stopped
