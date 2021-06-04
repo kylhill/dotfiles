@@ -1,26 +1,28 @@
 #!/bin/sh
 
-####
+BACKUP_PATH="/srv/backup"
+DEVICES_BACKUP_PATH=$BACKUP_PATH"/devices"
+SYNTAX_BACKUP_PATH=$DEVICES_BACKUP_PATH"/syntax"
+GDRIVE_BACKUP_PATH=$BACKUP_PATH"/google_drive"
+
+# Generate updated shared file directory listings to aid in recovery
+find -O3 /srv/shared/ -maxdepth 3 -type d -print | sort -h > $SYNTAX_BACKUP_PATH/misc/syntax_dirlist.txt
+ls /srv/shared/books/ > $SYNTAX_BACKUP_PATH/misc/books_list.txt
+ls /srv/shared/video/Movies/ > $SYNTAX_BACKUP_PATH/misc/movies_list.txt
+
 # Zip latest syntax rsnapshot and copy to device backup
-CWD=/srv/backup/rsnapshot/daily.0/syntax
-ZIP_FILE=/srv/backup/devices/syntax/syntax.zip
+LATEST_RSNAPSHOT="/srv/backup/rsnapshot/daily.0/syntax"
+ZIP_FILE=$SYNTAX_BACKUP_PATH"/syntax.zip"
 
-cd $CWD || exit
+/usr/bin/zip -q -P 'Facesol1!' -r $ZIP_FILE $LATEST_RSNAPSHOT/* > /dev/null 2>&1
 
-# Remove any existing zip backup
-if [ -f $ZIP_FILE ]; then
-    rm $ZIP_FILE
-fi
-
-# Zip up the most recent backup
-/usr/bin/zip -q -P 'Facesol1!' -r $ZIP_FILE ./* > /dev/null 2>&1
-
-####
 # Sync all device backups to Google Drive
-/usr/bin/rclone sync /srv/backup/devices/ drive:/Backup/
+/usr/bin/rclone -q sync $DEVICES_BACKUP_PATH/ drive:/Backup/
 
-####
+# Sync Google Drive to backup directory
+/usr/bin/rclone -q sync drive:/ $GDRIVE_BACKUP_PATH/
+
 # rsync all backups to cislinux for off-site storage
-rsync -az --delete --quiet --exclude '.zfs' /srv/backup/ cislinux:~/backup/
+rsync -az --delete --quiet --exclude '.zfs' $BACKUP_PATH/ cislinux:~/backup/
 
 exit 0

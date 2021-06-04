@@ -1,6 +1,6 @@
 #!/bin/sh
 
 # Backup mySQL database with mysqldump
-/usr/bin/mysqldump --defaults-extra-file=/etc/mysql/debian.cnf --all-databases | /bin/gzip > database.sql.gz
+/usr/bin/mysqldump --all-databases | /bin/gzip > database.sql.gz
 
 exit 0
