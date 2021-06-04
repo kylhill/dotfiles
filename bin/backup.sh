@@ -5,7 +5,7 @@ BACKUP_FILE=$BACKUP_PATH$(hostname).tgz
 BACKUP_FILE_OLD=$BACKUP_FILE".old"
 
 REMOTE_BACKUP_HOST="kyleh@syntax.l.tacomafia.net"
-REMOTE_BACKUP_PATH=/srv/backup/$(hostname)/
+REMOTE_BACKUP_PATH=/srv/backup/devices/$(hostname)/
 
 set -e
 
