@@ -3,4 +3,9 @@
 # Sync Google Drive to backup directory
 /usr/bin/rclone sync drive:/ "/srv/backup/google_drive/" --quiet
 
+# Generate updated shared file directory listings to aid in recovery
+find -O3 /srv/shared/ -maxdepth 3 -type d -print | sort -h > /srv/backup/syntax/misc/syntax_dirlist.txt
+ls /srv/shared/books/ > /srv/backup/syntax/misc/books_list.txt
+ls /srv/shared/video/Movies/ > /srv/backup/syntax/misc/movies_list.txt
+
 exit 0
