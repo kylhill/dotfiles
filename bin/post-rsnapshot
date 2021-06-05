@@ -11,10 +11,16 @@ ls /srv/shared/books/ > $SYNTAX_BACKUP_PATH/misc/books_list.txt
 ls /srv/shared/video/Movies/ > $SYNTAX_BACKUP_PATH/misc/movies_list.txt
 
 # Zip latest syntax rsnapshot and copy to device backup
-LATEST_RSNAPSHOT="/srv/backup/rsnapshot/daily.0/syntax"
+LATEST_RSNAPSHOT="/srv/backup/rsnapshot/daily.0"
 ZIP_FILE=$SYNTAX_BACKUP_PATH"/syntax.zip"
 
-/usr/bin/zip -q -P 'Facesol1!' -r $ZIP_FILE $LATEST_RSNAPSHOT/* > /dev/null 2>&1
+cd $LATEST_RSNAPSHOT
+
+if [ -f $ZIP_FILE ]; then
+    rm $ZIP_FILE
+fi
+
+/usr/bin/zip -q -P 'Facesol1!' -r $ZIP_FILE ./* > /dev/null 2>&1
 
 # Sync all device backups to Google Drive
 /usr/bin/rclone -q sync $DEVICES_BACKUP_PATH/ drive:/Backup/
@@ -23,6 +29,6 @@ ZIP_FILE=$SYNTAX_BACKUP_PATH"/syntax.zip"
 /usr/bin/rclone -q sync drive:/ $GDRIVE_BACKUP_PATH/
 
 # rsync all backups to cislinux for off-site storage
-rsync -az --delete --quiet --exclude '.zfs' $BACKUP_PATH/ cislinux:~/backup/
+/usr/bin/rsync -az --delete --quiet --exclude '.zfs' $BACKUP_PATH/ cislinux:~/backup/
 
 exit 0
