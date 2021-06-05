@@ -1,8 +1,12 @@
 #!/bin/sh
 
+###
+# Generate device backups
 BACKUP_PATH="/srv/backup"
 DEVICES_BACKUP_PATH=$BACKUP_PATH"/devices"
 SYNTAX_BACKUP_PATH=$DEVICES_BACKUP_PATH"/syntax"
+UNIFI_BACKUP_PATH=$DEVICES_BACKUP_PATH"/unifi"
+GATEWAY_BACKUP_PATH=$DEVICES_BACKUP_PATH"/gateway"
 GDRIVE_BACKUP_PATH=$BACKUP_PATH"/google_drive"
 
 # Generate updated shared file directory listings to aid in recovery
@@ -15,19 +19,25 @@ LATEST_RSNAPSHOT="/srv/backup/rsnapshot/daily.0"
 ZIP_FILE=$SYNTAX_BACKUP_PATH"/syntax.zip"
 
 cd $LATEST_RSNAPSHOT
-
 if [ -f $ZIP_FILE ]; then
     rm $ZIP_FILE
 fi
-
 /usr/bin/zip -q -P 'Facesol1!' -r $ZIP_FILE ./* > /dev/null 2>&1
 
+# rsync unifi backups
+/usr/bin/rsync -a --delete --quiet /opt/appdata/unifi-controller/data/backup/autobackup/ $UNIFI_BACKUP_PATH
+
+# Generate gateway backup
+ssh gateway tar -cz /config > $GATEWAY_BACKUP_PATH/gateway.tgz 2>/dev/null
+
+###
 # Sync all device backups to Google Drive
 /usr/bin/rclone -q sync $DEVICES_BACKUP_PATH/ drive:/Backup/
 
 # Sync Google Drive to backup directory
 /usr/bin/rclone -q sync drive:/ $GDRIVE_BACKUP_PATH/
 
+###
 # rsync all backups to cislinux for off-site storage
 /usr/bin/rsync -az --delete --quiet --exclude '.zfs' $BACKUP_PATH/ cislinux:~/backup/
 
