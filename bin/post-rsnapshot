@@ -41,4 +41,7 @@ ssh gateway tar -cz /config > $GATEWAY_BACKUP_PATH/gateway.tgz 2>/dev/null
 # rsync all backups to cislinux for off-site storage
 /usr/bin/rsync -az --delete --quiet --exclude '.zfs' $BACKUP_PATH/ cislinux:~/backup/
 
+# Run cislinux archive rotation script
+ssh cislinux /home/k/kylhill/.local/bin/cislinux-archive.sh 2>/dev/null
+
 exit 0
