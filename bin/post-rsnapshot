@@ -44,4 +44,9 @@ ssh gateway tar -cz /config > $GATEWAY_BACKUP_PATH/gateway.tgz 2>/dev/null
 # Run cislinux archive rotation script
 ssh cislinux /home/k/kylhill/.local/bin/cislinux-archive.sh 2>/dev/null
 
+###
+# rsync select shared files to cislinux (Don't use excessive disk space!)
+/usr/bin/rsync -a --delete $SHARED_PATH/books/ cislinux:~/shared/books/
+/usr/bin/rsync -a --delete $SHARED_PATH/pictures/ cislinux:~/shared/pictures/
+
 exit 0
