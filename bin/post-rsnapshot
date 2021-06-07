@@ -3,29 +3,29 @@
 ###
 # Generate device backups
 BACKUP_PATH="/srv/backup"
+GDRIVE_BACKUP_PATH=$BACKUP_PATH"/google_drive"
 DEVICES_BACKUP_PATH=$BACKUP_PATH"/devices"
 SYNTAX_BACKUP_PATH=$DEVICES_BACKUP_PATH"/syntax"
 UNIFI_BACKUP_PATH=$DEVICES_BACKUP_PATH"/unifi"
 GATEWAY_BACKUP_PATH=$DEVICES_BACKUP_PATH"/gateway"
-GDRIVE_BACKUP_PATH=$BACKUP_PATH"/google_drive"
+SHARED_PATH="/srv/shared"
 
 # Generate updated shared file directory listings to aid in recovery
-find -O3 /srv/shared/ -maxdepth 3 -type d -print | sort -h > $SYNTAX_BACKUP_PATH/misc/syntax_dirlist.txt
-ls /srv/shared/books/ > $SYNTAX_BACKUP_PATH/misc/books_list.txt
-ls /srv/shared/video/Movies/ > $SYNTAX_BACKUP_PATH/misc/movies_list.txt
+find -O3 $SHARED_PATH/ -maxdepth 3 -type d -print | sort -h > $SYNTAX_BACKUP_PATH/misc/syntax_dirlist.txt
+ls $SHARED_PATH/books/ > $SYNTAX_BACKUP_PATH/misc/books_list.txt
+ls $SHARED_PATH/video/Movies/ > $SYNTAX_BACKUP_PATH/misc/movies_list.txt
 
 # Zip latest syntax rsnapshot and copy to device backup
-LATEST_RSNAPSHOT="/srv/backup/rsnapshot/daily.0"
 ZIP_FILE=$SYNTAX_BACKUP_PATH"/syntax.zip"
 
-cd $LATEST_RSNAPSHOT
+cd $BACKUP_PATH/rsnapshot/daily.0
 if [ -f $ZIP_FILE ]; then
     rm $ZIP_FILE
 fi
 /usr/bin/zip -q -P 'Facesol1!' -r $ZIP_FILE ./* > /dev/null 2>&1
 
 # rsync unifi backups
-/usr/bin/rsync -a --delete --quiet /opt/appdata/unifi-controller/data/backup/autobackup/ $UNIFI_BACKUP_PATH
+/usr/bin/rsync -a --delete --quiet /opt/appdata/unifi-controller/data/backup/autobackup/ $UNIFI_BACKUP_PATH/
 
 # Generate gateway backup
 ssh gateway tar -cz /config > $GATEWAY_BACKUP_PATH/gateway.tgz 2>/dev/null
