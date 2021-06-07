@@ -6,11 +6,13 @@
 #
 ####################################
 
+cd "/home/k/kylhill"
+
 # What to backup.
-backup_files="/home/k/kylhill/backup/devices /home/k/kylhill/backup/google_drive"
+backup_files="backup/devices backup/google_drive"
 
 # Where to backup to.
-dest="/home/k/kylhill/archive"
+dest="archive"
 
 # Setup variables for the archive filename.
 day=$(date +%A)
