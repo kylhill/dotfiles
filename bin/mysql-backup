@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# Backup mySQL database with mysqldump
-/usr/bin/mysqldump --all-databases | /bin/gzip > database.sql.gz
-
-exit 0
