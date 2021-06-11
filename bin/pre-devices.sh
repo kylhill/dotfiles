@@ -6,9 +6,20 @@ ls /srv/shared/books/ > /srv/backup/devices/syntax/misc/books_list.txt
 ls /srv/shared/video/Movies/ > /srv/backup/devices/syntax/misc/movies_list.txt
 
 # rsync unifi backups
-/usr/bin/rsync -a --delete --quiet /opt/appdata/unifi-controller/data/backup/autobackup/ /srv/backup/devices/unifi/
+/usr/bin/rsync -a --delete --quiet --exclude='autobackup_meta.json' /opt/appdata/unifi-controller/data/backup/autobackup/ /srv/backup/devices/unifi/
 
 # Generate gateway backup
-ssh gateway tar -cz /config > /srv/backup/devices/gateway/gateway.tgz 2>/dev/null
+ssh gateway "tar -cz -C / config" > /srv/backup/devices/gateway/gateway.tgz
+
+# Generate htpc backups
+for i in htpc htpc2 htpc3 htpc4
+do
+    ssh $i "tar -cf /storage/backup/$i.tar -C / \
+                --exclude='storage/.cache/swapfile' --exclude='storage/.kodi/userdata/Thumbnails' --exclude='storage/.kodi/addons/packages' --exclude='storage/.kodi/addons/virtual.system-tools' \
+                storage/.cache/ storage/.config/ storage/.kodi/ storage/.ssh/ storage/.vim/ && \
+            tar -cf /storage/backup/\"$i\"_flash.tar -C /flash config.txt edid.dat" &&
+    scp -q $i:/storage/backup/$i.tar /srv/backup/devices/$i/$i.tar &&
+    scp -q $i:/storage/backup/"$i"_flash.tar /srv/backup/devices/$i/"$i"_flash.tar
+done
 
 exit 0
