@@ -11,15 +11,18 @@ ls /srv/shared/video/Movies/ > /srv/backup/devices/syntax/misc/movies_list.txt
 # Generate gateway backup
 ssh gateway "tar -cz -C / config" > /srv/backup/devices/gateway/gateway.tgz
 
-# Generate htpc backups
+# Generate htpc backups weekly
 for i in htpc htpc2 htpc3 htpc4
 do
-    ssh $i "tar -cf /storage/backup/$i.tar -C / \
-                --exclude='storage/.cache/swapfile' --exclude='storage/.kodi/userdata/Thumbnails' --exclude='storage/.kodi/addons/packages' --exclude='storage/.kodi/addons/virtual.system-tools' \
-                storage/.cache/ storage/.config/ storage/.kodi/ storage/.ssh/ storage/.vim/ && \
-            tar -cf /storage/backup/\"$i\"_flash.tar -C /flash config.txt edid.dat" &&
-    scp -q $i:/storage/backup/$i.tar /srv/backup/devices/$i/$i.tar &&
-    scp -q $i:/storage/backup/"$i"_flash.tar /srv/backup/devices/$i/"$i"_flash.tar
+    HTPC_BACKUP="/srv/backup/devices/$i/$i.tar"
+    if [ ! -f "$HTPC_BACKUP" ] || [ "$(find "$HTPC_BACKUP" -type f -daystart -mtime +6 -print)" ]; then
+        ssh $i "tar -cf /storage/backup/$i.tar -C / \
+                    --exclude='storage/.cache/swapfile' --exclude='storage/.kodi/userdata/Thumbnails' --exclude='storage/.kodi/addons/packages' --exclude='storage/.kodi/addons/virtual.system-tools' \
+                    storage/.cache/ storage/.config/ storage/.kodi/ storage/.ssh/ storage/.vim/ && \
+                tar -cf /storage/backup/\"$i\"_flash.tar -C /flash config.txt edid.dat" &&
+        scp -q $i:/storage/backup/$i.tar /srv/backup/devices/$i/$i.tar &&
+        scp -q $i:/storage/backup/"$i"_flash.tar /srv/backup/devices/$i/"$i"_flash.tar
+    fi
 done
 
 exit 0

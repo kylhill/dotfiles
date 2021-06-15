@@ -7,6 +7,7 @@ services:
       - PUID=115
       - PGID=121
       - MEM_LIMIT=256M
+      - MEM_STARTUP=256M
     volumes:
       - /opt/appdata/unifi-controller:/config
     ports:
