@@ -49,6 +49,11 @@ set hlsearch            " highlight matches
 set ignorecase          " do case insensitive matching
 set smartcase           " do smart case matching
 
+" Disable Backups
+set writebackup
+set nobackup
+set noundofile
+
 " NERDTree Configuration
 if has("autocmd")
     " Open NERDTree automatically if opening a directory
