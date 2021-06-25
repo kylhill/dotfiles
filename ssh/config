@@ -41,6 +41,7 @@ Host gateway
     user kyleh
     IdentityFile ~/.ssh/ubnt-20210331
     ForwardAgent yes
+    StrictHostKeyChecking no
 
 Host wap
     HostName wap.l.tacomafia.net
