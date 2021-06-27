@@ -6,6 +6,7 @@ Host tacomafia.net
 
 Host syntax
     HostName syntax.l.tacomafia.net
+    Port 993
     User kyleh
     ForwardAgent yes
 
