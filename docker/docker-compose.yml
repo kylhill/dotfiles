@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3.7"
 services:
   unifi-controller:
     image: ghcr.io/linuxserver/unifi-controller
@@ -96,11 +96,24 @@ services:
   doh-server:
     image: satishweb/doh-server
     container_name: doh-server
+    network_mode: "host"
     environment:
       DEBUG: "0"
       UPSTREAM_DNS_SERVER: "udp:192.168.1.30:53"
       DOH_HTTP_PREFIX: "/q"
       DOH_SERVER_LISTEN: ":8053"
-    ports:
-      - 127.0.0.1:8053:8053
+    restart: unless-stopped
+  cloudflare-ddns:
+    image: timothyjmiller/cloudflare-ddns:latest
+    container_name: cloudflare-ddns
+    security_opt:
+      - no-new-privileges:true
+    network_mode: "host"
+    environment:
+      - PUID=117
+      - PGID=127
+    volumes:
+      - type: bind
+        source: /opt/appdata/cloudflare-ddns/config.json
+        target: /config.json
     restart: unless-stopped
