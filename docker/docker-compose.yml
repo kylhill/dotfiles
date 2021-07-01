@@ -99,7 +99,7 @@ services:
     network_mode: "host"
     environment:
       DEBUG: "0"
-      UPSTREAM_DNS_SERVER: "udp:127.0.0.1:53"
+      UPSTREAM_DNS_SERVER: "udp:[::1]:53"
       DOH_HTTP_PREFIX: "/q"
       DOH_SERVER_LISTEN: ":8053"
     restart: unless-stopped
