@@ -40,6 +40,6 @@ fi
 export EDITOR="$VISUAL"
 
 # enable byobu unless ~/.local/.nobyobu exists
-if [ -x /usr/bin/byobu-launch && ! -f "$HOME/.local/.nobyobu ]
+if [ -x /usr/bin/byobu-launch ] && [ ! -f "$HOME/.local/.nobyobu" ]; then
     _byobu_sourced=1 . /usr/bin/byobu-launch 2>/dev/null || true
 fi
