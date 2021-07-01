@@ -28,14 +28,14 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x "$PROFILE/usr/bin/lesspipe" ] && eval "$(SHELL=$PROFILE/bin/sh lesspipe)"
+[ -x "$PREFIX/usr/bin/lesspipe" ] && eval "$(SHELL=$PREFIX/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r "$PROFILE/etc/debian_chroot" ]; then
-    debian_chroot=$(cat "$PROFILE/etc/debian_chroot")
+if [ -z "${debian_chroot:-}" ] && [ -r "$PREFIX/etc/debian_chroot" ]; then
+    debian_chroot=$(cat "$PREFIX/etc/debian_chroot")
 fi
 
-if [ -n "$PROFILE" ]; then
+if [ -n "$PREFIX" ]; then
     # set a fancy prompt (non-color, unless we know we "want" color)
     case "$TERM" in
         xterm-color|*-256color) color_prompt=yes;;
@@ -47,7 +47,7 @@ if [ -n "$PROFILE" ]; then
     #force_color_prompt=yes
 
     if [ -n "$force_color_prompt" ]; then
-        if [ -x "$PROFILE/usr/bin/tput" ] && tput setaf 1 >&/dev/null; then
+        if [ -x "$PREFIX/usr/bin/tput" ] && tput setaf 1 >&/dev/null; then
             # We have color support; assume it's compliant with Ecma-48
             # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
             # a case would tend to support setf rather than setaf.)
@@ -75,7 +75,7 @@ if [ -n "$PROFILE" ]; then
 fi
 
 # enable color support of ls and also add handy aliases
-if [ -x "$PROFILE/usr/bin/dircolors" ]; then
+if [ -x "$PREFIX/usr/bin/dircolors" ]; then
     eval "$(dircolors "$HOME/.dircolors/dircolors-solarized/dircolors.256dark")"
 
     alias ls='ls --color=auto -h'
@@ -115,10 +115,10 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f "$PROFILE/usr/share/bash-completion/bash_completion" ]; then
-    . "$PROFILE/usr/share/bash-completion/bash_completion"
-  elif [ -f "$PROFILE/etc/bash_completion" ]; then
-    . "$PROFILE/etc/bash_completion"
+  if [ -f "$PREFIX/usr/share/bash-completion/bash_completion" ]; then
+    . "$PREFIX/usr/share/bash-completion/bash_completion"
+  elif [ -f "$PREFIX/etc/bash_completion" ]; then
+    . "$PREFIX/etc/bash_completion"
   fi
 fi
 
@@ -132,9 +132,9 @@ shopt -s autocd
 stty -ixon
 
 # Alias vim to nvim, if available
-if [ -x "$PROFILE/usr/bin/nvim" ]; then
-    alias vim="$PROFILE/usr/bin/nvim"
-    alias vimdiff="$PROFILE/usr/bin/nvim -d"
+if [ -x "$PREFIX/usr/bin/nvim" ]; then
+    alias vim="$PREFIX/usr/bin/nvim"
+    alias vimdiff="$PREFIX/usr/bin/nvim -d"
 fi
 
 # Solarized colors for less
@@ -147,5 +147,5 @@ export LESS_TERMCAP_ue=$'\E[0m' # end underline
 
 # Easy Docker shell
 dbash() {
-    docker exec -it "$1" "$PROFILE/bin/bash"
+    docker exec -it "$1" "$PREFIX/bin/bash"
 }
