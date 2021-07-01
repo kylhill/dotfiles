@@ -27,10 +27,15 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x "$PREFIX/usr/bin/lesspipe" ] && eval "$(SHELL=$PREFIX/bin/sh lesspipe)"
-
+# Set PREFIX to /usr if not already set.  If already set, we know we're in termux
 if [ ! "$PREFIX" ]; then
+    PREFIX=/usr
+fi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x "$PREFIX/bin/lesspipe" ] && eval "$(SHELL=$PREFIX/bin/sh lesspipe)"
+
+if [ "$PREFIX" == /usr ]; then
     # set variable identifying the chroot you work in (used in the prompt below)
     if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
         debian_chroot=$(cat /etc/debian_chroot)
@@ -75,7 +80,7 @@ if [ ! "$PREFIX" ]; then
 fi
 
 # enable color support of ls and also add handy aliases
-if [ -x "$PREFIX/usr/bin/dircolors" ]; then
+if [ -x "$PREFIX/bin/dircolors" ]; then
     eval "$(dircolors "$HOME/.dircolors/dircolors-solarized/dircolors.256dark")"
 
     alias ls='ls --color=auto -h'
@@ -115,10 +120,12 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f "$PREFIX/usr/share/bash-completion/bash_completion" ]; then
-    . "$PREFIX/usr/share/bash-completion/bash_completion"
+  if [ -f "$PREFIX/share/bash-completion/bash_completion" ]; then
+    . "$PREFIX/share/bash-completion/bash_completion"
   elif [ -f "$PREFIX/etc/bash_completion" ]; then
     . "$PREFIX/etc/bash_completion"
+  elif [ -f "/etc/bash_completion" ]; then
+    . /etc/bash_completion
   fi
 fi
 
@@ -132,9 +139,9 @@ shopt -s autocd
 stty -ixon
 
 # Alias vim to nvim, if available
-if [ -x "$PREFIX/usr/bin/nvim" ]; then
-    alias vim="$PREFIX/usr/bin/nvim"
-    alias vimdiff="$PREFIX/usr/bin/nvim -d"
+if [ -x "$PREFIX/bin/nvim" ]; then
+    alias vim="$PREFIX/bin/nvim"
+    alias vimdiff="$PREFIX/bin/nvim -d"
 fi
 
 # Solarized colors for less
