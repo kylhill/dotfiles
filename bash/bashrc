@@ -154,5 +154,5 @@ export LESS_TERMCAP_ue=$'\E[0m' # end underline
 
 # Easy Docker shell
 dbash() {
-    docker exec -it "$1" "$PREFIX/bin/bash"
+    docker exec -it "$1" /bin/bash
 }
