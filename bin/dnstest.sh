@@ -5,7 +5,7 @@ command -v bc > /dev/null || { echo "bc was not found. Please install bc."; exit
 
 PROVIDERS="
 1.1.1.1#cloudflare
-192.168.1.30#syntax
+::1#syntax
 8.8.8.8#google
 9.9.9.9#quad9
 "
