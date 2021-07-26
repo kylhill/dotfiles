@@ -82,7 +82,7 @@ services:
       - 127.0.0.1:8002:80
     restart: unless-stopped
   grocy:
-    image: ghcr.io/linuxserver/grocy:version-v3.0.1
+    image: ghcr.io/linuxserver/grocy
     container_name: grocy
     environment:
       - PUID=121
