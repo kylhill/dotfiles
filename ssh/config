@@ -40,17 +40,20 @@ Host cislinux
 Host gateway
     HostName gateway.l.tacomafia.net
     user kyleh
+    IdentityFile ~/.ssh/ubnt-20210331
     ForwardAgent yes
     StrictHostKeyChecking no
 
 Host wap
     HostName wap.l.tacomafia.net
     user kyleh
+    IdentityFile ~/.ssh/ubnt-20210331
     ForwardAgent yes
 
 Host wap2
     HostName wap2.l.tacomafia.net
     user kyleh
+    IdentityFile ~/.ssh/ubnt-20210331
     ForwardAgent yes
 
 Host *
