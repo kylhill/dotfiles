@@ -11,7 +11,7 @@ PROVIDERS="
 "
 
 # Domains to test. Duplicated domains are ok
-DOMAINS2TEST="www.google.com amazon.com facebook.com www.youtube.com www.reddit.com wikipedia.org twitter.com gmail.com whatsapp.com arstechnica.com msn.com slashdot.org theverge.com npr.org costco.com garmin.com lifehacker.com nytimes.com spotify.com tacomafia.net"
+DOMAINS2TEST="www.google.com amazon.com facebook.com www.youtube.com www.reddit.com wikipedia.org twitter.com gmail.com whatsapp.com arstechnica.com msn.com slashdot.org theverge.com npr.org garmin.com lifehacker.com nytimes.com spotify.com tacomafia.net"
 
 totaldomains=0
 printf "%-18s" ""
