@@ -56,7 +56,7 @@ Host wap2
     IdentityFile ~/.ssh/ubnt-20210331
     ForwardAgent yes
 
-Host *.borgbase.com
+Host *.repo.borgbase.com
     IdentityFile ~/.ssh/id_borg
     ServerAliveInterval 10
     ServerAliveCountMax 30
