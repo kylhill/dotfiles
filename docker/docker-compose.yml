@@ -3,6 +3,7 @@ services:
   unifi-controller:
     image: ghcr.io/linuxserver/unifi-controller
     container_name: unifi-controller
+    network_mode: host
     environment:
       - PUID=115
       - PGID=121
@@ -10,12 +11,6 @@ services:
       - MEM_STARTUP=256M
     volumes:
       - /opt/appdata/unifi-controller:/config
-    ports:
-      - 3478:3478/udp
-      - 10001:10001/udp
-      - 8080:8080
-      - 127.0.0.1:8443:8443
-      - 1900:1900/udp
     restart: unless-stopped
   kanzi:
     image: ghcr.io/linuxserver/kanzi
@@ -96,7 +91,7 @@ services:
   doh-server:
     image: satishweb/doh-server
     container_name: doh-server
-    network_mode: "host"
+    network_mode: host
     environment:
       DEBUG: "0"
       UPSTREAM_DNS_SERVER: "udp:[::1]:53"
@@ -104,11 +99,11 @@ services:
       DOH_SERVER_LISTEN: ":8053"
     restart: unless-stopped
   cloudflare-ddns:
-    image: timothyjmiller/cloudflare-ddns:latest
+    image: timothyjmiller/cloudflare-ddns
     container_name: cloudflare-ddns
     security_opt:
       - no-new-privileges:true
-    network_mode: "host"
+    network_mode: host
     environment:
       - PUID=117
       - PGID=127
