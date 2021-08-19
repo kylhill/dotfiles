@@ -3,7 +3,7 @@ services:
   unifi-controller:
     image: ghcr.io/linuxserver/unifi-controller
     container_name: unifi-controller
-    network_mode: host
+    network_mode: "host"
     environment:
       - PUID=115
       - PGID=121
@@ -53,7 +53,7 @@ services:
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
-    network_mode: host
+    network_mode: "host"
     environment:
       - PUID=1000
       - PGID=100
@@ -91,7 +91,7 @@ services:
   doh-server:
     image: satishweb/doh-server
     container_name: doh-server
-    network_mode: host
+    network_mode: "host"
     environment:
       DEBUG: "0"
       UPSTREAM_DNS_SERVER: "udp:[::1]:53"
@@ -103,7 +103,7 @@ services:
     container_name: cloudflare-ddns
     security_opt:
       - no-new-privileges:true
-    network_mode: host
+    network_mode: "host"
     environment:
       - PUID=117
       - PGID=127
