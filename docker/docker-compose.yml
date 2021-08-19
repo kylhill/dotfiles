@@ -24,7 +24,7 @@ services:
     volumes:
       - /opt/appdata/kanzi:/config
     ports:
-      - 127.0.0.1:8000:8000
+      - "127.0.0.1:8000:8000"
     restart: unless-stopped
   flexget:
     image: wiserain/flexget
@@ -48,7 +48,7 @@ services:
     volumes:
       - /opt/appdata/freshrss:/config
     ports:
-      - 127.0.0.1:8001:80
+      - "127.0.0.1:8001:80"
     restart: unless-stopped
   deluge:
     image: ghcr.io/linuxserver/deluge
@@ -74,7 +74,7 @@ services:
       - /opt/appdata/fulltextrss/custom_config.php:/var/www/html/custom_config.php:ro
       - /opt/appdata/fulltextrss/mpm_prefork.conf:/etc/apache2/mods-enabled/mpm_prefork.conf:ro
     ports:
-      - 127.0.0.1:8002:80
+      - "127.0.0.1:8002:80"
     restart: unless-stopped
   grocy:
     image: ghcr.io/linuxserver/grocy
@@ -86,7 +86,7 @@ services:
     volumes:
       - /opt/appdata/grocy:/config
     ports:
-      - 127.0.0.1:8003:80
+      - "127.0.0.1:8003:80"
     restart: unless-stopped
   doh-server:
     image: satishweb/doh-server
@@ -108,7 +108,5 @@ services:
       - PUID=117
       - PGID=127
     volumes:
-      - type: bind
-        source: /opt/appdata/cloudflare-ddns/config.json
-        target: /config.json
+      - /opt/appdata/cloudflare-ddns/config.json:/config.json
     restart: unless-stopped
