@@ -27,7 +27,7 @@ services:
       - "127.0.0.1:8000:8000"
     restart: unless-stopped
   flexget:
-    image: wiserain/flexget
+    image: ghcr.io/wiserain/flexget
     container_name: flexget
     environment:
       - PUID=114
@@ -95,7 +95,7 @@ services:
     environment:
       DEBUG: "0"
       UPSTREAM_DNS_SERVER: "udp:[::1]:53"
-      DOH_HTTP_PREFIX: "/q"
+      DOH_HTTP_PREFIX: "/dns-query"
       DOH_SERVER_LISTEN: ":8053"
     restart: unless-stopped
   cloudflare-ddns:
