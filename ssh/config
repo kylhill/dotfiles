@@ -30,8 +30,15 @@ Host htpc4
     User root
     ForwardAgent yes
 
+Host cslinux
+    HostName cslinux.cs.ksu.edu
+    User kylhill
+    ForwardAgent yes
+    ServerAliveInterval 10
+    ServerAliveCountMax 30
+
 Host cislinux
-    HostName cislinux.cis.ksu.edu
+    HostName cslinux.cs.ksu.edu
     User kylhill
     ForwardAgent yes
     ServerAliveInterval 10
