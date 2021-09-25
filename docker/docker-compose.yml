@@ -109,3 +109,17 @@ services:
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
+  librespeed:
+    image: ghcr.io/linuxserver/librespeed
+    container_name: librespeed
+    environment:
+      - PUID=100
+      - PGID=1000
+      - TZ=America/Chicago
+      - PASSWORD=3mn3S5jxaWykr3QG
+    volumes:
+      - /opt/appdata/librespeed/config:/config
+    ports:
+        - "127.0.0.1:8004:80"
+    restart: unless-stopped
+
