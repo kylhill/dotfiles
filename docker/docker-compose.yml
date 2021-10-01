@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   unifi-controller:
-    image: ghcr.io/linuxserver/unifi-controller
+    image: lscr.io/linuxserver/unifi-controller
     container_name: unifi-controller
     network_mode: "host"
     environment:
@@ -13,7 +13,7 @@ services:
       - /opt/appdata/unifi-controller:/config
     restart: unless-stopped
   kanzi:
-    image: ghcr.io/linuxserver/kanzi
+    image: lscr.io/linuxserver/kanzi
     container_name: kanzi
     environment:
       - PUID=119
@@ -39,7 +39,7 @@ services:
       - /srv/shared/video/Series:/srv/shared/video/Series:ro
     restart: unless-stopped
   freshrss:
-    image: ghcr.io/linuxserver/freshrss
+    image: lscr.io/linuxserver/freshrss
     container_name: freshrss
     environment:
       - PUID=120
@@ -51,7 +51,7 @@ services:
       - "127.0.0.1:8001:80"
     restart: unless-stopped
   deluge:
-    image: ghcr.io/linuxserver/deluge
+    image: lscr.io/linuxserver/deluge
     container_name: deluge
     network_mode: "host"
     environment:
@@ -77,7 +77,7 @@ services:
       - "127.0.0.1:8002:80"
     restart: unless-stopped
   grocy:
-    image: ghcr.io/linuxserver/grocy
+    image: lscr.io/linuxserver/grocy
     container_name: grocy
     environment:
       - PUID=121
@@ -110,11 +110,11 @@ services:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
   librespeed:
-    image: ghcr.io/linuxserver/librespeed
+    image: lscr.io/linuxserver/librespeed
     container_name: librespeed
     environment:
-      - PUID=100
-      - PGID=1000
+      - PUID=122
+      - PGID=120
       - TZ=America/Chicago
       - PASSWORD=3mn3S5jxaWykr3QG
     volumes:
