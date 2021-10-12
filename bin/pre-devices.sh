@@ -14,7 +14,10 @@ ssh gateway "tar -cz -C / config" > /srv/backup/devices/gateway/gateway.tgz
 # Generate htpc backups weekly
 for i in htpc htpc2 htpc3 htpc4
 do
-    HTPC_BACKUP="/srv/backup/devices/$i/$i.tar"
+    HTPC_BACKUP_DIR="/srv/backup/devices/$i/"
+    mkdir -p $HTPC_BACKUP_DIR
+
+    HTPC_BACKUP=$HTPC_BACKUP_DIR"$i.tar"
     if [ ! -f "$HTPC_BACKUP" ] || [ "$(find "$HTPC_BACKUP" -type f -daystart -mtime +6 -print)" ]; then
         ssh $i "tar -cf /storage/backup/$i.tar -C / \
                     --exclude='storage/.cache/swapfile' --exclude='storage/.kodi/userdata/Thumbnails' --exclude='storage/.kodi/addons/packages' --exclude='storage/.kodi/addons/virtual.system-tools' --exclude='storage/.kodi/addons/virtual.network-tools'\
