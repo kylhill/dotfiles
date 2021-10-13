@@ -111,13 +111,12 @@ services:
   homeassistant:
     image: lscr.io/linuxserver/homeassistant
     container_name: homeassistant
-    network_mode: "host"
     environment:
       - PUID=123
       - PGID=128
       - TZ=America/Chicago
     volumes:
       - /opt/appdata/homeassistant:/config
-    #ports:
-    #    - "127.0.0.1:8005:8123"
+    ports:
+        - "127.0.0.1:8005:8123"
     restart: unless-stopped
