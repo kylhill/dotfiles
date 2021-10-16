@@ -120,3 +120,19 @@ services:
     ports:
         - "127.0.0.1:8005:8123"
     restart: unless-stopped
+  minecraft:
+    image: itzg/minecraft-bedrock-server
+    container_name: minecraft
+    environment:
+      EULA: "TRUE"
+      SERVER_NAME: "Dad's Server"
+      GAMEMODE: "survival"
+      DIFFICULTY: "peaceful"
+      OPS: "2533274795625937,2535405415054487,2535405917118583"
+      #ALLOW_LIST_USERS: "monkeyman 67156,IsaacChief13,OfficerCarson17"
+    ports:
+      - 19132:19132/udp
+    volumes:
+      - /opt/appdata/minecraft:/data
+    stdin_open: true
+    tty: true
