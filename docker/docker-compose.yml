@@ -109,6 +109,23 @@ services:
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    hostname: syntax
+    network_mode: "host"
+    environment:
+      TZ: 'America/Chicago'
+      ServerIP: '192.168.1.30'
+      ServerIPv6: 'fd06:4f9a:934d:a848::30'
+      VIRTUAL_HOST: 'pihole.tacomafia.net'
+      WEB_PORT: '8006'
+    volumes:
+      - /opt/appdata/pihole/etc/pihole/:/etc/pihole/
+      - /opt/appdata/pihole/etc/dnsmasq.d/:/etc/dnsmasq.d/
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
 #  homeassistant:
 #    image: lscr.io/linuxserver/homeassistant
 #    container_name: homeassistant
