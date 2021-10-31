@@ -1,3 +1,8 @@
+networks:
+  docker_net:
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
 services:
   unifi-controller:
     image: lscr.io/linuxserver/unifi-controller
@@ -24,6 +29,9 @@ services:
       - /opt/appdata/kanzi:/config
     ports:
       - "127.0.0.1:8000:8000"
+    networks:
+      docker_net:
+        ipv4_address: 172.18.0.2
     restart: unless-stopped
   flexget:
     image: ghcr.io/wiserain/flexget
@@ -36,6 +44,9 @@ services:
     volumes:
       - /opt/appdata/flexget:/config
       - /srv/shared/video/Series:/srv/shared/video/Series:ro
+    networks:
+      docker_net:
+        ipv4_address: 172.18.0.3
     restart: unless-stopped
   freshrss:
     image: lscr.io/linuxserver/freshrss
@@ -48,6 +59,9 @@ services:
       - /opt/appdata/freshrss:/config
     ports:
       - "127.0.0.1:8001:80"
+    networks:
+      docker_net:
+        ipv4_address: 172.18.0.4
     restart: unless-stopped
   deluge:
     image: lscr.io/linuxserver/deluge
@@ -74,6 +88,9 @@ services:
       - /opt/appdata/fulltextrss/mpm_prefork.conf:/etc/apache2/mods-enabled/mpm_prefork.conf:ro
     ports:
       - "127.0.0.1:8002:80"
+    networks:
+      docker_net:
+        ipv4_address: 172.18.0.7
     restart: unless-stopped
   grocy:
     image: lscr.io/linuxserver/grocy
@@ -86,6 +103,9 @@ services:
       - /opt/appdata/grocy:/config
     ports:
       - "127.0.0.1:8003:80"
+    networks:
+      docker_net:
+        ipv4_address: 172.18.0.6
     restart: unless-stopped
   doh-server:
     image: satishweb/doh-server
@@ -97,6 +117,9 @@ services:
       DOH_SERVER_LISTEN: ":8053"
     ports:
       - "127.0.0.1:8053:8053"
+    networks:
+      docker_net:
+        ipv4_address: 172.18.0.5
     restart: unless-stopped
   cloudflare-ddns:
     image: ghcr.io/joshuaavalon/cloudflare-ddns
@@ -137,20 +160,26 @@ services:
 #      - /opt/appdata/homeassistant:/config
 #    ports:
 #        - "127.0.0.1:8005:8123"
+#    networks:
+#      docker_net:
+#        ipv4_address: 172.18.0.8
 #    restart: unless-stopped
-#  minecraft:
-#    image: itzg/minecraft-bedrock-server
-#    container_name: minecraft
-#    environment:
-#      EULA: "TRUE"
-#      SERVER_NAME: "Dad's Server"
-#      GAMEMODE: "survival"
-#      DIFFICULTY: "peaceful"
-#      OPS: "2533274795625937,2535405415054487,2535405917118583"
-#      #ALLOW_LIST_USERS: "monkeyman 67156,IsaacChief13,OfficerCarson17"
-#    ports:
-#      - 19132:19132/udp
-#    volumes:
-#      - /opt/appdata/minecraft:/data
-#    stdin_open: true
-#    tty: true
+  minecraft:
+    image: itzg/minecraft-bedrock-server
+    container_name: minecraft
+    environment:
+      EULA: "TRUE"
+      SERVER_NAME: "Dad's Server"
+      GAMEMODE: "survival"
+      DIFFICULTY: "normal"
+      OPS: "2533274795625937,2535405415054487,2535405917118583"
+      #ALLOW_LIST_USERS: "monkeyman 67156,IsaacChief13,OfficerCarson17"
+    volumes:
+      - /opt/appdata/minecraft:/data
+    ports:
+      - "19132:19132/udp"
+    networks:
+      docker_net:
+        ipv4_address: 172.18.0.9
+    stdin_open: true
+    tty: true
