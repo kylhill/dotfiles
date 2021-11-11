@@ -4,7 +4,7 @@ command -v bc > /dev/null || { echo "bc was not found. Please install bc."; exit
 { command -v drill > /dev/null && dig=drill; } || { command -v dig > /dev/null && dig=dig; } || { echo "dig was not found. Please install dnsutils."; exit 1; }
 
 PROVIDERS="
-192.168.1.30#syntax
+192.168.1.1#syntax
 1.1.1.1#cloudflare
 74.82.42.42#hurricane
 8.8.8.8#google
