@@ -78,7 +78,7 @@ services:
       - "127.0.0.1:8002:80"
     networks:
       docker_net:
-        ipv4_address: 172.18.0.7
+        ipv4_address: 172.18.0.5
     restart: unless-stopped
   grocy:
     image: lscr.io/linuxserver/grocy
@@ -107,7 +107,7 @@ services:
       - "127.0.0.1:8053:8053"
     networks:
       docker_net:
-        ipv4_address: 172.18.0.5
+        ipv4_address: 172.18.0.7
     restart: unless-stopped
   cloudflare-ddns:
     image: ghcr.io/joshuaavalon/cloudflare-ddns
