@@ -28,7 +28,7 @@
         path: bash/inputrc
     ~/.profile:
         path: bash/profile
-    ~/.tvnamer.json:
+    ~/.config/tvnamer/tvnamer.json:
         path: tvnamer/tvnamer.json
     ~/.vim:
         path: vim/vim/

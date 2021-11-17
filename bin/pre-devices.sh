@@ -22,7 +22,7 @@ do
         ssh $i "tar -cf /storage/backup/$i.tar -C / \
                     --exclude='storage/.cache/swapfile' --exclude='storage/.kodi/userdata/Thumbnails' --exclude='storage/.kodi/addons/packages' --exclude='storage/.kodi/addons/virtual.system-tools' --exclude='storage/.kodi/addons/virtual.network-tools'\
                     storage/.cache/ storage/.config/ storage/.kodi/ storage/.ssh/ storage/.vim/ && \
-                tar -cf /storage/backup/\"$i\"_flash.tar -C /flash config.txt edid.dat" &&
+                tar -cf /storage/backup/\"$i\"_flash.tar -C /flash config.txt cmdline.txt" &&
         scp -q $i:/storage/backup/$i.tar /srv/backup/devices/$i/$i.tar &&
         scp -q $i:/storage/backup/"$i"_flash.tar /srv/backup/devices/$i/"$i"_flash.tar
     fi
