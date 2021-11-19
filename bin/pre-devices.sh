@@ -5,12 +5,6 @@ find -O3 /srv/shared/ -maxdepth 3 -type d -print | sort -h > /srv/backup/devices
 ls /srv/shared/books/ > /srv/backup/devices/syntax/misc/books_list.txt
 ls /srv/shared/video/Movies/ > /srv/backup/devices/syntax/misc/movies_list.txt
 
-# rsync unifi backups
-#/usr/bin/rsync -a --delete --quiet --exclude='autobackup_meta.json' /opt/appdata/unifi-controller/data/backup/autobackup/ /srv/backup/devices/unifi/
-
-# Generate gateway backup
-#ssh gateway "tar -cz -C / config" > /srv/backup/devices/gateway/gateway.tgz
-
 # Generate htpc backups weekly
 for i in htpc htpc2 htpc3 htpc4
 do
