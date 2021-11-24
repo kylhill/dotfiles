@@ -18,7 +18,7 @@ services:
     environment:
       TZ: 'America/Chicago'
       ServerIP: '192.168.1.1'
-      ServerIPv6: 'fd06:4f9a:934d:a848::1'
+      ServerIPv6: 'fd06:4f9a:934d:1::1'
       VIRTUAL_HOST: 'pihole.tacomafia.net'
       WEB_PORT: '8000'
     volumes:
@@ -41,9 +41,9 @@ services:
   netdata:
     image: netdata/netdata
     container_name: netdata
-    hostname: gateway.l.tacomafia.net
+    hostname: gateway
     ports:
-      - 19999:19999
+      - "19999:19999"
     restart: unless-stopped
     cap_add:
       - SYS_PTRACE
