@@ -78,12 +78,13 @@ services:
   doh-server:
     image: satishweb/doh-server
     container_name: doh-server
-    network_mode: "host"
     environment:
       DEBUG: "0"
       UPSTREAM_DNS_SERVER: "udp:192.168.1.1:53"
       DOH_HTTP_PREFIX: "/dns-query"
       DOH_SERVER_LISTEN: ":8053"
+    ports:
+      - "127.0.0.1:8053:8053"
     restart: unless-stopped
   cloudflare-ddns:
     image: ghcr.io/joshuaavalon/cloudflare-ddns
@@ -127,7 +128,7 @@ services:
   netdata:
     image: netdata/netdata
     container_name: netdata
-    hostname: syntax.l.tacomafia.net
+    hostname: syntax
     ports:
       - "127.0.0.1:19999:19999"
     restart: unless-stopped
