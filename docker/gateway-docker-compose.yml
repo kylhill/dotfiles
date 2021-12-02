@@ -1,16 +1,4 @@
 services:
-  unifi-controller:
-    image: lscr.io/linuxserver/unifi-controller
-    container_name: unifi-controller
-    network_mode: "host"
-    environment:
-      - PUID=113
-      - PGID=119
-      - MEM_LIMIT=512M
-      - MEM_STARTUP=512M
-    volumes:
-      - /opt/appdata/unifi-controller:/config
-    restart: unless-stopped
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
@@ -38,31 +26,3 @@ services:
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
-  netdata:
-    image: netdata/netdata
-    container_name: netdata
-    hostname: gateway
-    ports:
-      - "19999:19999"
-    restart: unless-stopped
-    cap_add:
-      - SYS_PTRACE
-    security_opt:
-      - apparmor:unconfined
-    volumes:
-      - /opt/appdata/netdata/config:/etc/netdata:ro
-      - netdatalib:/var/lib/netdata
-      - netdatacache:/var/cache/netdata
-      - /etc/passwd:/host/etc/passwd:ro
-      - /etc/group:/host/etc/group:ro
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /etc/os-release:/host/etc/os-release:ro
-    environment:
-      - NETDATA_CLAIM_TOKEN=FnQggaW0ttKaVQVWvuow9h56m1Y1L5I2tqwh4x5ap6h9zjrLFzywR21O6VzMQubftEqLiPx-y-nvAEoEr7TBs8O7GpcGH8AnsQ8HQ7LzeRHGCOM6r_TSswZXnMh_FaSJV8CDJw4
-      - NETDATA_CLAIM_URL=https://app.netdata.cloud
-      - NETDATA_CLAIM_ROOMS=6dab7580-c5eb-43a0-8e5e-392e3f5e5a98
-
-volumes:
-  netdatalib:
-  netdatacache:
