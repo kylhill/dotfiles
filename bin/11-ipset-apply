@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# Script to call firehol ipset-apply.sh as part of netfilter-persistent
+# Place a symlink at /usr/share/netfilter-persistent/plugins.d/
+#
+
+set -e
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Source configuration
+if [ -f "/etc/default/netfilter-persistent" ]; then
+    . /etc/default/netfilter-persistent
+fi
+
+# Create the ipsets and populate them
+load_sets ()
+{
+    ipset-apply.sh "$BLOCKLIST_SETS" >/dev/null 2>&1
+}
+
+save_sets ()
+{
+    :
+}
+
+flush_sets ()
+{
+    :
+}
+
+
+case "$1" in
+start|restart|reload|force-reload)
+    load_sets
+    ;;
+save)
+    save_sets
+    ;;
+stop)
+    # While it makes sense to stop (delete) ipsets we keep the same
+    # semantics as ip(6)?tables rules
+    echo "Automatic flushing disabled, use \"flush\" instead of \"stop\""
+    ;;
+flush)
+    flush_sets
+    ;;
+*)
+    echo "Usage: $0 {start|restart|reload|force-reload|save|flush}" >&2
+    exit 1
+    ;;
+esac
