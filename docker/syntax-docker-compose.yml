@@ -20,7 +20,6 @@ services:
       - PUID=114
       - PGID=124
       - TZ=America/Chicago
-      - FG_LOG_LEVEL=info
     volumes:
       - /opt/appdata/flexget:/config
       - /srv/shared/video/Series:/srv/shared/video/Series:ro
@@ -45,7 +44,7 @@ services:
       - PUID=1000
       - PGID=100
       - TZ=America/Chicago
-      - UMASK_SET=022
+      - UMASK=022
       - DELUGE_LOGLEVEL=warning
     volumes:
       - /opt/appdata/deluge:/config
@@ -97,6 +96,22 @@ services:
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
+  unifi-controller:
+    image: lscr.io/linuxserver/unifi-controller
+    container_name: unifi-controller
+    environment:
+      - PUID=115
+      - PGID=121
+      - MEM_LIMIT=512M
+      - MEM_STARTUP=512M
+    ports:
+      - "3478:3478/udp"
+      - "10001:10001/udp"
+      - "8080:8080"
+      - "127.0.0.1:8004:8443"
+    volumes:
+      - /opt/appdata/unifi-controller:/config
+    restart: unless-stopped
 #  homeassistant:
 #    image: lscr.io/linuxserver/homeassistant
 #    container_name: homeassistant
@@ -109,31 +124,19 @@ services:
 #    ports:
 #        - "127.0.0.1:8005:8123"
 #    restart: unless-stopped
-  minecraft:
-    image: itzg/minecraft-bedrock-server
-    container_name: minecraft
-    environment:
-      EULA: "TRUE"
-      SERVER_NAME: "Dad's Server"
-      GAMEMODE: "survival"
-      DIFFICULTY: "normal"
-      OPS: "2533274795625937,2535405415054487,2535405917118583"
-      #ALLOW_LIST_USERS: "monkeyman 67156,IsaacChief13,OfficerCarson17"
-    volumes:
-      - /opt/appdata/minecraft:/data
-    ports:
-      - "19132:19132/udp"
-    stdin_open: true
-    tty: true
-  unifi-controller:
-    image: lscr.io/linuxserver/unifi-controller
-    container_name: unifi-controller
-    network_mode: "host"
-    environment:
-      - PUID=115
-      - PGID=121
-      - MEM_LIMIT=512M
-      - MEM_STARTUP=512M
-    volumes:
-      - /opt/appdata/unifi-controller:/config
-    restart: unless-stopped
+#  minecraft:
+#    image: itzg/minecraft-bedrock-server
+#    container_name: minecraft
+#    environment:
+#      EULA: "TRUE"
+#      SERVER_NAME: "Dad's Server"
+#      GAMEMODE: "survival"
+#      DIFFICULTY: "normal"
+#      OPS: "2533274795625937,2535405415054487,2535405917118583"
+#      #ALLOW_LIST_USERS: "monkeyman 67156,IsaacChief13,OfficerCarson17"
+#    volumes:
+#      - /opt/appdata/minecraft:/data
+#    ports:
+#      - "19132:19132/udp"
+#    stdin_open: true
+#    tty: true
