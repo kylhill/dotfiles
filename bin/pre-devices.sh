@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# Script to generate additional backup data, intended to be called from a backup script
+#
 
 # Generate updated shared file directory listings to aid in recovery
 find -O3 /srv/shared/ -maxdepth 3 -type d -print | sort -h > /srv/backup/devices/syntax/misc/syntax_dirlist.txt
@@ -6,8 +9,7 @@ ls /srv/shared/books/ > /srv/backup/devices/syntax/misc/books_list.txt
 ls /srv/shared/video/Movies/ > /srv/backup/devices/syntax/misc/movies_list.txt
 
 # Generate htpc backups weekly
-for i in htpc htpc2 htpc3 htpc4
-do
+for i in htpc htpc2 htpc3 htpc4; do
     HTPC_BACKUP_DIR="/srv/backup/devices/$i/"
     mkdir -p $HTPC_BACKUP_DIR
 
