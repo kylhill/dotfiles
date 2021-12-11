@@ -11,6 +11,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 # Source configuration
 if [ -f "/etc/default/netfilter-persistent" ]; then
     . /etc/default/netfilter-persistent
+else
+    BLOCKLIST_SETS="firehol_level1"
 fi
 
 # Create the ipsets and populate them
@@ -28,7 +30,6 @@ flush_sets ()
 {
     :
 }
-
 
 case "$1" in
 start|restart|reload|force-reload)
