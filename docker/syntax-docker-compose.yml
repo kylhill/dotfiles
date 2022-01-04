@@ -45,7 +45,6 @@ services:
       - PGID=100
       - TZ=America/Chicago
       - UMASK=022
-      - DELUGE_LOGLEVEL=warning
     volumes:
       - /opt/appdata/deluge:/config
       - /var/working:/var/working
@@ -78,10 +77,10 @@ services:
     image: satishweb/doh-server
     container_name: doh-server
     environment:
-      DEBUG: "0"
-      UPSTREAM_DNS_SERVER: "udp:192.168.1.1:53"
-      DOH_HTTP_PREFIX: "/dns-query"
-      DOH_SERVER_LISTEN: ":8053"
+      - DEBUG=0
+      - UPSTREAM_DNS_SERVER=udp:192.168.1.1:53
+      - DOH_HTTP_PREFIX=/dns-query
+      - DOH_SERVER_LISTEN=:8053
     ports:
       - "127.0.0.1:8053:8053"
     restart: unless-stopped
@@ -90,9 +89,9 @@ services:
     container_name: cloudflare-ddns
     network_mode: "host"
     environment:
-      PUID: "117"
-      PGID: "127"
-      CRON: "*/60 * * * *"
+      - PUID=117
+      - PGID=127
+      - CRON=*/60 * * * *
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
@@ -108,35 +107,43 @@ services:
       - "3478:3478/udp"
       - "10001:10001/udp"
       - "8080:8080"
-      - "127.0.0.1:8004:8443"
+      - "8004:8443"
     volumes:
       - /opt/appdata/unifi-controller:/config
     restart: unless-stopped
-#  homeassistant:
-#    image: lscr.io/linuxserver/homeassistant
-#    container_name: homeassistant
-#    environment:
-#      - PUID=123
-#      - PGID=128
-#      - TZ=America/Chicago
-#    volumes:
-#      - /opt/appdata/homeassistant:/config
-#    ports:
-#        - "127.0.0.1:8005:8123"
-#    restart: unless-stopped
-#  minecraft:
-#    image: itzg/minecraft-bedrock-server
-#    container_name: minecraft
-#    environment:
-#      EULA: "TRUE"
-#      SERVER_NAME: "Dad's Server"
-#      GAMEMODE: "survival"
-#      DIFFICULTY: "normal"
-#      OPS: "2533274795625937,2535405415054487,2535405917118583"
-#      #ALLOW_LIST_USERS: "monkeyman 67156,IsaacChief13,OfficerCarson17"
-#    volumes:
-#      - /opt/appdata/minecraft:/data
-#    ports:
-#      - "19132:19132/udp"
-#    stdin_open: true
-#    tty: true
+  homeassistant:
+    image: lscr.io/linuxserver/homeassistant
+    container_name: homeassistant
+    network_mode: "host"
+    environment:
+      - PUID=123
+      - PGID=128
+      - TZ=America/Chicago
+    volumes:
+      - /opt/appdata/homeassistant:/config
+      - /srv/shared:/srv/shared:ro
+    restart: unless-stopped
+  esphome:
+    image: ghcr.io/esphome/esphome
+    container_name: esphome
+    network_mode: "host"
+    volumes:
+      - /opt/appdata/esphome:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+  minecraft:
+    image: itzg/minecraft-bedrock-server
+    container_name: minecraft
+    environment:
+      - EULA=TRUE
+      - SERVER_NAME=Dad's Server
+      - GAMEMODE=survival
+      - DIFFICULTY=normal
+      - OPS=2533274795625937,2535405415054487,2535405917118583
+      #- ALLOW_LIST_USERS=monkeyman 67156,IsaacChief13,OfficerCarson17
+    volumes:
+      - /opt/appdata/minecraft:/data
+    ports:
+      - "19132:19132/udp"
+    stdin_open: true
+    tty: true
