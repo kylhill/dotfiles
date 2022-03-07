@@ -101,8 +101,8 @@ services:
     environment:
       - PUID=115
       - PGID=121
-      - MEM_LIMIT=512M
-      - MEM_STARTUP=512M
+      - MEM_LIMIT=512
+      - MEM_STARTUP=512
     ports:
       - "3478:3478/udp"
       - "10001:10001/udp"
@@ -163,6 +163,7 @@ services:
       - "127.0.0.1:3000:3000"
     volumes:
       - /opt/appdata/grafana:/var/lib/grafana
+    restart: unless-stopped
 #  minecraft:
 #    image: itzg/minecraft-bedrock-server
 #    container_name: minecraft
