@@ -3,6 +3,7 @@
 # Script to backup a large dataset using rsync that spans multiple smaller drives
 #
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+EMAIL_NOTIFY=kylhill@gmail.com
 
 cleanup() {
     rm -f "$INCLUDE"
@@ -24,11 +25,11 @@ SRC="${SRC%/}/"
 DEST="${DEST%/}/"
 
 if [ ! -d "$SRC" ]; then
-    echo "Invalid source directory"
+    echo "Invalid source directory: $SRC"
     exit 1
 fi
 if [ ! -d "$DEST" ]; then
-    echo "Invalid destination directory"
+    echo "Invalid destination directory: $DEST"
     exit 1
 fi
 
@@ -40,8 +41,10 @@ INCLUDE="$(mktemp)"
 find "$SRC" -name '*.zfs' -prune -o -type f -print | cut -sd / -f "$SRC_SLASHES"- | sort -u > "$INCLUDE"
 
 # rsync files from include list to destination
+n=0
 until rsync -arm --delete --progress --files-from="$INCLUDE" "$SRC" "$DEST"
 do
+    n=$((n + 1))
     # Remove empty directories from destination
     find "$DEST" -type d -empty -delete
 
@@ -55,8 +58,11 @@ do
 
     rm -f "$TMP_EXCLUDE"
 
-    read -r -p "Drive full. Swap in new drive, free up some space, and press any key to continue..."
+    echo "Backup drive $n ($DEST) is full. Ready to swap in a new drive." | mail -s "Syntax: $SRC Backup Drive Full" "$EMAIL_NOTIFY"
+    read -r -p "Drive $n ($DEST) full. Swap in new drive, free up some space, and press any key to continue..."
 done
+
+echo "Backup of $SRC to $DEST is complete." | mail -s "Syntax: $SRC Backup Complete" "$EMAIL_NOTIFY"
 
 cleanup
 exit 0

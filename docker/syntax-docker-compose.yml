@@ -139,23 +139,6 @@ services:
     volumes:
       - /opt/appdata/influxdb:/var/lib/influxdb2
     restart: unless-stopped
-  telegraf:
-    image: telegraf
-    container_name: telegraf
-    network_mode: "host"
-    environment:
-      - HOST_ETC=/hostfs/etc
-      - HOST_PROC=/hostfs/proc
-      - HOST_SYS=/hostfs/sys
-      - HOST_MOUNT_PREFIX=/hostfs
-    volumes:
-      - /opt/appdata/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-      - /:/hostfs:ro
-      - /etc:/hostfs/etc:ro
-      - /proc:/hostfs/proc:ro
-      - /sys:/hostfs/sys:ro
-      - /var/run/utmp:/var/run/utmp:ro
-    restart: unless-stopped
   grafana:
     image: grafana/grafana-oss
     container_name: grafana
