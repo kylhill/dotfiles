@@ -8,7 +8,8 @@ services:
       - TZ=America/Chicago
       - FTLCONF_REPLY_ADDR4=192.168.1.1
      #- PIHOLE_DNS_=1.1.1.1;2606:4700:4700::1111;74.82.42.42;2001:470:20::2
-      - PIHOLE_DNS_=1.1.1.1;2001:470:20::2
+     #- PIHOLE_DNS_=1.1.1.1;2001:470:20::2
+      - PIHOLE_DNS_=127.0.0.1#5053
       - VIRTUAL_HOST=pihole.tacomafia.net
       - INTERFACE=lan0
       - DNSMASQ_LISTENING=local
@@ -31,21 +32,4 @@ services:
       - CRON=*/60 * * * *
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
-    restart: unless-stopped
-  telegraf:
-    image: telegraf
-    container_name: telegraf
-    network_mode: "host"
-    environment:
-      - HOST_ETC=/hostfs/etc
-      - HOST_PROC=/hostfs/proc
-      - HOST_SYS=/hostfs/sys
-      - HOST_MOUNT_PREFIX=/hostfs
-    volumes:
-      - /opt/appdata/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-      - /:/hostfs:ro
-      - /etc:/hostfs/etc:ro
-      - /proc:/hostfs/proc:ro
-      - /sys:/hostfs/sys:ro
-      - /var/run/utmp:/var/run/utmp:ro
     restart: unless-stopped
