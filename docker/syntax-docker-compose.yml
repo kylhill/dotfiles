@@ -131,21 +131,13 @@ services:
       - /opt/appdata/esphome:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
-  influxdb:
-    image: influxdb
-    container_name: influxdb
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    container_name: uptime-kuma
     ports:
-      - "8086:8086"
+      - "127.0.0.1:3001:3001"
     volumes:
-      - /opt/appdata/influxdb:/var/lib/influxdb2
-    restart: unless-stopped
-  grafana:
-    image: grafana/grafana-oss
-    container_name: grafana
-    ports:
-      - "127.0.0.1:3000:3000"
-    volumes:
-      - /opt/appdata/grafana:/var/lib/grafana
+      - /opt/appdata/uptime-kuma:/app/data
     restart: unless-stopped
 #  minecraft:
 #    image: itzg/minecraft-bedrock-server
