@@ -91,7 +91,7 @@ services:
     environment:
       - PUID=117
       - PGID=127
-      - CRON=*/60 * * * *
+      - CRON=*/30 * * * *
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
@@ -155,3 +155,4 @@ services:
 #      - "19132:19132/udp"
 #    stdin_open: true
 #    tty: true
+#    restart: unless-stopped

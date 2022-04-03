@@ -3,10 +3,8 @@
 # Script to generate additional backup data, intended to be called from a backup script
 #
 
-# Generate updated shared file directory listings to aid in recovery
-find /srv/shared/ -maxdepth 3 -type d -print | sort -uh > /srv/backup/devices/syntax/misc/syntax_dirlist.txt
-ls /srv/shared/books/ > /srv/backup/devices/syntax/misc/books_list.txt
-ls /srv/shared/video/Movies/ > /srv/backup/devices/syntax/misc/movies_list.txt
+# Generate an updated shared file manifest to aid in recovery
+find /srv/shared/ -name '*.zfs' -prune -o -type f -print | cut -sd / -f 3- | sort > /srv/backup/devices/syntax/misc/shared_manifest.txt
 
 # Generate htpc backups weekly
 for i in htpc htpc2 htpc3 htpc4; do
