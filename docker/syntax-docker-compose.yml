@@ -1,6 +1,6 @@
 services:
   kanzi:
-    image: lscr.io/linuxserver/kanzi
+    image: lscr.io/linuxserver/kanzi:latest
     container_name: kanzi
     environment:
       - PUID=119
@@ -10,11 +10,9 @@ services:
       - URL_ENDPOINT=https://kanzi.tacomafia.net
     volumes:
       - /opt/appdata/kanzi:/config
-    ports:
-      - "127.0.0.1:8000:8000"
     restart: unless-stopped
   flexget:
-    image: ghcr.io/wiserain/flexget
+    image: ghcr.io/wiserain/flexget:latest
     container_name: flexget
     environment:
       - PUID=114
@@ -25,19 +23,20 @@ services:
       - /srv/shared/video/Series:/srv/shared/video/Series:ro
     restart: unless-stopped
   freshrss:
-    image: lscr.io/linuxserver/freshrss
+    image: lscr.io/linuxserver/freshrss:latest
     container_name: freshrss
+    depends_on:
+      - mariadb
+      - fulltextrss
     environment:
       - PUID=120
       - PGID=125
       - TZ=America/Chicago
     volumes:
       - /opt/appdata/freshrss:/config
-    ports:
-      - "127.0.0.1:8001:80"
     restart: unless-stopped
   deluge:
-    image: lscr.io/linuxserver/deluge
+    image: lscr.io/linuxserver/deluge:latest
     container_name: deluge
     network_mode: "host"
     environment:
@@ -51,18 +50,16 @@ services:
       - /srv/shared/torrents:/srv/shared/torrents
     restart: unless-stopped
   fulltextrss:
-    image: heussd/fivefilters-full-text-rss
+    image: heussd/fivefilters-full-text-rss:latest
     container_name: fulltextrss
     volumes:
       - /var/www/html/cache
       - /opt/appdata/fulltextrss/ftr-site-config:/var/www/html/site_config/standard:ro
       - /opt/appdata/fulltextrss/custom_config.php:/var/www/html/custom_config.php:ro
       - /opt/appdata/fulltextrss/mpm_prefork.conf:/etc/apache2/mods-enabled/mpm_prefork.conf:ro
-    ports:
-      - "127.0.0.1:8002:80"
     restart: unless-stopped
   grocy:
-    image: lscr.io/linuxserver/grocy
+    image: lscr.io/linuxserver/grocy:latest
     container_name: grocy
     environment:
       - PUID=121
@@ -70,22 +67,16 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/appdata/grocy:/config
-    ports:
-      - "127.0.0.1:8003:80"
     restart: unless-stopped
   doh-server:
-    image: satishweb/doh-server
+    image: satishweb/doh-server:latest
     container_name: doh-server
     environment:
-      - DEBUG=0
       - UPSTREAM_DNS_SERVER=udp:192.168.1.1:53
       - DOH_HTTP_PREFIX=/dns-query
-      - DOH_SERVER_LISTEN=:8053
-    ports:
-      - "127.0.0.1:8053:8053"
     restart: unless-stopped
   cloudflare-ddns:
-    image: ghcr.io/joshuaavalon/cloudflare-ddns
+    image: ghcr.io/joshuaavalon/cloudflare-ddns:latest
     container_name: cloudflare-ddns
     network_mode: "host"
     environment:
@@ -96,7 +87,7 @@ services:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
   unifi-controller:
-    image: lscr.io/linuxserver/unifi-controller
+    image: lscr.io/linuxserver/unifi-controller:latest
     container_name: unifi-controller
     environment:
       - PUID=115
@@ -107,12 +98,12 @@ services:
       - "3478:3478/udp"
       - "10001:10001/udp"
       - "8080:8080"
-      - "8004:8443"
+      - "8443:8443"
     volumes:
       - /opt/appdata/unifi-controller:/config
     restart: unless-stopped
   homeassistant:
-    image: lscr.io/linuxserver/homeassistant
+    image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
     network_mode: "host"
     environment:
@@ -124,7 +115,7 @@ services:
       - /srv/shared:/srv/shared:ro
     restart: unless-stopped
   esphome:
-    image: ghcr.io/esphome/esphome
+    image: ghcr.io/esphome/esphome:latest
     container_name: esphome
     network_mode: "host"
     volumes:
@@ -132,15 +123,49 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
   uptime-kuma:
-    image: louislam/uptime-kuma
+    image: louislam/uptime-kuma:latest
     container_name: uptime-kuma
-    ports:
-      - "127.0.0.1:3001:3001"
     volumes:
       - /opt/appdata/uptime-kuma:/app/data
     restart: unless-stopped
+  mariadb:
+    image: lscr.io/linuxserver/mariadb
+    container_name: mariadb
+    environment:
+      - PUID=109
+      - PGID=115
+      - TZ=America/Chicago
+    volumes:
+      - /opt/appdata/mariadb:/config
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+  swag:
+    image: lscr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=33
+      - PGID=33
+      - TZ=America/Chicago
+      - URL=tacomafia.net
+      - VALIDATION=dns
+      - SUBDOMAINS=wildcard
+      - DNSPLUGIN=cloudflare
+      - EMAIL= kylhill@gmail.com
+      - EXTRA_DOMAINS= "*.l.tacomafia.net"
+    volumes:
+      - /opt/appdata/swag:/config
+      - /srv/backup:/srv/backup:ro
+      - /srv/kws:/srv/kws:ro
+      - /srv/shared:/srv/shared:ro
+    ports:
+      - "443:443"
+      - "80:80"
+    restart: unless-stopped
 #  minecraft:
-#    image: itzg/minecraft-bedrock-server
+#    image: itzg/minecraft-bedrock-server:latest
 #    container_name: minecraft
 #    environment:
 #      - EULA=TRUE
