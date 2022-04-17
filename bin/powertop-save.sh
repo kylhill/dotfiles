@@ -1,5 +1,7 @@
 #!/bin/sh
 # Enable power savings suggested by PowerTOP
+sysctl kernel.nmi_watchdog=0
+sysctl vm.dirty_writeback_centisecs=1500
 
 for i in /sys/bus/i2c/devices/i2c-*/device/power/control; do
     echo auto > $i
