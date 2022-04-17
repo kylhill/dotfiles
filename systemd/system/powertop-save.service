@@ -1,5 +1,5 @@
 [Unit]
-Description=Enables power savings suggested by PowerTOP
+Description=Enable power savings suggested by PowerTOP
 After=local-fs.target
 
 [Service]
