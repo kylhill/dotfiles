@@ -1,0 +1,10 @@
+[Unit]
+Description=Update remote ipsets
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+Restart=no
+
+ExecStart=/usr/local/bin/ipset-update.sh
