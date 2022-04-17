@@ -98,7 +98,6 @@ services:
       - "3478:3478/udp"
       - "10001:10001/udp"
       - "8080:8080"
-      - "8443:8443"
     volumes:
       - /opt/appdata/unifi-controller:/config
     restart: unless-stopped
@@ -125,6 +124,8 @@ services:
   uptime-kuma:
     image: louislam/uptime-kuma:latest
     container_name: uptime-kuma
+    depends_on:
+      - swag
     volumes:
       - /opt/appdata/uptime-kuma:/app/data
     restart: unless-stopped

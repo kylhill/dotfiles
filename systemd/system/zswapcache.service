@@ -1,0 +1,12 @@
+[Unit]
+Description=Configures zswap cache
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/zswapcache-on
+ExecStop=/usr/local/bin/zswapcache-on off
+RemainAfterExit=yes
+
+[Install]
+WantedBy = multi-user.target
