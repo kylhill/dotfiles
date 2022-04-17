@@ -1,0 +1,10 @@
+[Unit]
+Description=Enables power savings suggested by PowerTOP
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/powertop-save.sh
+
+[Install]
+WantedBy = multi-user.target

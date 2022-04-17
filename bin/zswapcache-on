@@ -26,3 +26,5 @@ echo zstd   > /sys/module/zswap/parameters/compressor
 
 # Faster than any of the alternatives.
 echo zsmalloc > /sys/module/zswap/parameters/zpool
+
+exit 0
