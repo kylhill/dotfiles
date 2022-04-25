@@ -74,6 +74,8 @@ services:
     environment:
       - UPSTREAM_DNS_SERVER=udp:192.168.1.1:53
       - DOH_HTTP_PREFIX=/dns-query
+    volumes:
+        - /opt/appdata/doh-server/app-config:/app-config
     restart: unless-stopped
   cloudflare-ddns:
     image: ghcr.io/joshuaavalon/cloudflare-ddns:latest
@@ -82,7 +84,7 @@ services:
     environment:
       - PUID=117
       - PGID=127
-      - CRON=*/30 * * * *
+      - CRON=0 */6 * * *
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
