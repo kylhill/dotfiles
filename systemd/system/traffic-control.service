@@ -1,0 +1,9 @@
+[Unit]
+Description=Set up traffic control qdisc
+After= network.target
+
+[Service]
+ExecStart=/usr/sbin/tc qdisc replace dev wan0 root cake bandwidth 500Mbit ethernet nat
+
+[Install]
+WantedBy=multi-user.target
