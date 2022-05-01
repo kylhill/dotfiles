@@ -203,7 +203,7 @@ measure_direction() {
 #       5 sessions chosen empirically because total didn't increase much after that number)
 
 # set an initial values for defaults
-TESTHOST="netperf.bufferbloat.net"
+TESTHOST="netperf-west.bufferbloat.net"
 TESTDUR="60"
 
 PING4=ping
