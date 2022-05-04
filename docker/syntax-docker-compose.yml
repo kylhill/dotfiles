@@ -72,7 +72,7 @@ services:
     image: satishweb/doh-server:latest
     container_name: doh-server
     environment:
-      - UPSTREAM_DNS_SERVER=udp:192.168.1.1:53
+      - UPSTREAM_DNS_SERVER=udp:172.19.0.1:53
       - DOH_HTTP_PREFIX=/dns-query
     volumes:
         - /opt/appdata/doh-server/app-config:/app-config
@@ -94,8 +94,8 @@ services:
     environment:
       - PUID=115
       - PGID=121
-      - MEM_LIMIT=512
-      - MEM_STARTUP=512
+      - MEM_LIMIT=256
+      - MEM_STARTUP=256
     ports:
       - "3478:3478/udp"
       - "10001:10001/udp"
@@ -135,8 +135,8 @@ services:
     image: lscr.io/linuxserver/mariadb
     container_name: mariadb
     environment:
-      - PUID=109
-      - PGID=115
+      - PUID=113
+      - PGID=118
       - TZ=America/Chicago
     volumes:
       - /opt/appdata/mariadb:/config
