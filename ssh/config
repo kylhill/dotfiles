@@ -66,6 +66,11 @@ Host *.repo.borgbase.com
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
+Host gcp
+    HostName gcp.tacomafia.net
+    user kylhill
+    ForwardAgent yes
+
 Host *
     AddKeysToAgent yes
     ControlPath ~/.ssh/control-%h-%p-%r.sock
