@@ -13,34 +13,28 @@ Host syntax
 Host htpc
     HostName htpc.l.tacomafia.net
     User root
-    ForwardAgent yes
 
 Host htpc2
     HostName htpc2.l.tacomafia.net
     User root
-    ForwardAgent yes
 
 Host htpc3
     HostName htpc3.l.tacomafia.net
     User root
-    ForwardAgent yes
 
 Host htpc4
     HostName htpc4.l.tacomafia.net
     User root
-    ForwardAgent yes
 
 Host cslinux
     HostName cslinux.cs.ksu.edu
     User kylhill
-    ForwardAgent yes
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
 Host cislinux
     HostName cslinux.cs.ksu.edu
     User kylhill
-    ForwardAgent yes
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
@@ -53,13 +47,15 @@ Host wap
     HostName wap.l.tacomafia.net
     user kyleh
     IdentityFile ~/.ssh/ubnt-20210331
-    ForwardAgent yes
+    HostKeyAlgorithms=+ssh-rsa
+    PubkeyAcceptedAlgorithms +ssh-rsa
 
 Host wap2
     HostName wap2.l.tacomafia.net
     user kyleh
     IdentityFile ~/.ssh/ubnt-20210331
-    ForwardAgent yes
+    HostKeyAlgorithms=+ssh-rsa
+    PubkeyAcceptedAlgorithms +ssh-rsa
 
 Host *.repo.borgbase.com
     IdentityFile ~/.ssh/id_borg
@@ -69,7 +65,7 @@ Host *.repo.borgbase.com
 Host gcp
     HostName gcp.tacomafia.net
     user kylhill
-    ForwardAgent yes
+    VerifyHostKeyDNS Yes
 
 Host *
     AddKeysToAgent yes

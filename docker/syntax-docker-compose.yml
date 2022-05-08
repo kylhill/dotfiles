@@ -68,15 +68,15 @@ services:
     volumes:
       - /opt/appdata/grocy:/config
     restart: unless-stopped
-  doh-server:
-    image: satishweb/doh-server:latest
-    container_name: doh-server
-    environment:
-      - UPSTREAM_DNS_SERVER=udp:172.19.0.1:53
-      - DOH_HTTP_PREFIX=/dns-query
-    volumes:
-        - /opt/appdata/doh-server/app-config:/app-config
-    restart: unless-stopped
+#  doh-server:
+#    image: satishweb/doh-server:latest
+#    container_name: doh-server
+#    environment:
+#      - UPSTREAM_DNS_SERVER=udp:172.19.0.1:53
+#      - DOH_HTTP_PREFIX=/dns-query
+#    volumes:
+#        - /opt/appdata/doh-server/app-config:/app-config
+#    restart: unless-stopped
   cloudflare-ddns:
     image: ghcr.io/joshuaavalon/cloudflare-ddns:latest
     container_name: cloudflare-ddns
