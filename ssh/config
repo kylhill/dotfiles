@@ -65,6 +65,7 @@ Host *.repo.borgbase.com
 Host gcp
     HostName gcp.tacomafia.net
     user kylhill
+    ForwardAgent yes
     VerifyHostKeyDNS Yes
 
 Host *
