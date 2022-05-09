@@ -46,8 +46,6 @@
         path: ssh/id_ed25519.pub
     ~/.ssh/id_ed25519_sk.pub:
         path: ssh/id_ed25519_sk.pub
-    ~/.ssh/ubnt-20210331.pub:
-        path: ssh/ubnt-20210331.pub
     ~/.local/bin:
         path: bin/
 
