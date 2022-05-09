@@ -46,16 +46,14 @@ Host gateway
 Host wap
     HostName wap.l.tacomafia.net
     user kyleh
-    IdentityFile ~/.ssh/ubnt-20210331
     HostKeyAlgorithms=+ssh-rsa
-    PubkeyAcceptedAlgorithms +ssh-rsa
+    PubkeyAcceptedKeyTypes=+ssh-rsa
 
 Host wap2
     HostName wap2.l.tacomafia.net
     user kyleh
-    IdentityFile ~/.ssh/ubnt-20210331
     HostKeyAlgorithms=+ssh-rsa
-    PubkeyAcceptedAlgorithms +ssh-rsa
+    PubkeyAcceptedKeyTypes=+ssh-rsa
 
 Host *.repo.borgbase.com
     IdentityFile ~/.ssh/id_borg
