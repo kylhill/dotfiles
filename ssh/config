@@ -1,56 +1,45 @@
-Host tacomafia.net
+Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net
+    Hostname syntax.tacomafia.net
     Port 993
     User kyleh
     ForwardAgent yes
     VerifyHostKeyDNS Yes
 
-Host syntax
-    HostName syntax.l.tacomafia.net
-    Port 993
-    User kyleh
-    ForwardAgent yes
-
-Host htpc
-    HostName htpc.l.tacomafia.net
+Host htpc htpc.l.tacomafia.net
+    Hostname htpc.l.tacomafia.net
     User root
 
-Host htpc2
-    HostName htpc2.l.tacomafia.net
+Host htpc2 htpc2.l.tacomafia.net
+    Hostname htpc2.l.tacomafia.net
     User root
 
-Host htpc3
-    HostName htpc3.l.tacomafia.net
+Host htpc3 htpc3.l.tacomafia.net
+    Hostname htpc3.l.tacomafia.net
     User root
 
-Host htpc4
-    HostName htpc4.l.tacomafia.net
+Host htpc4 htpc4.l.tacomafia.net
+    Hostname htpc4.l.tacomafia.net
     User root
 
-Host cslinux
-    HostName cslinux.cs.ksu.edu
+Host cslinux cislinux
+    Hostname cslinux.cs.ksu.edu
     User kylhill
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
-Host cislinux
-    HostName cslinux.cs.ksu.edu
-    User kylhill
-    ServerAliveInterval 10
-    ServerAliveCountMax 30
-
-Host gateway
-    HostName gateway.l.tacomafia.net
+Host gateway gateway.l.tacomafia.net
+    Hostname gateway.l.tacomafia.net
     user kyleh
     ForwardAgent yes
 
-Host wap
-    HostName wap.l.tacomafia.net
+Host wap wap.l.tacomafia.net
+    Hostname wap.l.tacomafia.net
     user kyleh
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
 
-Host wap2
-    HostName wap2.l.tacomafia.net
+Host wap2 wap2.l.tacomafia.net
+    Hostname wap2.l.tacomafia.net
     user kyleh
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
@@ -60,8 +49,8 @@ Host *.repo.borgbase.com
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
-Host gcp
-    HostName gcp.tacomafia.net
+Host gcp gcp.tacomafia.net
+    Hostname gcp.tacomafia.net
     user kylhill
     ForwardAgent yes
     VerifyHostKeyDNS Yes
