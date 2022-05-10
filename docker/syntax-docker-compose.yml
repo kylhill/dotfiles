@@ -115,22 +115,22 @@ services:
       - /opt/appdata/homeassistant:/config
       - /srv/shared:/srv/shared:ro
     restart: unless-stopped
-  esphome:
-    image: ghcr.io/esphome/esphome:latest
-    container_name: esphome
-    network_mode: "host"
-    volumes:
-      - /opt/appdata/esphome:/config
-      - /etc/localtime:/etc/localtime:ro
-    restart: unless-stopped
-  uptime-kuma:
-    image: louislam/uptime-kuma:latest
-    container_name: uptime-kuma
-    depends_on:
-      - swag
-    volumes:
-      - /opt/appdata/uptime-kuma:/app/data
-    restart: unless-stopped
+#  esphome:
+#    image: ghcr.io/esphome/esphome:latest
+#    container_name: esphome
+#    network_mode: "host"
+#    volumes:
+#      - /opt/appdata/esphome:/config
+#      - /etc/localtime:/etc/localtime:ro
+#    restart: unless-stopped
+#  uptime-kuma:
+#    image: louislam/uptime-kuma:latest
+#    container_name: uptime-kuma
+#    depends_on:
+#      - swag
+#    volumes:
+#      - /opt/appdata/uptime-kuma:/app/data
+#    restart: unless-stopped
   mariadb:
     image: lscr.io/linuxserver/mariadb
     container_name: mariadb
