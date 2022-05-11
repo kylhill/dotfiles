@@ -52,6 +52,7 @@ Host *.repo.borgbase.com
 Host syntax-borg
     Hostname syntax.tacomafia.net
     Port 993
+    user kyleh
     VerifyHostKeyDNS Yes
     IdentityFile ~/.ssh/id_borg
     ServerAliveInterval 10
