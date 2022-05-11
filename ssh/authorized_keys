@@ -1,2 +1,3 @@
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH3B/FlRNV435YERy7hUtp/RW6v2uX9KF0dm+y7WTuy9 Kyle's Key - 7/25/2020
 sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIKqsXNyKdNR50dAY+pwl05V8jfYGQIAztYpoIgD+GmEoAAAABHNzaDo= Yubikey 5 - 7/24/2021
+command="borg serve --restrict-to-path /srv/backup/borg",restrict ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEB63lee/I4RHdrFmd0i5tBXa8ruPMudWw7+BKaGhleF borgbackup

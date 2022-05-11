@@ -49,6 +49,14 @@ Host *.repo.borgbase.com
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
+Host syntax-borg
+    Hostname syntax.tacomafia.net
+    Port 993
+    VerifyHostKeyDNS Yes
+    IdentityFile ~/.ssh/id_borg
+    ServerAliveInterval 10
+    ServerAliveCountMax 30
+
 Host gcp gcp.tacomafia.net
     Hostname gcp.tacomafia.net
     user kylhill
