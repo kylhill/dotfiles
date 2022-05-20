@@ -1,24 +1,11 @@
 services:
-  pihole:
-    container_name: pihole
-    image: ghcr.io/pi-hole/pihole:latest
-    hostname: pihole
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
     network_mode: "host"
-    environment:
-      - TZ=America/Chicago
-      - FTLCONF_REPLY_ADDR4=192.168.1.1
-      - PIHOLE_DNS_=127.0.0.1#5053
-      - VIRTUAL_HOST=pihole.tacomafia.net
-      - INTERFACE=lan0
-      - DNSMASQ_LISTENING=local
-      - WEB_PORT=8000
     volumes:
-      - /opt/appdata/pihole/etc/pihole:/etc/pihole
-      - /opt/appdata/pihole/etc/dnsmasq.d:/etc/dnsmasq.d
-    cap_add:
-      - NET_ADMIN
-      - SYS_NICE
-      - CHOWN
+      - /opt/appdata/adguard/work:/opt/adguardhome/work
+      - /opt/appdata/adguard/conf:/opt/adguardhome/conf
     restart: unless-stopped
   cloudflare-ddns:
     image: ghcr.io/joshuaavalon/cloudflare-ddns:latest
