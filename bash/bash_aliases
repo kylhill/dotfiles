@@ -5,4 +5,4 @@ alias dcpull='docker-compose -f /opt/docker-compose.yml pull' #pulls all new ima
 alias dclogs='docker-compose -f /opt/docker-compose.yml logs -tf --tail="50" '
 alias dtail='docker logs -tf --tail="50" "$@"'
 alias dcp='docker-compose -f /opt/docker-compose.yml '
-alias dprune='docker system prune --all --volumes'
+alias dprune='docker system prune -a -v -f'
