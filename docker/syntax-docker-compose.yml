@@ -129,7 +129,6 @@ services:
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
-    network_mode: "host"
     environment:
       - PUID=123
       - PGID=128
@@ -137,6 +136,15 @@ services:
     volumes:
       - /opt/appdata/homeassistant:/config
       - /srv/shared:/srv/shared:ro
+    restart: unless-stopped
+  authelia:
+    image: ghcr.io/authelia/authelia:latest
+    container_name: authelia
+    user: "125:132"
+    environment:
+      - TZ=America/Chicago
+    volumes:
+      - /opt/appdata/authelia:/config
     restart: unless-stopped
 #  esphome:
 #    image: ghcr.io/esphome/esphome:latest
