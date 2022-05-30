@@ -33,6 +33,7 @@ if [ ! -d "$DEST" ]; then
     exit 1
 fi
 
+# Count slashes
 SRC_SLASHES=$((  $(echo "$SRC"  | tr -cd '/' | wc -c) + 1 ))
 DEST_SLASHES=$(( $(echo "$DEST" | tr -cd '/' | wc -c) + 1 ))
 
@@ -40,11 +41,12 @@ DEST_SLASHES=$(( $(echo "$DEST" | tr -cd '/' | wc -c) + 1 ))
 INCLUDE="$(mktemp)"
 find "$SRC" -name '*.zfs' -prune -o -type f -print | cut -sd / -f "$SRC_SLASHES"- | sort -u > "$INCLUDE"
 
+# Remove empty directories from destination
+find "$DEST" -type d -empty -delete
+
 # rsync files from include list to destination
-n=0
 until rsync -arm --delete --progress --files-from="$INCLUDE" "$SRC" "$DEST"
 do
-    n=$((n + 1))
     # Remove empty directories from destination
     find "$DEST" -type d -empty -delete
 
@@ -58,11 +60,11 @@ do
 
     rm -f "$TMP_EXCLUDE"
 
-    echo "Backup drive $n ($DEST) is full. Ready to swap in a new drive." | mail -s "Syntax: $SRC Backup Drive Full" "$EMAIL_NOTIFY"
-    read -r -p "Drive $n ($DEST) full. Swap in new drive, free up some space, and press any key to continue..."
+    #echo "Backup drive $DEST is full. Ready to swap in a new drive." | mail -s "Syntax: $SRC Backup Drive Full" "$EMAIL_NOTIFY"
+    read -r -p "Drive $DEST full. Swap in new drive, free up some space, and press any key to continue..."
 done
 
-echo "Backup of $SRC to $DEST is complete." | mail -s "Syntax: $SRC Backup Complete" "$EMAIL_NOTIFY"
+#echo "Backup of $SRC to $DEST is complete." | mail -s "Syntax: $SRC Backup Complete" "$EMAIL_NOTIFY"
+echo "Backup of $SRC to $DEST is complete."
 
-cleanup
 exit 0
