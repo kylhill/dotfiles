@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: ubuntu/nginx
+    image: docker.io/ubuntu/nginx
     #build: /opt/nginx-build
     container_name: nginx
     environment:
@@ -82,7 +82,7 @@ services:
       - /srv/shared/torrents:/srv/shared/torrents
     restart: unless-stopped
   fulltextrss:
-    image: heussd/fivefilters-full-text-rss:latest
+    image: docker.io/heussd/fivefilters-full-text-rss:latest
     container_name: fulltextrss
     volumes:
       - /var/www/html/cache
@@ -155,7 +155,7 @@ services:
 #      - /etc/localtime:/etc/localtime:ro
 #    restart: unless-stopped
 #  uptime-kuma:
-#    image: louislam/uptime-kuma:latest
+#    image: docker.io/louislam/uptime-kuma:latest
 #    container_name: uptime-kuma
 #    depends_on:
 #      - nginx
@@ -163,7 +163,7 @@ services:
 #      - /opt/appdata/uptime-kuma:/app/data
 #    restart: unless-stopped
 #  minecraft:
-#    image: itzg/minecraft-bedrock-server:latest
+#    image: docker.io/itzg/minecraft-bedrock-server:latest
 #    container_name: minecraft
 #    environment:
 #      - EULA=TRUE
