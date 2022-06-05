@@ -1,6 +1,6 @@
 services:
   adguard:
-    image: adguard/adguardhome:latest
+    image: docker.io/adguard/adguardhome:latest
     container_name: adguard
     network_mode: "host"
     volumes:
