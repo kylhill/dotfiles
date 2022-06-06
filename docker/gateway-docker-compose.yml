@@ -18,3 +18,8 @@ services:
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.17.0.0/16
