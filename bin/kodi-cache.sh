@@ -18,7 +18,7 @@ clean() {
 }
 
 error_exit() {
-    curl -fsS --retry 3 -o /dev/null https://hc-ping.com/c5012e7b-fd13-4c87-88b9-a49631c75757/$?
+    #curl -fsS --retry 3 -o /dev/null https://hc-ping.com/c5012e7b-fd13-4c87-88b9-a49631c75757/$?
     exit 1
 }
 

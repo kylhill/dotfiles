@@ -120,6 +120,7 @@ services:
       - MEM_LIMIT=256
       - MEM_STARTUP=256
     ports:
+      - "8443:8443"
       - "3478:3478/udp"
       - "10001:10001/udp"
       - "8080:8080"
@@ -129,6 +130,7 @@ services:
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
+    network_mode: "host"
     environment:
       - PUID=123
       - PGID=128
@@ -146,14 +148,14 @@ services:
     volumes:
       - /opt/appdata/authelia:/config
     restart: unless-stopped
-#  esphome:
-#    image: ghcr.io/esphome/esphome:latest
-#    container_name: esphome
-#    network_mode: "host"
-#    volumes:
-#      - /opt/appdata/esphome:/config
-#      - /etc/localtime:/etc/localtime:ro
-#    restart: unless-stopped
+  esphome:
+    image: ghcr.io/esphome/esphome:latest
+    container_name: esphome
+    network_mode: "host"
+    volumes:
+      - /opt/appdata/esphome:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
 #  uptime-kuma:
 #    image: docker.io/louislam/uptime-kuma:latest
 #    container_name: uptime-kuma
