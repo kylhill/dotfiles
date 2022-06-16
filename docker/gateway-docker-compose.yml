@@ -18,8 +18,16 @@ services:
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
-networks:
-  default:
-    ipam:
-      config:
-        - subnet: 172.17.0.0/16
+  uptime-kuma:
+    image: docker.io/louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    network_mode: "host"
+    volumes:
+      - /opt/appdata/uptime-kuma:/app/data
+    restart: unless-stopped
+# Must use "host" network_mode as Docker interferes with iptables firewall
+#networks:
+#  default:
+#    ipam:
+#      config:
+#        - subnet: 172.17.0.0/16
