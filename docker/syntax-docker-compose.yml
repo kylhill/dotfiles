@@ -156,14 +156,6 @@ services:
       - /opt/appdata/esphome:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
-#  uptime-kuma:
-#    image: docker.io/louislam/uptime-kuma:latest
-#    container_name: uptime-kuma
-#    depends_on:
-#      - nginx
-#    volumes:
-#      - /opt/appdata/uptime-kuma:/app/data
-#    restart: unless-stopped
 #  minecraft:
 #    image: docker.io/itzg/minecraft-bedrock-server:latest
 #    container_name: minecraft
