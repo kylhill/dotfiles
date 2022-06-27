@@ -28,6 +28,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/appdata/mariadb:/config
+      - /opt/appdata/mariadb/mysqld:/var/run/mysqld
     ports:
       - "3306:3306"
     restart: unless-stopped
@@ -66,6 +67,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/appdata/freshrss:/config
+      - /opt/appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
   deluge:
     image: lscr.io/linuxserver/deluge:latest
@@ -117,8 +119,8 @@ services:
     environment:
       - PUID=115
       - PGID=121
-      - MEM_LIMIT=256
-      - MEM_STARTUP=256
+      - MEM_LIMIT=512
+      - MEM_STARTUP=512
     ports:
       - "8443:8443"
       - "3478:3478/udp"
@@ -130,6 +132,8 @@ services:
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
+    depends_on:
+      - mariadb
     network_mode: "host"
     environment:
       - PUID=123
@@ -138,6 +142,7 @@ services:
     volumes:
       - /opt/appdata/homeassistant:/config
       - /srv/shared:/srv/shared:ro
+      - /opt/appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
   authelia:
     image: ghcr.io/authelia/authelia:latest
@@ -148,14 +153,14 @@ services:
     volumes:
       - /opt/appdata/authelia:/config
     restart: unless-stopped
-  esphome:
-    image: ghcr.io/esphome/esphome:latest
-    container_name: esphome
-    network_mode: "host"
-    volumes:
-      - /opt/appdata/esphome:/config
-      - /etc/localtime:/etc/localtime:ro
-    restart: unless-stopped
+#  esphome:
+#    image: ghcr.io/esphome/esphome:latest
+#    container_name: esphome
+#    network_mode: "host"
+#    volumes:
+#      - /opt/appdata/esphome:/config
+#      - /etc/localtime:/etc/localtime:ro
+#    restart: unless-stopped
 #  minecraft:
 #    image: docker.io/itzg/minecraft-bedrock-server:latest
 #    container_name: minecraft
