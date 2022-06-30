@@ -1,7 +1,6 @@
 services:
   nginx:
     image: docker.io/ubuntu/nginx
-    #build: /opt/nginx-build
     container_name: nginx
     environment:
       - TZ=America/Chicago
