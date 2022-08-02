@@ -5,26 +5,26 @@
 	path = bash/dircolors/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "vim/vim/bundle/nerdtree"]
-	path = vim/vim/bundle/nerdtree
+	path = vim/vim/pack/bundle/start/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "vim/vim/bundle/vim-colors-solarized"]
-	path = vim/vim/bundle/vim-colors-solarized
+	path = vim/vim/pack/bundle/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "vim/vim/bundle/vim-solarized8"]
-	path = vim/vim/bundle/vim-solarized8
+	path = vim/vim/pack/bundle/start/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
 [submodule "vim/vim/bundle/vim-airline"]
-	path = vim/vim/bundle/vim-airline
+	path = vim/vim/pack/bundle/start/vim-airline
 	url = https://github.com/bling/vim-airline
 [submodule "vim/vim/bundle/vim-fugitive"]
-	path = vim/vim/bundle/vim-fugitive
+	path = vim/vim/pack/bundle/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim/vim/bundle/ctrlp.vim"]
 	path = vim/vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
 [submodule "vim/vim/bundle/vim-tmux-navigator"]
-	path = vim/vim/bundle/vim-tmux-navigator
+	path = vim/vim/pack/bundle/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
 [submodule "vim/vim/bundle/vim-airline-themes"]
-	path = vim/vim/bundle/vim-airline-themes
+	path = vim/vim/pack/bundle/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
