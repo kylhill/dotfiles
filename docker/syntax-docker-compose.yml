@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 services:
   nginx:
     image: docker.io/ubuntu/nginx
@@ -18,8 +18,6 @@ services:
     ports:
      - "80:80"
      - "443:443"
-    extra_hosts:
-      - "host.docker.internal:172.17.0.1"
     restart: unless-stopped
   mariadb:
     image: lscr.io/linuxserver/mariadb:latest
@@ -194,6 +192,25 @@ services:
 #      - /opt/appdata/nextcloud/data:/data
 #      - /srv/shared:/srv/shared:ro
 #    restart: unless-stopped
+  wallabag:
+    image: docker.io/wallabag/wallabag:latest
+    container_name: wallabag
+    environment:
+      - POPULATE_DATABASE=false
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=mariadb
+      - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_NAME=wallabag
+      - SYMFONY__ENV__DATABASE_USER=wallabag
+      - SYMFONY__ENV__DATABASE_PASSWORD=BYCW8Qn4wZAjW2Rz
+      - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
+      - SYMFONY__ENV__DOMAIN_NAME=https://pocket.tacomafia.net
+      - SYMFONY__ENV__SERVER_NAME="tacomafia.net"
+    volumes:
+      - /opt/appdata/wallabag/images:/var/www/wallabag/web/assets/images
+    depends_on:
+      - mariadb
+    restart: unless-stopped
 networks:
   default:
     ipam:
