@@ -18,6 +18,8 @@ services:
     ports:
      - "80:80"
      - "443:443"
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
     restart: unless-stopped
   mariadb:
     image: lscr.io/linuxserver/mariadb:latest
@@ -54,6 +56,8 @@ services:
     volumes:
       - /opt/appdata/flexget:/config
       - /srv/shared/video/Series:/srv/shared/video/Series:ro
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
     restart: unless-stopped
   freshrss:
     image: lscr.io/linuxserver/freshrss:latest
@@ -161,22 +165,34 @@ services:
 #      - /opt/appdata/esphome:/config
 #      - /etc/localtime:/etc/localtime:ro
 #    restart: unless-stopped
-#  minecraft:
-#    image: docker.io/itzg/minecraft-bedrock-server:latest
-#    container_name: minecraft
+  minecraft:
+    image: docker.io/itzg/minecraft-bedrock-server:latest
+    container_name: minecraft
+    environment:
+      - EULA=TRUE
+      - SERVER_NAME=Dad's Server
+      - GAMEMODE=survival
+      - DIFFICULTY=normal
+      - OPS=2533274795625937,2535405415054487,2535405917118583
+      #- ALLOW_LIST_USERS=monkeyman 67156,IsaacChief13,OfficerCarson17
+    volumes:
+      - /opt/appdata/minecraft:/data
+    ports:
+      - "19132:19132/udp"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+#  nextcloud:
+#    image: lscr.io/linuxserver/nextcloud:latest
+#    container_name: nextcloud
 #    environment:
-#      - EULA=TRUE
-#      - SERVER_NAME=Dad's Server
-#      - GAMEMODE=survival
-#      - DIFFICULTY=normal
-#      - OPS=2533274795625937,2535405415054487,2535405917118583
-#      #- ALLOW_LIST_USERS=monkeyman 67156,IsaacChief13,OfficerCarson17
+#      - PUID=126
+#      - PGID=133
+#      - TZ=America/Chicago
 #    volumes:
-#      - /opt/appdata/minecraft:/data
-#    ports:
-#      - "19132:19132/udp"
-#    stdin_open: true
-#    tty: true
+#      - /opt/appdata/nextcloud/config:/config
+#      - /opt/appdata/nextcloud/data:/data
+#      - /srv/shared:/srv/shared:ro
 #    restart: unless-stopped
 networks:
   default:

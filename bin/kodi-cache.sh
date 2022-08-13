@@ -37,10 +37,10 @@ esac
 
 fstrim -a
 
-# Sync texture cache database and thumbnails to other hosts that share Kodi database
+# Sync thumbnails to other hosts that share Kodi database
 for i in $SYNC_HOSTS; do
-    rsync -aq --delete /storage/.kodi/userdata/Database/Textures13.db "$i":/storage/.kodi/userdata/Database/Textures13.db && \
     rsync -aq --delete /storage/.kodi/userdata/Thumbnails/ "$i":/storage/.kodi/userdata/Thumbnails/ && \
+    ssh "$i" "/usr/bin/texturecache.py Xd" && \
     ssh "$i" "/usr/sbin/fstrim -a"
 done
 
