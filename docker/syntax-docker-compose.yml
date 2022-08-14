@@ -180,18 +180,6 @@ services:
     stdin_open: true
     tty: true
     restart: unless-stopped
-#  nextcloud:
-#    image: lscr.io/linuxserver/nextcloud:latest
-#    container_name: nextcloud
-#    environment:
-#      - PUID=126
-#      - PGID=133
-#      - TZ=America/Chicago
-#    volumes:
-#      - /opt/appdata/nextcloud/config:/config
-#      - /opt/appdata/nextcloud/data:/data
-#      - /srv/shared:/srv/shared:ro
-#    restart: unless-stopped
   wallabag:
     image: docker.io/wallabag/wallabag:latest
     container_name: wallabag
