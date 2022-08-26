@@ -7,14 +7,11 @@ services:
       - /opt/appdata/adguard/work:/opt/adguardhome/work
       - /opt/appdata/adguard/conf:/opt/adguardhome/conf
     ports:
-      - "853:853"
       - "853:853/udp"
     restart: unless-stopped
   uptime-kuma:
     image: docker.io/louislam/uptime-kuma:latest
     container_name: uptime-kuma
-    depends_on:
-      - nginx
     volumes:
       - /opt/appdata/uptime-kuma:/app/data
     restart: unless-stopped
