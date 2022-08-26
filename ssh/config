@@ -27,7 +27,7 @@ Host cslinux cislinux
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
-Host gateway gateway.l.tacomafia.net
+Host gateway gateway.l.tacomafia.net gateway.tacomafia.net
     Hostname gateway.l.tacomafia.net
     user kyleh
     ForwardAgent yes
