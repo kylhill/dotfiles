@@ -163,23 +163,23 @@ services:
 #      - /opt/appdata/esphome:/config
 #      - /etc/localtime:/etc/localtime:ro
 #    restart: unless-stopped
-  minecraft:
-    image: docker.io/itzg/minecraft-bedrock-server:latest
-    container_name: minecraft
-    environment:
-      - EULA=TRUE
-      - SERVER_NAME=Dad's Server
-      - GAMEMODE=survival
-      - DIFFICULTY=normal
-      - OPS=2533274795625937,2535405415054487,2535405917118583
-      #- ALLOW_LIST_USERS=monkeyman 67156,IsaacChief13,OfficerCarson17
-    volumes:
-      - /opt/appdata/minecraft:/data
-    ports:
-      - "19132:19132/udp"
-    stdin_open: true
-    tty: true
-    restart: unless-stopped
+#  minecraft:
+#    image: docker.io/itzg/minecraft-bedrock-server:latest
+#    container_name: minecraft
+#    environment:
+#      - EULA=TRUE
+#      - SERVER_NAME=Dad's Server
+#      - GAMEMODE=survival
+#      - DIFFICULTY=normal
+#      - OPS=2533274795625937,2535405415054487,2535405917118583
+#      #- ALLOW_LIST_USERS=monkeyman 67156,IsaacChief13,OfficerCarson17
+#    volumes:
+#      - /opt/appdata/minecraft:/data
+#    ports:
+#      - "19132:19132/udp"
+#    stdin_open: true
+#    tty: true
+#    restart: unless-stopped
   wallabag:
     image: docker.io/wallabag/wallabag:latest
     container_name: wallabag
