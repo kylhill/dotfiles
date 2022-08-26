@@ -63,6 +63,7 @@ Host gcp gcp.tacomafia.net
     user kylhill
     ForwardAgent yes
     VerifyHostKeyDNS Yes
+    IdentityFile ~/.ssh/id_ed25519
 
 Host gcp-borg
     Hostname gcp.tacomafia.net
