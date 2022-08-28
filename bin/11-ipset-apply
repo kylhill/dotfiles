@@ -8,17 +8,17 @@ set -e
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# Source configuration
-if [ -f "/etc/default/netfilter-persistent" ]; then
-    . /etc/default/netfilter-persistent
-else
-    BLOCKLIST_SETS="firehol_level1"
-fi
+IPSET_DIR=/etc/firehol/ipsets/
 
 # Create the ipsets and populate them
 load_sets ()
 {
-    ipset-apply.sh "$BLOCKLIST_SETS" >/dev/null 2>&1
+    for i in "$IPSET_DIR"*.netset; do
+        ipset-apply.sh "$i" >/dev/null 2>&1
+    done
+    for i in "$IPSET_DIR"*.ipset; do
+        ipset-apply.sh "$i" >/dev/null 2>&1
+    done
 }
 
 save_sets ()

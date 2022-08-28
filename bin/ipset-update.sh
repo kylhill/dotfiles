@@ -1,19 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Script to download and apply ipsets, intended to be called from a systemd service
 #
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# Source configuration
-if [ -f "/etc/default/netfilter-persistent" ]; then
-    . /etc/default/netfilter-persistent
-else
-    BLOCKLIST_SETS="firehol_level1"
-fi
+declare -A NETSETS
+NETSETS["firehol_level1"]="https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/firehol_level1.netset"
 
-BASE_URL="https://raw.githubusercontent.com/firehol/blocklist-ipsets/master"
-BASE_DIR="/etc/firehol/ipsets"
+declare -A IPSETS
+IPSETS["doh_servers"]="https://raw.githubusercontent.com/oneoffdallas/dohservers/master/iplist.txt"
+#IPSETS["doh_servers_v6"]="https://raw.githubusercontent.com/oneoffdallas/dohservers/master/ipv6list.txt"
 
+IPSET_DIR="/etc/firehol/ipsets/"
 TMP_DIR="$(mktemp -d)"
 
 cleanup() {
@@ -26,18 +24,24 @@ error_exit() {
     exit 1
 }
 
-# Download ipsets
-for i in $BLOCKLIST_SETS; do
-    NETSET=$i.netset
-    curl -fsS --retry 3 -o "$TMP_DIR"/$NETSET "$BASE_URL"/$NETSET || error_exit
-    mv -f "$TMP_DIR"/$NETSET "$BASE_DIR"/$NETSET || error_exit
+# Download and apply netsets
+for i in "${!NETSETS[@]}"; do
+    TMP_OUT="$TMP_DIR"/$i.netset
+    curl -fsS --retry 3 -o "$TMP_OUT" "${NETSETS[$i]}" || error_exit
+    ipset-apply.sh "$TMP_OUT" || error_exit
+    mv -f "$TMP_OUT" "$IPSET_DIR" || error_exit
+done
+
+# Download and apply ipsets
+for i in "${!IPSETS[@]}"; do
+    TMP_OUT="$TMP_DIR"/$i.ipset
+    curl -fsS --retry 3 -o "$TMP_OUT" "${IPSETS[$i]}" || error_exit
+    ipset-apply.sh "$TMP_OUT" || error_exit
+    mv -f "$TMP_OUT" "$IPSET_DIR" || error_exit
 done
 
 # Cleanup
 cleanup
-
-# Apply ipsets
-ipset-apply.sh "$BLOCKLIST_SETS" || error_exit
 
 # Ping Healthchecks.io - https://healthchecks.io/docs/monitoring_cron_jobs/
 curl -fsS --retry 3 -o /dev/null https://hc-ping.com/a2eb4fdb-3511-4ed6-8f56-c1fc7e350756
