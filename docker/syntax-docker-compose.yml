@@ -149,6 +149,8 @@ services:
   authelia:
     image: ghcr.io/authelia/authelia:latest
     container_name: authelia
+    depends_on:
+      - redis
     user: "125:132"
     environment:
       - TZ=America/Chicago
@@ -204,6 +206,14 @@ services:
     container_name: uptime-kuma
     volumes:
       - /opt/appdata/uptime-kuma:/app/data
+    restart: unless-stopped
+  redis:
+    image: docker.io/redis:alpine
+    container_name: redis
+    environment:
+      - TZ=America/Chicago
+    volumes:
+      - /opt/appdata/redis:/data
     restart: unless-stopped
 networks:
   default:

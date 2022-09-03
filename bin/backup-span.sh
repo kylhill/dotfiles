@@ -14,12 +14,15 @@ remove_old_files() {
    # For each file in $DEST
     while IFS= read -r FILE; do
         # If file path not appear in $INCLUDE
-        if ! LC_ALL=C grep -qxFe "$FILE" "$INCLUDE"; then
+        if ! grep -qxFe "$FILE" "$INCLUDE"; then
             # Delete file
             echo "Deleting $DEST$FILE"
             rm -f "$DEST$FILE"
         fi
     done < <(find "$DEST" -type f | cut -sd / -f "$DEST_SLASHES"-)
+
+    # Remove any left-over empty directories from destination
+    find "$DEST" -type d -empty -delete
 }
 
 set -e
