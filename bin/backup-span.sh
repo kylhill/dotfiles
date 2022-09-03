@@ -3,10 +3,23 @@
 # Script to backup a large dataset using rsync that spans multiple smaller drives
 #
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-EMAIL_NOTIFY=kylhill@gmail.com
 
 cleanup() {
     rm -f "$INCLUDE"
+    rm -f "$EXCLUDE"
+    rm -f "$NEW_INCLUDE"
+}
+
+remove_old_files() {
+   # For each file in $DEST
+    while IFS= read -r FILE; do
+        # If file path not appear in $INCLUDE
+        if ! LC_ALL=C grep -qxFe "$FILE" "$INCLUDE"; then
+            # Delete file
+            echo "Deleting $DEST$FILE"
+            rm -f "$DEST$FILE"
+        fi
+    done < <(find "$DEST" -type f | cut -sd / -f "$DEST_SLASHES"-)
 }
 
 set -e
@@ -32,39 +45,54 @@ if [ ! -d "$DEST" ]; then
     echo "Invalid destination directory: $DEST"
     exit 1
 fi
+if [[ "$DEST" != /media* ]]; then
+    echo "Safety check: $DEST not a child of /media"
+    exit 1
+fi
 
 # Count slashes
 SRC_SLASHES=$((  $(echo "$SRC"  | tr -cd '/' | wc -c) + 1 ))
 DEST_SLASHES=$(( $(echo "$DEST" | tr -cd '/' | wc -c) + 1 ))
 
-# Generate list of files to backup
 INCLUDE="$(mktemp)"
+
+echo "Generating list of files from $SRC to backup..."
 find "$SRC" -name '*.zfs' -prune -o -type f -print | cut -sd / -f "$SRC_SLASHES"- | sort -u > "$INCLUDE"
 
-# Remove empty directories from destination
-find "$DEST" -type d -empty -delete
+echo "Deleting files from $DEST not found in list..."
+remove_old_files
 
 # rsync files from include list to destination
-until rsync -arm --delete --progress --files-from="$INCLUDE" "$SRC" "$DEST"
-do
-    # Remove empty directories from destination
+until rsync -arm --progress --files-from="$INCLUDE" "$SRC" "$DEST"; do
+    # Remove any left-over empty directories from destination
     find "$DEST" -type d -empty -delete
 
-    # Remove files backed up to this drive from the include list
-    TMP_EXCLUDE="$(mktemp)"
-    find "$DEST" -type f -print | cut -sd / -f "$DEST_SLASHES"- | sort -u > "$TMP_EXCLUDE"
+    # Get list of files backed up to drive
+    EXCLUDE="$(mktemp)"
+    find "$DEST" -type f -print | cut -sd / -f "$DEST_SLASHES"- | sort -u > "$EXCLUDE"
 
-    TMP_INCLUDE="$(mktemp)"
-    comm -23 "$INCLUDE" "$TMP_EXCLUDE" > "$TMP_INCLUDE"
-    mv "$TMP_INCLUDE" "$INCLUDE"
+    OLD_UUID="$(findmnt -no uuid -T "${DEST}")"
 
-    rm -f "$TMP_EXCLUDE"
+    read -r -p "Drive $DEST full? Free space or swap in new drive. Press any key to continue..."
 
-    #echo "Backup drive $DEST is full. Ready to swap in a new drive." | mail -s "Syntax: $SRC Backup Drive Full" "$EMAIL_NOTIFY"
-    read -r -p "Drive $DEST full. Swap in new drive, free up some space, and press any key to continue..."
+    NEW_UUID="$(findmnt -no uuid -T "${DEST}")"
+
+    if [ "$OLD_UUID" != "$NEW_UUID" ]; then
+        echo "New drive, removing backed-up files from list..."
+        NEW_INCLUDE="$(mktemp)"
+        comm -23 "$INCLUDE" "$EXCLUDE" > "$NEW_INCLUDE"
+        mv "$NEW_INCLUDE" "$INCLUDE"
+
+        echo "Deleting files from $DEST not found in list..."
+        remove_old_files
+    else
+        echo "Same drive, continuing backup..."
+    fi
+
+    rm -f "$EXCLUDE"
 done
 
-#echo "Backup of $SRC to $DEST is complete." | mail -s "Syntax: $SRC Backup Complete" "$EMAIL_NOTIFY"
+rm -f "$INCLUDE"
 echo "Backup of $SRC to $DEST is complete."
 
 exit 0

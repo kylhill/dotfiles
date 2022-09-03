@@ -199,6 +199,12 @@ services:
     depends_on:
       - mariadb
     restart: unless-stopped
+  uptime-kuma:
+    image: docker.io/louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    volumes:
+      - /opt/appdata/uptime-kuma:/app/data
+    restart: unless-stopped
 networks:
   default:
     ipam:
