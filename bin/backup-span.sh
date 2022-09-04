@@ -8,21 +8,26 @@ cleanup() {
     rm -f "$INCLUDE"
     rm -f "$EXCLUDE"
     rm -f "$NEW_INCLUDE"
+    rm -f "$DEST_FILES"
 }
 
 remove_old_files() {
-   # For each file in $DEST
+    DEST_FILES="$(mktemp)"
+
+    # Generate list of all files at destination
+    echo "Deleting files from $DEST not found in list..."
+    find "$DEST" -path "$DEST"_copy2 -prune -o -type f -print | cut -sd / -f "$DEST_SLASHES"- | sort -u > "$DEST_FILES"
+
+    # Delete all files at destination that are not also at source
     while IFS= read -r FILE; do
-        # If file path not appear in $INCLUDE
-        if ! grep -qxFe "$FILE" "$INCLUDE"; then
-            # Delete file
-            echo "Deleting $DEST$FILE"
-            rm -f "$DEST$FILE"
-        fi
-    done < <(find "$DEST" -type f | cut -sd / -f "$DEST_SLASHES"-)
+        echo "Deleting $DEST$FILE"
+        rm -f "$DEST$FILE"
+    done < <(comm -13 "$INCLUDE" "$DEST_FILES")
 
     # Remove any left-over empty directories from destination
     find "$DEST" -type d -empty -delete
+
+    rm -f "$DEST_FILES"
 }
 
 set -e
@@ -60,9 +65,8 @@ DEST_SLASHES=$(( $(echo "$DEST" | tr -cd '/' | wc -c) + 1 ))
 INCLUDE="$(mktemp)"
 
 echo "Generating list of files from $SRC to backup..."
-find "$SRC" -name '*.zfs' -prune -o -type f -print | cut -sd / -f "$SRC_SLASHES"- | sort -u > "$INCLUDE"
+find "$SRC" -path "$SRC".zfs -prune -o -type f -print | cut -sd / -f "$SRC_SLASHES"- | sort -u > "$INCLUDE"
 
-echo "Deleting files from $DEST not found in list..."
 remove_old_files
 
 # rsync files from include list to destination
@@ -86,7 +90,6 @@ until rsync -arm --progress --files-from="$INCLUDE" "$SRC" "$DEST"; do
         comm -23 "$INCLUDE" "$EXCLUDE" > "$NEW_INCLUDE"
         mv "$NEW_INCLUDE" "$INCLUDE"
 
-        echo "Deleting files from $DEST not found in list..."
         remove_old_files
     else
         echo "Same drive, continuing backup..."
