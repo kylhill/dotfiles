@@ -4,7 +4,7 @@
 #
 
 # Generate an updated shared file manifest to aid in recovery
-find /srv/shared/ -name '*.zfs' -prune -o -type f -print | cut -sd / -f 3- | sort > /srv/backup/devices/syntax/misc/shared_manifest.txt
+find /srv/shared/ -path '/srv/shared/.zfs' -prune -o -type f -print | cut -sd / -f 3- | sort -u > /srv/backup/devices/syntax/misc/shared_manifest.txt
 
 # Generate htpc backups weekly
 for i in htpc htpc2 htpc3 htpc4; do
