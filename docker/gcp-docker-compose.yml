@@ -29,15 +29,6 @@ services:
       - "80:80"
       - "443:443"
     restart: unless-stopped
-  authelia:
-    image: ghcr.io/authelia/authelia:latest
-    container_name: authelia
-    user: "111:123"
-    environment:
-      - TZ=America/Chicago
-    volumes:
-      - /opt/appdata/authelia:/config
-    restart: unless-stopped
 #  cloudflare-ddns:
 #    image: ghcr.io/joshuaavalon/cloudflare-ddns:latest
 #    container_name: cloudflare-ddns
