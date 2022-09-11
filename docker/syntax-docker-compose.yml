@@ -194,6 +194,7 @@ services:
       - SYMFONY__ENV__DATABASE_USER=wallabag
       - SYMFONY__ENV__DATABASE_PASSWORD=BYCW8Qn4wZAjW2Rz
       - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
+      - SYMFONY__ENV__SECRET=zZvtPgKS92VFxX6FvxP9Vs9RXMyKMq
       - SYMFONY__ENV__DOMAIN_NAME=https://pocket.tacomafia.net
       - SYMFONY__ENV__SERVER_NAME="tacomafia.net"
     volumes:
