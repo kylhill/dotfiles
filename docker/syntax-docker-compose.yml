@@ -82,7 +82,7 @@ services:
       - UMASK=022
     volumes:
       - /opt/appdata/deluge:/config
-      - /var/working:/var/working
+      - /var/opt/deluge/working:/data/working
       - /srv/shared/torrents:/srv/shared/torrents
     restart: unless-stopped
   fulltextrss:
@@ -210,11 +210,8 @@ services:
       - /opt/appdata/uptime-kuma:/app/data
     restart: unless-stopped
   redis:
-    image: docker.io/ubuntu/redis:latest
+    image: docker.io/redis:latest
     container_name: redis
-    environment:
-      - TZ=America/Chicago
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - /opt/appdata/redis:/data
     restart: unless-stopped
