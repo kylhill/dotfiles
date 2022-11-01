@@ -9,7 +9,7 @@ docker-compose -f /opt/docker-compose.yml up -d
 docker system prune -a -f --volumes
 
 sudo aptitude update
-sudo aptitude full-upgrade
+sudo aptitude full-upgrade -r -y
 
 sudo fstrim -va
 
