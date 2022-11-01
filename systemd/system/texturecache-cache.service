@@ -1,0 +1,11 @@
+[Unit]
+Description=Cache missing thumbnails to texture cache
+After=kodi.target
+Requires=kodi.target
+ConditionPathExists=/storage/nfs/video
+
+[Service]
+Type=oneshot
+StandardOutput=journal
+TimeoutStartSec=3h
+ExecStart=/storage/.local/bin/kodi-cache.sh cache

@@ -1,0 +1,10 @@
+[Unit]
+Description=Clean Kodi video library
+
+[Timer]
+OnBootSec=20m
+OnUnitActiveSec=12h
+RandomizedDelaySec=10m
+
+[Install]
+WantedBy=timers.target

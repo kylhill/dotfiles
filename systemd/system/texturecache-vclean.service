@@ -1,0 +1,12 @@
+[Unit]
+Description=Clean Kodi video library
+After=kodi.target
+Requires=kodi.target
+ConditionPathExists=/storage/nfs/video
+
+[Service]
+Type=oneshot
+StandardOutput=journal
+TimeoutStartSec=30min
+ExecStart=/usr/bin/texturecache.py @config=/storage/.config/texturecache.cfg vclean
+ExecStartPost=curl -fsS --retry 3 -o /dev/null https://hc-ping.com/0cfeafab-219a-44f6-bbe3-d79990f61f28

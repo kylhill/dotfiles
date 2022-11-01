@@ -1,0 +1,10 @@
+[Unit]
+Description=Clean up the texture cache
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+RandomizedDelaySec=4h
+
+[Install]
+WantedBy=timers.target
