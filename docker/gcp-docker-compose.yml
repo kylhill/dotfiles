@@ -29,17 +29,6 @@ services:
       - "80:80"
       - "443:443"
     restart: unless-stopped
-#  cloudflare-ddns:
-#    image: ghcr.io/joshuaavalon/cloudflare-ddns:latest
-#    container_name: cloudflare-ddns
-#    network_mode: "host"
-#    environment:
-#      - PUID=115
-#      - PGID=124
-#      - CRON=0 */24 * * *
-#    volumes:
-#      - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
-#    restart: unless-stopped
 networks:
   default:
     ipam:
