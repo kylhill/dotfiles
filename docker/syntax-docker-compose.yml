@@ -45,10 +45,14 @@ services:
       - /opt/appdata/kanzi:/config
     restart: unless-stopped
   flexget:
-    image: ghcr.io/wiserain/flexget:latest
+    image: ghcr.io/flexget/flexget:latest
     container_name: flexget
     depends_on:
       - deluge
+    command:
+      - daemon
+      - start
+      - --autoreload-config
     environment:
       - PUID=114
       - PGID=124
@@ -84,7 +88,7 @@ services:
       - UMASK=022
     volumes:
       - /opt/appdata/deluge:/config
-      - /var/opt/deluge/working:/data/working
+      - /opt/appdata/deluge/working:/data/working
       - /srv/shared/torrents:/srv/shared/torrents
     restart: unless-stopped
   fulltextrss:

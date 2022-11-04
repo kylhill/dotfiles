@@ -11,6 +11,6 @@ docker system prune -a -f --volumes
 sudo aptitude update
 sudo aptitude full-upgrade -r -y
 
-sudo fstrim -va
+#sudo fstrim -va
 
 exit 0
