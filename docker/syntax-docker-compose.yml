@@ -88,7 +88,7 @@ services:
       - UMASK=022
     volumes:
       - /opt/appdata/deluge:/config
-      - /opt/appdata/deluge/working:/data/working
+      - /opt/working:/data/working
       - /srv/shared/torrents:/srv/shared/torrents
     restart: unless-stopped
   fulltextrss:
