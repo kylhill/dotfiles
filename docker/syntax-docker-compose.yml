@@ -45,14 +45,10 @@ services:
       - /opt/appdata/kanzi:/config
     restart: unless-stopped
   flexget:
-    image: ghcr.io/flexget/flexget:latest
+    image: docker.io/wiserain/flexget:3.4
     container_name: flexget
     depends_on:
       - deluge
-    command:
-      - daemon
-      - start
-      - --autoreload-config
     environment:
       - PUID=114
       - PGID=124
@@ -68,7 +64,7 @@ services:
     container_name: freshrss
     depends_on:
       - mariadb
-      - fulltextrss
+      - mercury
     environment:
       - PUID=120
       - PGID=125
@@ -76,6 +72,10 @@ services:
     volumes:
       - /opt/appdata/freshrss:/config
       - /opt/appdata/mariadb/mysqld:/var/run/mysqld
+    restart: unless-stopped
+  mercury:
+    image: docker.io/wangqiru/mercury-parser-api:latest
+    container_name: mercury
     restart: unless-stopped
   deluge:
     image: lscr.io/linuxserver/deluge:latest
@@ -90,15 +90,6 @@ services:
       - /opt/appdata/deluge:/config
       - /opt/working:/data/working
       - /srv/shared/torrents:/srv/shared/torrents
-    restart: unless-stopped
-  fulltextrss:
-    image: docker.io/heussd/fivefilters-full-text-rss:latest
-    container_name: fulltextrss
-    volumes:
-      - /var/www/html/cache
-      - /opt/appdata/fulltextrss/ftr-site-config:/var/www/html/site_config/standard:ro
-      - /opt/appdata/fulltextrss/custom_config.php:/var/www/html/custom_config.php:ro
-      - /opt/appdata/fulltextrss/mpm_prefork.conf:/etc/apache2/mods-enabled/mpm_prefork.conf:ro
     restart: unless-stopped
   grocy:
     image: lscr.io/linuxserver/grocy:latest
@@ -140,8 +131,6 @@ services:
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
-    depends_on:
-      - mariadb
     network_mode: "host"
     environment:
       - PUID=123
@@ -150,7 +139,6 @@ services:
     volumes:
       - /opt/appdata/homeassistant:/config
       - /srv/shared:/srv/shared:ro
-      - /opt/appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
   authelia:
     image: ghcr.io/authelia/authelia:latest
@@ -163,14 +151,14 @@ services:
     volumes:
       - /opt/appdata/authelia:/config
     restart: unless-stopped
-#  esphome:
-#    image: ghcr.io/esphome/esphome:latest
-#    container_name: esphome
-#    network_mode: "host"
-#    volumes:
-#      - /opt/appdata/esphome:/config
-#      - /etc/localtime:/etc/localtime:ro
-#    restart: unless-stopped
+  esphome:
+    image: ghcr.io/esphome/esphome:latest
+    container_name: esphome
+    network_mode: "host"
+    volumes:
+      - /opt/appdata/esphome:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
 #  minecraft:
 #    image: docker.io/itzg/minecraft-bedrock-server:latest
 #    container_name: minecraft
@@ -199,6 +187,7 @@ services:
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
       - SYMFONY__ENV__DATABASE_HOST=mariadb
       - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_SOCKET="/var/run/mysqld/mysqld.sock"
       - SYMFONY__ENV__DATABASE_NAME=wallabag
       - SYMFONY__ENV__DATABASE_USER=wallabag
       - SYMFONY__ENV__DATABASE_PASSWORD=BYCW8Qn4wZAjW2Rz
@@ -208,6 +197,7 @@ services:
       - SYMFONY__ENV__SERVER_NAME="tacomafia.net"
     volumes:
       - /opt/appdata/wallabag/images:/var/www/wallabag/web/assets/images
+      - /opt/appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
   uptime-kuma:
     image: docker.io/louislam/uptime-kuma:latest
