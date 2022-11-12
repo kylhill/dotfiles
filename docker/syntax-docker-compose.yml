@@ -64,7 +64,7 @@ services:
     container_name: freshrss
     depends_on:
       - mariadb
-      - mercury
+      - fulltextrss
     environment:
       - PUID=120
       - PGID=125
@@ -73,9 +73,15 @@ services:
       - /opt/appdata/freshrss:/config
       - /opt/appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
-  mercury:
-    image: docker.io/wangqiru/mercury-parser-api:latest
-    container_name: mercury
+  fulltextrss:
+    build: /opt/docker-fulltextrss
+    environment:
+      - PUID=129
+      - PGID=137
+      - TZ=America/Chicago
+    container_name: fulltextrss
+    volumes:
+      - /opt/appdata/fulltextrss:/config
     restart: unless-stopped
   deluge:
     image: lscr.io/linuxserver/deluge:latest
