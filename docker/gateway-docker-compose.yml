@@ -4,6 +4,8 @@ services:
     image: docker.io/adguard/adguardhome:latest
     container_name: adguard
     network_mode: "host"
+    environment:
+      - TZ=America/Chicago
     volumes:
       - /opt/appdata/adguard/work:/opt/adguardhome/work
       - /opt/appdata/adguard/conf:/opt/adguardhome/conf
@@ -15,12 +17,13 @@ services:
     environment:
       - PUID=114
       - PGID=120
+      - TZ=America/Chicago
       - CRON=0 */6 * * *
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
     restart: unless-stopped
   node-exporter:
-    image: docker.io/prom/node-exporter:latest
+    image: quay.io/prometheus/node-exporter:latest
     container_name: node-exporter
     network_mode: "host"
     volumes:
