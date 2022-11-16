@@ -3,6 +3,8 @@ services:
   adguard:
     image: docker.io/adguard/adguardhome:latest
     container_name: adguard
+    environment:
+      - TZ=America/Chicago
     volumes:
       - /opt/appdata/adguard/work:/opt/adguardhome/work
       - /opt/appdata/adguard/conf:/opt/adguardhome/conf
@@ -12,12 +14,17 @@ services:
   uptime-kuma:
     image: docker.io/louislam/uptime-kuma:latest
     container_name: uptime-kuma
+    environment:
+      - PUID=110
+      - PGID=116
     volumes:
       - /opt/appdata/uptime-kuma:/app/data
     restart: unless-stopped
   nginx:
     image: docker.io/ubuntu/nginx:latest
     container_name: nginx
+    environment:
+      - TZ=America/Chicago
     volumes:
       - /opt/appdata/nginx/etc/nginx.conf:/etc/nginx/nginx.conf:ro
       - /opt/appdata/nginx/etc/sites-enabled:/etc/nginx/sites-enabled:ro
