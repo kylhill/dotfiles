@@ -35,6 +35,8 @@ services:
   kanzi:
     image: lscr.io/linuxserver/kanzi:latest
     container_name: kanzi
+    depends_on:
+      - nginx
     environment:
       - PUID=119
       - PGID=123
@@ -114,6 +116,7 @@ services:
     environment:
       - PUID=117
       - PGID=127
+      - TZ=America/Chicago
       - CRON=0 */6 * * *
     volumes:
       - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml
@@ -124,6 +127,7 @@ services:
     environment:
       - PUID=115
       - PGID=121
+      - TZ=America/Chicago
       - MEM_LIMIT=512
       - MEM_STARTUP=512
     ports:
@@ -151,8 +155,9 @@ services:
     container_name: authelia
     depends_on:
       - redis
-    user: "125:132"
     environment:
+      - PUID=125
+      - PGID=132
       - TZ=America/Chicago
     volumes:
       - /opt/appdata/authelia:/config
@@ -189,6 +194,7 @@ services:
       - mariadb
       - redis
     environment:
+      - TZ=America/Chicago
       - POPULATE_DATABASE=false
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
       - SYMFONY__ENV__DATABASE_HOST=mariadb
@@ -208,12 +214,17 @@ services:
   uptime-kuma:
     image: docker.io/louislam/uptime-kuma:latest
     container_name: uptime-kuma
+    environment:
+      - PUID=130
+      - PGID=138
     volumes:
       - /opt/appdata/uptime-kuma:/app/data
     restart: unless-stopped
   redis:
-    image: docker.io/redis:latest
+    image: docker.io/redis:alpine
     container_name: redis
+    environment:
+      - TZ=America/Chicago
     volumes:
       - /opt/appdata/redis:/data
     restart: unless-stopped
@@ -223,12 +234,14 @@ services:
     depends_on:
       - prometheus
     user: "472:0"
+    environment:
+      - TZ=America/Chicago
     volumes:
       - /opt/appdata/grafana/data:/var/lib/grafana
       - /opt/appdata/grafana/config:/etc/grafana
     restart: unless-stopped
   node-exporter:
-    image: docker.io/prom/node-exporter:latest
+    image: quay.io/prometheus/node-exporter:latest
     container_name: node-exporter
     network_mode: "host"
     volumes:
@@ -242,7 +255,7 @@ services:
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
     restart: unless-stopped
   prometheus:
-    image: docker.io/prom/prometheus:latest
+    image: quay.io/prometheus/prometheus:latest
     container_name: prometheus
     depends_on:
       - node-exporter
