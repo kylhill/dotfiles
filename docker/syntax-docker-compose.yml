@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   nginx:
-    image: docker.io/ubuntu/nginx:latest
+    build: /opt/docker/nginx
     container_name: nginx
     environment:
       - TZ=America/Chicago
@@ -16,8 +16,8 @@ services:
       - /srv/kws:/srv/kws:ro
       - /srv/shared:/srv/shared:ro
     ports:
-     - "80:80"
-     - "443:443"
+      - "80:80"
+      - "443:443"
     restart: unless-stopped
   mariadb:
     image: lscr.io/linuxserver/mariadb:latest
@@ -35,8 +35,6 @@ services:
   kanzi:
     image: lscr.io/linuxserver/kanzi:latest
     container_name: kanzi
-    depends_on:
-      - nginx
     environment:
       - PUID=119
       - PGID=123
@@ -47,7 +45,7 @@ services:
       - /opt/appdata/kanzi:/config
     restart: unless-stopped
   flexget:
-    image: docker.io/wiserain/flexget:3.4
+    image: docker.io/wiserain/flexget
     container_name: flexget
     depends_on:
       - deluge
@@ -76,7 +74,7 @@ services:
       - /opt/appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
   fulltextrss:
-    build: /opt/docker-fulltextrss
+    build: /opt/docker/fulltextrss
     environment:
       - PUID=129
       - PGID=137
