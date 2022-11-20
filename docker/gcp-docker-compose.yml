@@ -1,5 +1,21 @@
 version: "3.9"
 services:
+  nginx:
+    build: /opt/docker/nginx
+    container_name: nginx
+    environment:
+      - TZ=America/Chicago
+    volumes:
+      - /opt/appdata/nginx/etc/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /opt/appdata/nginx/etc/sites-enabled:/etc/nginx/sites-enabled:ro
+      - /opt/appdata/nginx/etc/snippets:/etc/nginx/snippets:ro
+      - /opt/appdata/nginx/etc/conf.d:/etc/nginx/conf.d:ro
+      - /opt/appdata/nginx/www:/var/www:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
   adguard:
     image: docker.io/adguard/adguardhome:latest
     container_name: adguard
@@ -19,22 +35,6 @@ services:
       - PGID=116
     volumes:
       - /opt/appdata/uptime-kuma:/app/data
-    restart: unless-stopped
-  nginx:
-    image: docker.io/ubuntu/nginx:latest
-    container_name: nginx
-    environment:
-      - TZ=America/Chicago
-    volumes:
-      - /opt/appdata/nginx/etc/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /opt/appdata/nginx/etc/sites-enabled:/etc/nginx/sites-enabled:ro
-      - /opt/appdata/nginx/etc/snippets:/etc/nginx/snippets:ro
-      - /opt/appdata/nginx/etc/conf.d:/etc/nginx/conf.d:ro
-      - /opt/appdata/nginx/www:/var/www:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-    ports:
-      - "80:80"
-      - "443:443"
     restart: unless-stopped
 networks:
   default:
