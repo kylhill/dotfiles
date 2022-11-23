@@ -62,12 +62,10 @@ Host gcp gcp.tacomafia.net
     Hostname gcp.tacomafia.net
     user kylhill
     ForwardAgent yes
-    VerifyHostKeyDNS Yes
 
 Host gcp-borg
     Hostname gcp.tacomafia.net
     user kylhill
-    VerifyHostKeyDNS Yes
     IdentityFile ~/.ssh/id_borg
     ServerAliveInterval 10
     ServerAliveCountMax 30
