@@ -1,13 +1,13 @@
 version: "3.9"
 services:
   nginx:
-    build: /opt/docker/nginx
+    image: ghcr.io/kylhill/docker-nginx:latest
     container_name: nginx
     environment:
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/nginx/etc:/etc/nginx:ro
-      - /opt/appdata/nginx/www:/var/www:ro
+      - ./appdata/nginx/etc:/etc/nginx:ro
+      - ./appdata/nginx/www:/var/www:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - "80:80"
@@ -19,8 +19,8 @@ services:
     environment:
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/adguard/work:/opt/adguardhome/work
-      - /opt/appdata/adguard/conf:/opt/adguardhome/conf
+      - ./appdata/adguard/work:/opt/adguardhome/work
+      - ./appdata/adguard/conf:/opt/adguardhome/conf
     ports:
       - "853:853/udp"
     restart: unless-stopped
@@ -31,7 +31,7 @@ services:
       - PUID=110
       - PGID=116
     volumes:
-      - /opt/appdata/uptime-kuma:/app/data
+      - ./appdata/uptime-kuma:/app/data
     restart: unless-stopped
 networks:
   default:
