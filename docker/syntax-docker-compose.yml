@@ -1,13 +1,13 @@
 version: "3.9"
 services:
   nginx:
-    build: /opt/docker/nginx
+    build: ./docker/nginx
     container_name: nginx
     environment:
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/nginx/etc:/etc/nginx:ro
-      - /opt/appdata/nginx/www:/var/www:ro
+      - ./appdata/nginx/etc:/etc/nginx:ro
+      - ./appdata/nginx/www:/var/www:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /srv/backup:/srv/backup:ro
       - /srv/kws:/srv/kws:ro
@@ -24,8 +24,8 @@ services:
       - PGID=118
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/mariadb:/config
-      - /opt/appdata/mariadb/mysqld:/var/run/mysqld
+      - ./appdata/mariadb:/config
+      - ./appdata/mariadb/mysqld:/var/run/mysqld
     ports:
       - "3306:3306"
     restart: unless-stopped
@@ -39,7 +39,7 @@ services:
       - INVOCATION_NAME=kodi
       - URL_ENDPOINT=https://kanzi.tacomafia.net
     volumes:
-      - /opt/appdata/kanzi:/config
+      - ./appdata/kanzi:/config
     restart: unless-stopped
   flexget:
     image: docker.io/wiserain/flexget
@@ -51,7 +51,7 @@ services:
       - PGID=124
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/flexget:/config
+      - ./appdata/flexget:/config
       - /srv/shared/video/Series:/srv/shared/video/Series:ro
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
@@ -67,18 +67,18 @@ services:
       - PGID=125
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/freshrss:/config
-      - /opt/appdata/mariadb/mysqld:/var/run/mysqld
+      - ./appdata/freshrss:/config
+      - ./appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
   fulltextrss:
-    build: /opt/docker/fulltextrss
+    build: ./docker/fulltextrss
     environment:
       - PUID=129
       - PGID=137
       - TZ=America/Chicago
     container_name: fulltextrss
     volumes:
-      - /opt/appdata/fulltextrss:/config
+      - ./appdata/fulltextrss:/config
     restart: unless-stopped
   deluge:
     image: lscr.io/linuxserver/deluge:latest
@@ -90,8 +90,8 @@ services:
       - TZ=America/Chicago
       - UMASK=022
     volumes:
-      - /opt/appdata/deluge:/config
-      - /opt/working:/data/working
+      - ./appdata/deluge:/config
+      - ./working:/data/working
       - /srv/shared/torrents:/srv/shared/torrents
     restart: unless-stopped
   grocy:
@@ -102,7 +102,7 @@ services:
       - PGID=126
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/grocy:/config
+      - ./appdata/grocy:/config
     restart: unless-stopped
   cloudflare-ddns:
     image: ghcr.io/joshuaavalon/cloudflare-ddns:latest
@@ -114,7 +114,7 @@ services:
       - TZ=America/Chicago
       - CRON=0 */6 * * *
     volumes:
-      - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml:ro
+      - ./appdata/cloudflare-ddns/config.yaml:/app/config.yaml:ro
     restart: unless-stopped
   unifi-controller:
     image: lscr.io/linuxserver/unifi-controller:latest
@@ -131,7 +131,7 @@ services:
       - "10001:10001/udp"
       - "8080:8080"
     volumes:
-      - /opt/appdata/unifi-controller:/config
+      - ./appdata/unifi-controller:/config
     restart: unless-stopped
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
@@ -142,7 +142,7 @@ services:
       - PGID=128
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/homeassistant:/config
+      - ./appdata/homeassistant:/config
       - /srv/shared:/srv/shared:ro
     restart: unless-stopped
   authelia:
@@ -155,14 +155,14 @@ services:
       - PGID=132
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/authelia:/config
+      - ./appdata/authelia:/config
     restart: unless-stopped
   esphome:
     image: ghcr.io/esphome/esphome:latest
     container_name: esphome
     network_mode: "host"
     volumes:
-      - /opt/appdata/esphome:/config
+      - ./appdata/esphome:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
 #  minecraft:
@@ -176,7 +176,7 @@ services:
 #      - OPS=2533274795625937,2535405415054487,2535405917118583
 #      #- ALLOW_LIST_USERS=monkeyman 67156,IsaacChief13,OfficerCarson17
 #    volumes:
-#      - /opt/appdata/minecraft:/data
+#      - ./appdata/minecraft:/data
 #    ports:
 #      - "19132:19132/udp"
 #    stdin_open: true
@@ -203,8 +203,8 @@ services:
       - SYMFONY__ENV__DOMAIN_NAME=https://pocket.tacomafia.net
       - SYMFONY__ENV__SERVER_NAME="tacomafia.net"
     volumes:
-      - /opt/appdata/wallabag/images:/var/www/wallabag/web/assets/images
-      - /opt/appdata/mariadb/mysqld:/var/run/mysqld
+      - ./appdata/wallabag/images:/var/www/wallabag/web/assets/images
+      - ./appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
   uptime-kuma:
     image: docker.io/louislam/uptime-kuma:latest
@@ -213,7 +213,7 @@ services:
       - PUID=130
       - PGID=138
     volumes:
-      - /opt/appdata/uptime-kuma:/app/data
+      - ./appdata/uptime-kuma:/app/data
     restart: unless-stopped
   redis:
     image: docker.io/redis:alpine
@@ -221,7 +221,7 @@ services:
     environment:
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/redis:/data
+      - ./appdata/redis:/data
     restart: unless-stopped
   grafana:
     image: docker.io/grafana/grafana-oss:latest
@@ -232,8 +232,8 @@ services:
     environment:
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/grafana/data:/var/lib/grafana
-      - /opt/appdata/grafana/config:/etc/grafana
+      - ./appdata/grafana/data:/var/lib/grafana
+      - ./appdata/grafana/config:/etc/grafana
     restart: unless-stopped
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
@@ -256,8 +256,8 @@ services:
       - node-exporter
     user: "126:133"
     volumes:
-      - /opt/appdata/prometheus/config:/etc/prometheus
-      - /opt/appdata/prometheus/data:/prometheus
+      - ./appdata/prometheus/config:/etc/prometheus
+      - ./appdata/prometheus/data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
