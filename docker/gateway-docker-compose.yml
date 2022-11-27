@@ -7,8 +7,8 @@ services:
     environment:
       - TZ=America/Chicago
     volumes:
-      - /opt/appdata/adguard/work:/opt/adguardhome/work
-      - /opt/appdata/adguard/conf:/opt/adguardhome/conf
+      - ./appdata/adguard/work:/opt/adguardhome/work
+      - ./appdata/adguard/conf:/opt/adguardhome/conf
     restart: unless-stopped
   cloudflare-ddns:
     image: ghcr.io/joshuaavalon/cloudflare-ddns:latest
@@ -20,7 +20,7 @@ services:
       - TZ=America/Chicago
       - CRON=0 */6 * * *
     volumes:
-      - /opt/appdata/cloudflare-ddns/config.yaml:/app/config.yaml:ro
+      - ./appdata/cloudflare-ddns/config.yaml:/app/config.yaml:ro
     restart: unless-stopped
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
