@@ -70,6 +70,11 @@ Host gcp-borg
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
+Host oci oci.tacomafia.net
+    Hostname oci.tacomafia.net
+    user ubuntu
+    ForwardAgent yes
+
 Host *
     AddKeysToAgent yes
     ControlPath ~/.ssh/control-%h-%p-%r.sock

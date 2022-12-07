@@ -65,7 +65,7 @@ DEST_SLASHES=$(( $(echo "$DEST" | tr -cd '/' | wc -c) + 1 ))
 INCLUDE="$(mktemp)"
 
 echo "Generating list of files from $SRC to backup..."
-find "$SRC" -path "$SRC".zfs -prune -o -type f -print | cut -sd / -f "$SRC_SLASHES"- | sort -u > "$INCLUDE"
+find "$SRC" -type d -name '.zfs' -prune -o -type f -print | cut -sd / -f "$SRC_SLASHES"- | sort -u > "$INCLUDE"
 
 remove_old_files
 

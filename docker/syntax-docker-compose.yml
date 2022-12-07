@@ -1,7 +1,8 @@
 version: "3.9"
 services:
   nginx:
-    build: ./docker/nginx
+    image: ghcr.io/kylhill/docker-nginx:nightly
+    #build: ./docker/nginx
     container_name: nginx
     environment:
       - TZ=America/Chicago
@@ -71,6 +72,7 @@ services:
       - ./appdata/mariadb/mysqld:/var/run/mysqld
     restart: unless-stopped
   fulltextrss:
+    #image: ghcr.io/kylhill/docker-fulltextrss:nightly
     build: ./docker/fulltextrss
     environment:
       - PUID=129
@@ -157,14 +159,14 @@ services:
     volumes:
       - ./appdata/authelia:/config
     restart: unless-stopped
-  esphome:
-    image: ghcr.io/esphome/esphome:latest
-    container_name: esphome
-    network_mode: "host"
-    volumes:
-      - ./appdata/esphome:/config
-      - /etc/localtime:/etc/localtime:ro
-    restart: unless-stopped
+#  esphome:
+#    image: ghcr.io/esphome/esphome:latest
+#    container_name: esphome
+#   network_mode: "host"
+#    volumes:
+#      - ./appdata/esphome:/config
+#      - /etc/localtime:/etc/localtime:ro
+#    restart: unless-stopped
 #  minecraft:
 #    image: docker.io/itzg/minecraft-bedrock-server:latest
 #    container_name: minecraft
@@ -262,6 +264,13 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
     restart: unless-stopped
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: homepage
+    volumes:
+      - ./appdata/homepage:/app/config
+      - /srv:/srv:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 networks:
   default:
     ipam:
