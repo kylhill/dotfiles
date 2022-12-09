@@ -118,23 +118,23 @@ services:
     volumes:
       - ./appdata/cloudflare-ddns/config.yaml:/app/config.yaml:ro
     restart: unless-stopped
-  unifi-controller:
-    image: lscr.io/linuxserver/unifi-controller:latest
-    container_name: unifi-controller
-    environment:
-      - PUID=115
-      - PGID=121
-      - TZ=America/Chicago
-      - MEM_LIMIT=512
-      - MEM_STARTUP=512
-    ports:
-      - "8443:8443"
-      - "3478:3478/udp"
-      - "10001:10001/udp"
-      - "8080:8080"
-    volumes:
-      - ./appdata/unifi-controller:/config
-    restart: unless-stopped
+#  unifi-controller:
+#    image: lscr.io/linuxserver/unifi-controller:latest
+#    container_name: unifi-controller
+#    environment:
+#      - PUID=115
+#      - PGID=121
+#      - TZ=America/Chicago
+#      - MEM_LIMIT=512
+#      - MEM_STARTUP=512
+#    ports:
+#      - "8443:8443"
+#      - "3478:3478/udp"
+#      - "10001:10001/udp"
+#      - "8080:8080"
+#    volumes:
+#      - ./appdata/unifi-controller:/config
+#    restart: unless-stopped
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
@@ -159,14 +159,14 @@ services:
     volumes:
       - ./appdata/authelia:/config
     restart: unless-stopped
-#  esphome:
-#    image: ghcr.io/esphome/esphome:latest
-#    container_name: esphome
-#   network_mode: "host"
-#    volumes:
-#      - ./appdata/esphome:/config
-#      - /etc/localtime:/etc/localtime:ro
-#    restart: unless-stopped
+  esphome:
+    image: ghcr.io/esphome/esphome:latest
+    container_name: esphome
+    network_mode: "host"
+    volumes:
+      - ./appdata/esphome:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
 #  minecraft:
 #    image: docker.io/itzg/minecraft-bedrock-server:latest
 #    container_name: minecraft
@@ -207,15 +207,6 @@ services:
     volumes:
       - ./appdata/wallabag/images:/var/www/wallabag/web/assets/images
       - ./appdata/mariadb/mysqld:/var/run/mysqld
-    restart: unless-stopped
-  uptime-kuma:
-    image: docker.io/louislam/uptime-kuma:latest
-    container_name: uptime-kuma
-    environment:
-      - PUID=130
-      - PGID=138
-    volumes:
-      - ./appdata/uptime-kuma:/app/data
     restart: unless-stopped
   redis:
     image: docker.io/redis:alpine

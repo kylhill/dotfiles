@@ -1,3 +1,5 @@
+AddKeysToAgent yes
+
 Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net
     Hostname syntax.tacomafia.net
     Port 993
@@ -76,7 +78,6 @@ Host oci oci.tacomafia.net
     ForwardAgent yes
 
 Host *
-    AddKeysToAgent yes
     ControlPath ~/.ssh/control-%h-%p-%r.sock
     ControlMaster auto
     ControlPersist 10m

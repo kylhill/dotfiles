@@ -12,6 +12,8 @@
         path: bash/bashrc
     ~/.bash_aliases:
         path: bash/bash_aliases
+    ~/.bash_profile:
+        path: bash/bash_profile
     ~/.byobu/color.tmux:
         path: byobu/color.tmux
     ~/.byobu/status:
@@ -26,8 +28,6 @@
         path: git/gitconfig
     ~/.inputrc:
         path: bash/inputrc
-    ~/.profile:
-        path: bash/profile
     ~/.config/tvnamer/tvnamer.json:
         path: tvnamer/tvnamer.json
     ~/.vim:

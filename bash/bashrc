@@ -156,3 +156,12 @@ export LESS_TERMCAP_ue=$'\E[0m' # end underline
 dbash() {
     docker exec -it "$1" /bin/bash
 }
+
+# Start ssh-agent if not already running
+# https://wiki.archlinux.org/title/SSH_keys#ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
