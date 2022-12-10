@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   nginx:
-    image: ghcr.io/kylhill/docker-nginx:latest
+    image: ghcr.io/kylhill/docker-nginx:nightly
     container_name: nginx
     environment:
       - TZ=America/Chicago
