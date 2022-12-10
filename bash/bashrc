@@ -165,3 +165,17 @@ fi
 if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
+
+# Set these environment variables here, rather than in .bash_profile to preserve them through sudo
+# set PAGER to less
+if [ -x "$PREFIX/bin/less" ]; then
+    export PAGER="$PREFIX/bin/less"
+fi
+
+# set default edtior to nvim, if it exists, otherwise use vim
+if [ -x "$PREFIX/bin/nvim" ]; then
+    export VISUAL="$PREFIX/bin/nvim"
+else
+    export VISUAL="$PREFIX/bin/vim"
+fi
+export EDITOR="$VISUAL"

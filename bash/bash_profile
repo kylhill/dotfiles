@@ -27,17 +27,17 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # set PAGER to less
-if [ -x "$PREFIX/bin/less" ]; then
-    export PAGER="$PREFIX/bin/less"
-fi
+#if [ -x "$PREFIX/bin/less" ]; then
+#    export PAGER="$PREFIX/bin/less"
+#fi
 
 # set default edtior to nvim, if it exists, otherwise use vim
-if [ -x "$PREFIX/bin/nvim" ]; then
-    export VISUAL="$PREFIX/bin/nvim"
-else
-    export VISUAL="$PREFIX/bin/vim"
-fi
-export EDITOR="$VISUAL"
+#if [ -x "$PREFIX/bin/nvim" ]; then
+#    export VISUAL="$PREFIX/bin/nvim"
+#else
+#    export VISUAL="$PREFIX/bin/vim"
+#fi
+#export EDITOR="$VISUAL"
 
 # enable byobu unless ~/.local/.nobyobu exists
 if [ -x "$PREFIX/bin/byobu-launch" ] && [ ! -f "$HOME/.local/.nobyobu" ]; then
