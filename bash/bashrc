@@ -157,15 +157,6 @@ dbash() {
     docker exec -it "$1" /bin/bash
 }
 
-# Start ssh-agent if not already running
-# https://wiki.archlinux.org/title/SSH_keys#ssh-agent
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-fi
-
 # Set these environment variables here, rather than in .bash_profile to preserve them through sudo
 # set PAGER to less
 if [ -x "$PREFIX/bin/less" ]; then
