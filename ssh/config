@@ -72,6 +72,12 @@ Host gcp-borg
     ServerAliveInterval 10
     ServerAliveCountMax 30
 
+Host gcp-rsync
+    #Hostname gcp.tacomafia.net
+    Hostname gcp.vpn.tacomafia.net
+    user kylhill
+    IdentityFile ~/.ssh/id_rsync
+
 Host oci oci.tacomafia.net oci.vpn.tacomafia.net
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
@@ -85,6 +91,12 @@ Host oci-borg
     IdentityFile ~/.ssh/id_borg
     ServerAliveInterval 10
     ServerAliveCountMax 30
+
+Host oci-rsync
+    #Hostname oci.tacomafia.net
+    Hostname oci.vpn.tacomafia.net
+    user ubuntu
+    IdentityFile ~/.ssh/id_rsync
 
 Host *
     AddKeysToAgent yes
