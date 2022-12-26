@@ -2,6 +2,6 @@
 set -e
 
 cd /home/kyleh/infra
-ansible-playbook ./do-updates.yml -t updates
+ansible-playbook do-updates.yml -t update
 
 exit 0
