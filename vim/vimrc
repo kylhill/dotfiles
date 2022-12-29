@@ -14,8 +14,8 @@ if has("autocmd")
 endif
 
 " UI Configuration
-colorscheme elflord
-if &t_Co >= 256
+"if &t_Co >= 256
+if $TERM ==# 'tmux-256color'
     if has("termguicolors") && has('nvim')
         set termguicolors
         silent! colorscheme solarized8
@@ -26,13 +26,15 @@ if &t_Co >= 256
     let g:solarized_termtrans=1
     let g:airline_theme='solarized'
     let g:airline_solarized_bg='dark'
+
+    set cursorline
+else
+    set nocursorline
 endif
 
 set background=dark     " use a dark background
 set showmatch           " highlight matching brackets
 set noshowmode          " don't show current mode in bottom bar, Airline handles this
-set cursorline          " enable current line highlighting (slows down scrolling)
-"set number              " enable line numbering
 set mouse=              " disable mouse
 
 " Spaces and Tabs
