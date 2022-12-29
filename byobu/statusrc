@@ -44,7 +44,7 @@ MONITORED_DISK=/srv
 DISK_IO_THRESHOLD=100
 
 # Default: eth0
-MONITORED_NETWORK=enp5s0
+MONITORED_NETWORK=eth0
 
 # Unit used for network throughput (either bits per second or bytes per second)
 # Default: bits
