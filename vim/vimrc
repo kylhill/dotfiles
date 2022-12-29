@@ -14,8 +14,7 @@ if has("autocmd")
 endif
 
 " UI Configuration
-"if &t_Co >= 256
-if $TERM ==# 'tmux-256color'
+if $TERM =~# '-256color$'
     if has("termguicolors") && has('nvim')
         set termguicolors
         silent! colorscheme solarized8
