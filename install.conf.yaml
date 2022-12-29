@@ -23,7 +23,7 @@
     ~/.byobu/.tmux.conf:
         path: byobu/tmux.conf
     ~/.dircolors:
-        path: bash/dircolors/
+        path: bash/dircolors/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
         path: git/gitconfig
     ~/.inputrc:

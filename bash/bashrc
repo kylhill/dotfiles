@@ -27,7 +27,7 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-# Set PREFIX to /usr if not already set.  If already set, we know we're in termux
+# TERMUX: Set PREFIX to /usr if not already set.  If already set, we know we're in termux
 if [ ! "$PREFIX" ]; then
     PREFIX=/usr
 fi
@@ -81,8 +81,7 @@ fi
 
 # enable color support of ls and also add handy aliases
 if [ -x "$PREFIX/bin/dircolors" ]; then
-    eval "$(dircolors "$HOME/.dircolors/dircolors-solarized/dircolors.256dark")"
-
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto -h'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -112,8 +111,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f "$HOME/.bash_aliases" ]; then
-    . "$HOME/.bash_aliases"
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -155,6 +154,9 @@ export LESS_TERMCAP_ue=$'\E[0m' # end underline
 # Easy Docker shell
 dbash() {
     docker exec -it "$1" /bin/bash
+}
+dsh() {
+    docker exec -it "$1" /bin/sh
 }
 
 # Set these environment variables here, rather than in .bash_profile to preserve them through sudo
