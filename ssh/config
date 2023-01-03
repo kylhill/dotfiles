@@ -95,6 +95,6 @@ Host *-rsync
 # Global config
 Host *
     AddKeysToAgent yes
-    ControlPath /run/user/%i/ssh-%r@%h:%p.sock
+    ControlPath ~/.cache/ssh-%r@%h:%p.sock
     ControlMaster auto
     ControlPersist 10m
