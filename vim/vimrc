@@ -26,14 +26,21 @@ if $TERM =~# '-256color$'
     let g:airline_theme='solarized'
     let g:airline_solarized_bg='dark'
 
+    set background=dark
     set cursorline
 else
+    set background=light
     set nocursorline
 endif
 
-set background=dark     " use a dark background
+if has('nvim')
+    set noshowmode      " don't show current mode in bottom bar, Airline handles this
+else
+    set showmode        " show mode in the bottom bar
+endif
+
+set laststatus=2        " show 2-line status bar
 set showmatch           " highlight matching brackets
-set noshowmode          " don't show current mode in bottom bar, Airline handles this
 set mouse=              " disable mouse
 
 " Spaces and Tabs
