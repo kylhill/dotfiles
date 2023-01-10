@@ -11,3 +11,5 @@
     email = kylhill@gmail.com
 [github]
     user = kylhill
+[safe]
+	directory = /opt/appdata/fulltextrss/www/standard
