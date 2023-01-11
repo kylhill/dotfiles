@@ -2,18 +2,15 @@
 Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net
     Hostname syntax.tacomafia.net
     Port 993
-    User kyleh
     ForwardAgent yes
 
 Host syntax-borg
     Hostname syntax.tacomafia.net
     Port 993
-    user kyleh
 
 # Gateway
 Host gateway gateway.l.tacomafia.net gateway.tacomafia.net
     Hostname gateway.l.tacomafia.net
-    user kyleh
     ForwardAgent yes
 
 # HTPCs
@@ -41,7 +38,6 @@ Host wap2 wap2.l.tacomafia.net
     Hostname wap2.l.tacomafia.net
 
 Host wap*
-    user kyleh
     IdentityFile ~/.ssh/ubnt-20220508
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
@@ -50,35 +46,35 @@ Host wap*
 Host gcp gcp.tacomafia.net gcp.vpn.tacomafia.net
     #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    user kylhill
+    #user kylhill
     ForwardAgent yes
 
 Host gcp-borg
     #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    user kylhill
+    #user kylhill
 
 Host gcp-rsync
     #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    user kylhill
+    #user kylhill
 
 # OCI
 Host oci oci.tacomafia.net oci.vpn.tacomafia.net
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    user ubuntu
+    #user ubuntu
     ForwardAgent yes
 
 Host oci-borg
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    user ubuntu
+    #user ubuntu
 
 Host oci-rsync
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    user ubuntu
+    #user ubuntu
 
 # Common borg config
 Host *-borg *.repo.borgbase.com
@@ -98,3 +94,4 @@ Host *
     ControlPath ~/.cache/ssh-%r@%h:%p.sock
     ControlMaster auto
     ControlPersist 10m
+    user kyleh
