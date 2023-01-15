@@ -153,6 +153,11 @@ dsh() {
     docker exec -it "$1" /bin/sh
 }
 
+# Easy borgmatic mount
+bmount() {
+    borgmatic mount --repository /srv/backup/borg/"$1" --mount-point /media/borg
+}
+
 # set PAGER to less
 if [ -x "$PREFIX/bin/less" ]; then
     export PAGER="$PREFIX/bin/less"

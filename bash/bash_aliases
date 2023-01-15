@@ -6,3 +6,6 @@ alias dtail='docker logs -tf --tail="50" "$@"'
 alias dprune='docker system prune -a -f --volumes'
 
 alias bashreload='source ~/.bashrc && echo Bash config reloaded;'
+
+# Easy borgmatic unmount
+alias bumount='borgmatic umount --mount-point /media/borg'
