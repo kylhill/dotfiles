@@ -3,6 +3,7 @@ Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net
     Hostname syntax.tacomafia.net
     Port 993
     ForwardAgent yes
+    VerifyHostKeyDNS yes
 
 Host syntax-borg
     Hostname syntax.tacomafia.net
@@ -47,6 +48,7 @@ Host gcp gcp.tacomafia.net gcp.vpn.tacomafia.net
     #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
     #user kylhill
+    #VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host gcp-borg
@@ -64,6 +66,7 @@ Host oci oci.tacomafia.net oci.vpn.tacomafia.net
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
     #user ubuntu
+    #VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host oci-borg
