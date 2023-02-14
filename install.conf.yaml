@@ -37,6 +37,9 @@
     ~/.local/bin:
         path: bin/
 
+- create:
+    - ~/.cache
+
 - shell:
   - touch ~/.hushlogin
   - [git submodule update --init --recursive, Installing submodules]
