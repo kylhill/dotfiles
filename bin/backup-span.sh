@@ -12,6 +12,7 @@ cleanup() {
 }
 
 remove_old_files() {
+    set +e
     DEST_FILES="$(mktemp)"
 
     # Generate list of all files at destination
@@ -28,6 +29,7 @@ remove_old_files() {
     find "$DEST" -type d -empty -delete
 
     rm -f "$DEST_FILES"
+    set -e
 }
 
 set -e
