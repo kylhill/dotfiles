@@ -175,3 +175,6 @@ else
     export VISUAL="$PREFIX/bin/vim"
 fi
 export EDITOR="$VISUAL"
+
+# set default postgres user
+export PGUSER="postgres"
