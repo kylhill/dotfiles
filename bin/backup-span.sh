@@ -102,6 +102,12 @@ until rsync -arm --progress --files-from="$INCLUDE" "$SRC" "$DEST"; do
     # Remove any left-over empty directories from destination
     find "$DEST" -type d -empty -delete
 
+    OLD_UUID="$(findmnt -no uuid -T "${DEST}")"
+
+    read -r -p "Drive $DEST full? Free space or swap in new drive. Press any key to continue..."
+
+    NEW_UUID="$(findmnt -no uuid -T "${DEST}")"
+
     # Get list of files backed up to destination
     EXCLUDE="$(mktemp)"
     find "$DEST" -type f -print | cut -sd / -f "$DEST_SLASHES"- | sort -u > "$EXCLUDE"
@@ -111,12 +117,6 @@ until rsync -arm --progress --files-from="$INCLUDE" "$SRC" "$DEST"; do
     comm -23 "$INCLUDE" "$EXCLUDE" > "$NEW_INCLUDE"
     mv "$NEW_INCLUDE" "$INCLUDE"
     rm -f "$EXCLUDE"
-
-    OLD_UUID="$(findmnt -no uuid -T "${DEST}")"
-
-    read -r -p "Drive $DEST full? Free space or swap in new drive. Press any key to continue..."
-
-    NEW_UUID="$(findmnt -no uuid -T "${DEST}")"
 
     if [[ "$OLD_UUID" != "$NEW_UUID" ]]; then
         echo "New drive, removing already backed-up files..."
