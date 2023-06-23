@@ -12,14 +12,8 @@
         path: bash/bashrc
     ~/.bash_aliases:
         path: bash/bash_aliases
-    ~/.byobu/color.tmux:
-        path: byobu/color.tmux
-    ~/.byobu/status:
-        path: byobu/status
-    ~/.byobu/statusrc:
-        path: byobu/statusrc
-    ~/.byobu/.tmux.conf:
-        path: byobu/tmux.conf
+    ~/.tmux.conf:
+        path: tmux/tmux.conf
     ~/.dircolors:
         path: bash/dircolors/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:

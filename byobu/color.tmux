@@ -1,4 +1,0 @@
-BYOBU_DARK=black
-BYOBU_LIGHT=brightcyan
-BYOBU_ACCENT=blue
-BYOBU_HIGHLIGHT=yellow
