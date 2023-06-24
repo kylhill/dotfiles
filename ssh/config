@@ -13,6 +13,7 @@ Host syntax-borg
 Host gateway gateway.l.tacomafia.net gateway.tacomafia.net
     Hostname gateway.l.tacomafia.net
     ForwardAgent yes
+    VerifyHostKeyDNS yes
 
 # HTPCs
 Host htpc htpc.l.tacomafia.net
@@ -48,7 +49,7 @@ Host gcp gcp.tacomafia.net gcp.vpn.tacomafia.net
     #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
     #user kylhill
-    #VerifyHostKeyDNS yes
+    VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host gcp-borg
@@ -66,7 +67,7 @@ Host oci oci.tacomafia.net oci.vpn.tacomafia.net
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
     #user ubuntu
-    #VerifyHostKeyDNS yes
+    VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host oci-borg
