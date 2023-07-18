@@ -39,7 +39,6 @@ else
     set showmode        " show mode in the bottom bar
 endif
 
-set laststatus=2        " show 2-line status bar
 set showmatch           " highlight matching brackets
 set mouse=              " disable mouse
 
