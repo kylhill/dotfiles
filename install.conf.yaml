@@ -14,7 +14,7 @@
     ~/.bashrc:
     ~/.bash_aliases:
     ~/.dircolors:
-        path: bash/dircolors/dircolors-solarized/dircolors.256dark
+        path: dircolors/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
     ~/.inputrc:
     ~/.vim:
