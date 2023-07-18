@@ -5,35 +5,30 @@
 
 - clean: ['~']
 
+- shell:
+  - touch ~/.hushlogin
+  - git submodule update --init --recursive
+
 - link:
     ~/.aptitude:
-        path: aptitude/
     ~/.bashrc:
-        path: bash/bashrc
     ~/.bash_aliases:
-        path: bash/bash_aliases
-    ~/.tmux.conf:
-        path: tmux/tmux.conf
     ~/.dircolors:
         path: bash/dircolors/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
-        path: git/gitconfig
     ~/.inputrc:
-        path: bash/inputrc
     ~/.vim:
-        path: vim/vim/
     ~/.vimrc:
-        path: vim/vimrc
     ~/.config/nvim/init.vim:
         path: vim/init.vim
     ~/.ssh/config:
         path: ssh/config
     ~/.local/bin:
         path: bin/
+    ~/.tmux.conf:
 
 - create:
     - ~/.cache
 
 - shell:
-  - touch ~/.hushlogin
-  - [git submodule update --init --recursive, Installing submodules]
+  - source ~/.bashrc
