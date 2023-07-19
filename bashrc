@@ -129,10 +129,9 @@ if ! shopt -oq posix; then
 fi
 
 # Kyle's shell options
+shopt -s autocd
 shopt -s cdspell
 shopt -s dirspell
-shopt -s cmdhist
-shopt -s autocd
 
 # Disable XON/XOFF flow control
 stty -ixon

@@ -8,4 +8,3 @@ set skip-completed-text on
 
 set colored-stats on
 set mark-symlinked-directories on
-#set visible-stats on
