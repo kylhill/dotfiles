@@ -12,4 +12,4 @@
 [github]
     user = kylhill
 [safe]
-	directory = /opt/appdata/fulltextrss/www/standard
+    directory = /opt/appdata/fulltextrss/www/standard
