@@ -80,6 +80,13 @@ Host oci-rsync
     Hostname oci.vpn.tacomafia.net
     #user ubuntu
 
+# PVE
+Host pve pve.l.tacomafia.net
+    Hostname pve.l.tacomafia.net
+    #user root
+    VerifyHostKeyDNS yes
+    ForwardAgent yes
+
 # Common borg config
 Host *-borg *.repo.borgbase.com
     IdentityFile ~/.ssh/id_borg
