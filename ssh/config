@@ -1,3 +1,11 @@
+# TEMP - S2
+Host s2 s2.l.tacomafia.net
+    Hostname s2.l.tacomafia.net
+    Port 993
+    #User root
+    ForwardAgent yes
+    #VerifyHostKeyDNS yes
+
 # Syntax
 Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net
     Hostname syntax.tacomafia.net
@@ -48,42 +56,49 @@ Host wap*
 Host gcp gcp.tacomafia.net gcp.vpn.tacomafia.net
     #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    #user kylhill
+    #User kylhill
     VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host gcp-borg
     #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    #user kylhill
+    #User kylhill
 
 Host gcp-rsync
     #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    #user kylhill
+    #User kylhill
 
 # OCI
 Host oci oci.tacomafia.net oci.vpn.tacomafia.net
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    #user ubuntu
+    #User ubuntu
     VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host oci-borg
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    #user ubuntu
+    #User ubuntu
 
 Host oci-rsync
     #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    #user ubuntu
+    #User ubuntu
 
 # PVE
 Host pve pve.l.tacomafia.net
     Hostname pve.l.tacomafia.net
-    #user root
+    #User root
+    VerifyHostKeyDNS yes
+    ForwardAgent yes
+
+# Morbo
+Host morbo morbo.tacomafia.net morbo.l.tacomafia.net
+    Hostname morbo.l.tacomafia.net
+    #User root
     VerifyHostKeyDNS yes
     ForwardAgent yes
 
@@ -105,4 +120,4 @@ Host *
     ControlPath ~/.cache/ssh-%r@%h:%p.sock
     ControlMaster auto
     ControlPersist 10m
-    user kyleh
+    User kyleh
