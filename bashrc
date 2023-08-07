@@ -170,6 +170,8 @@ export EDITOR="$VISUAL"
 # set default postgres user
 export PGUSER="postgres"
 
+# set SSH_AUTH_SOCK if not already set and ssh-agent is running
+# https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
 if [[ -z "$SSH_AUTH_SOCK" ]] && [[ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
