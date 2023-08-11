@@ -10,7 +10,7 @@ Host syntax-borg
     Port 993
 
 # Gateway
-Host gateway gateway.l.tacomafia.net gateway.tacomafia.net
+Host gateway gateway.l.tacomafia.net
     Hostname gateway.l.tacomafia.net
     ForwardAgent yes
     VerifyHostKeyDNS yes
@@ -45,52 +45,38 @@ Host wap*
     PubkeyAcceptedKeyTypes=+ssh-rsa
 
 # GCP
-Host gcp gcp.tacomafia.net gcp.vpn.tacomafia.net
-    #Hostname gcp.tacomafia.net
+Host gcp gcp.vpn.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    #User kylhill
     VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host gcp-borg
-    #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    #User kylhill
 
 Host gcp-rsync
-    #Hostname gcp.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    #User kylhill
 
 # OCI
-Host oci oci.tacomafia.net oci.vpn.tacomafia.net
-    #Hostname oci.tacomafia.net
+Host oci oci.vpn.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    #User ubuntu
     VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host oci-borg
-    #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    #User ubuntu
 
 Host oci-rsync
-    #Hostname oci.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    #User ubuntu
 
 # PVE
 Host pve pve.l.tacomafia.net
     Hostname pve.l.tacomafia.net
-    #User root
     VerifyHostKeyDNS yes
     ForwardAgent yes
 
 # Morbo
-Host morbo morbo.tacomafia.net morbo.l.tacomafia.net
+Host morbo morbo.l.tacomafia.net
     Hostname morbo.l.tacomafia.net
-    #User root
     VerifyHostKeyDNS yes
     ForwardAgent yes
 
