@@ -1,11 +1,3 @@
-# TEMP - S2
-Host s2 s2.l.tacomafia.net
-    Hostname s2.l.tacomafia.net
-    Port 993
-    #User root
-    ForwardAgent yes
-    #VerifyHostKeyDNS yes
-
 # Syntax
 Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net
     Hostname syntax.tacomafia.net
