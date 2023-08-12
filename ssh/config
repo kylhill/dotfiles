@@ -69,16 +69,16 @@ Host oci-rsync
     Hostname oci.vpn.tacomafia.net
 
 # PVE
-Host pve pve.l.tacomafia.net
-    Hostname pve.l.tacomafia.net
-    VerifyHostKeyDNS yes
-    ForwardAgent yes
+#Host pve pve.l.tacomafia.net
+#    Hostname pve.l.tacomafia.net
+#    VerifyHostKeyDNS yes
+#    ForwardAgent yes
 
 # Morbo
-Host morbo morbo.l.tacomafia.net
-    Hostname morbo.l.tacomafia.net
-    VerifyHostKeyDNS yes
-    ForwardAgent yes
+#Host morbo morbo.l.tacomafia.net
+#    Hostname morbo.l.tacomafia.net
+#    VerifyHostKeyDNS yes
+#    ForwardAgent yes
 
 # Common borg config
 Host *-borg *.repo.borgbase.com
