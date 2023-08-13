@@ -3,7 +3,6 @@ Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net
     Hostname syntax.tacomafia.net
     Port 993
     ForwardAgent yes
-    VerifyHostKeyDNS yes
 
 Host syntax-borg
     Hostname syntax.tacomafia.net
@@ -13,7 +12,6 @@ Host syntax-borg
 Host gateway gateway.l.tacomafia.net
     Hostname gateway.l.tacomafia.net
     ForwardAgent yes
-    VerifyHostKeyDNS yes
 
 # HTPCs
 Host htpc htpc.l.tacomafia.net
@@ -47,7 +45,6 @@ Host wap*
 # GCP
 Host gcp gcp.vpn.tacomafia.net
     Hostname gcp.vpn.tacomafia.net
-    VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host gcp-borg
@@ -59,7 +56,6 @@ Host gcp-rsync
 # OCI
 Host oci oci.vpn.tacomafia.net
     Hostname oci.vpn.tacomafia.net
-    VerifyHostKeyDNS yes
     ForwardAgent yes
 
 Host oci-borg
@@ -71,13 +67,11 @@ Host oci-rsync
 # PVE
 #Host pve pve.l.tacomafia.net
 #    Hostname pve.l.tacomafia.net
-#    VerifyHostKeyDNS yes
 #    ForwardAgent yes
 
 # Morbo
 #Host morbo morbo.l.tacomafia.net
 #    Hostname morbo.l.tacomafia.net
-#    VerifyHostKeyDNS yes
 #    ForwardAgent yes
 
 # Common borg config
@@ -95,6 +89,7 @@ Host *-rsync
 # Global config
 Host *
     AddKeysToAgent yes
+    VerifyHostKeyDNS yes
     ControlPath ~/.cache/ssh-%r@%h:%p.sock
     ControlMaster auto
     ControlPersist 10m
