@@ -1,6 +1,5 @@
 # Syntax
-Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net
-    Hostname syntax.tacomafia.net
+Host syntax syntax.l.tacomafia.net syntax.tacomafia.net tacomafia.net 192.168.1.30
     Port 993
     ForwardAgent yes
 
@@ -9,42 +8,30 @@ Host syntax-borg
     Port 993
 
 # Gateway
-Host gateway gateway.l.tacomafia.net
-    Hostname gateway.l.tacomafia.net
+Host gateway gateway.l.tacomafia.net gateway.vpn.tacomafia.net 192.168.1.1 192.168.6.1
     ForwardAgent yes
 
 # HTPCs
 Host htpc htpc.l.tacomafia.net
-    Hostname htpc.l.tacomafia.net
     User root
 
 Host htpc2 htpc2.l.tacomafia.net
-    Hostname htpc2.l.tacomafia.net
     User root
 
 Host htpc3 htpc3.l.tacomafia.net
-    Hostname htpc3.l.tacomafia.net
     User root
 
 Host htpc4 htpc4.l.tacomafia.net
-    Hostname htpc4.l.tacomafia.net
     User root
 
 # WAPs
-Host wap wap.l.tacomafia.net
-    Hostname wap.l.tacomafia.net
-
-Host wap2 wap2.l.tacomafia.net
-    Hostname wap2.l.tacomafia.net
-
 Host wap*
     IdentityFile ~/.ssh/ubnt-20220508
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
 
 # GCP
-Host gcp gcp.vpn.tacomafia.net
-    Hostname gcp.vpn.tacomafia.net
+Host gcp gcp.vpn.tacomafia.net gcp.tacomafia.net
     ForwardAgent yes
 
 Host gcp-borg
@@ -54,8 +41,7 @@ Host gcp-rsync
     Hostname gcp.vpn.tacomafia.net
 
 # OCI
-Host oci oci.vpn.tacomafia.net
-    Hostname oci.vpn.tacomafia.net
+Host oci oci.vpn.tacomafia.net oci.tacomafia.net
     ForwardAgent yes
 
 Host oci-borg
@@ -63,16 +49,6 @@ Host oci-borg
 
 Host oci-rsync
     Hostname oci.vpn.tacomafia.net
-
-# PVE
-#Host pve pve.l.tacomafia.net
-#    Hostname pve.l.tacomafia.net
-#    ForwardAgent yes
-
-# Morbo
-#Host morbo morbo.l.tacomafia.net
-#    Hostname morbo.l.tacomafia.net
-#    ForwardAgent yes
 
 # Common borg config
 Host *-borg *.repo.borgbase.com
