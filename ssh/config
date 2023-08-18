@@ -41,13 +41,6 @@ Host wap*
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
 
-# GCP
-Host gcp gcp-borg gcp-rsync
-    Hostname gcp.vpn.tacomafia.net
-
-Host gcp*
-    ForwardAgent yes
-
 # OCI
 Host oci oci-borg oci-rsync
     Hostname oci.vpn.tacomafia.net
