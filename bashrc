@@ -167,23 +167,6 @@ else
 fi
 export EDITOR="$VISUAL"
 
-# Catch calls to sudo - https://peekread.info/tech/20210727-i-shouldn-t-use-sudo-nano/
-function sudo() {
-  if [[ $1 == "$EDITOR" ]]; then
-    # The editor has been called
-    if [ -w "$2" ]; then
-      # If the file is writable by the current user just use the editor as normal.
-      command $EDITOR "$2"
-    else
-      # The file is not writable use sudoedit.
-      command sudoedit "$2"
-    fi
-  else
-    # Use sudo as normal.
-    command /usr/bin/sudo "$@"
-  fi
-}
-
 # set default postgres user
 export PGUSER="postgres"
 
