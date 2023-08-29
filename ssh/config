@@ -15,16 +15,16 @@ Host gateway* 192.168.*.1
 
 # HTPCs
 Host htpc
-    Hostname htpc.l.taomafia.net
+    Hostname htpc.l.tacomafia.net
 
 Host htpc2
-    Hostname htpc2.l.taomafia.net
+    Hostname htpc2.l.tacomafia.net
 
 Host htpc3
-    Hostname htpc3.l.taomafia.net
+    Hostname htpc3.l.tacomafia.net
 
 Host htpc4
-    Hostname htpc4.l.taomafia.net
+    Hostname htpc4.l.tacomafia.net
 
 Host htpc*
     User root
