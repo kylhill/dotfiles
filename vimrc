@@ -1,7 +1,6 @@
 " Kyle's custom vimrc
 
 " General Settings
-set nocompatible    " disable compatibility mode
 set hidden          " hide buffers when they are abandoned
 set autowrite       " automatically save before certain commands
 set autochdir       " automatically set current directory to directory of last opened file
