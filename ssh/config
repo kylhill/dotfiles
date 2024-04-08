@@ -48,15 +48,6 @@ Host oci oci-borg oci-rsync
 Host oci*
     ForwardAgent yes
 
-# PVE
-Host pve
-    Hostname pve.l.tacomafia.net
-
-Host pve* 192.168.1.40
-    User root
-    VerifyHostKeyDNS no
-    ForwardAgent yes
-
 # Common borg config
 Host *-borg *.repo.borgbase.com
     IdentityFile ~/.ssh/id_borg
