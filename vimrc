@@ -28,7 +28,6 @@ if $TERM =~# '-256color$'
     set background=dark
     set cursorline
 else
-    set background=light
     set nocursorline
 endif
 
