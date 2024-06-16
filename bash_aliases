@@ -6,3 +6,6 @@ alias bashreload='source ~/.bashrc && echo Bash config reloaded;'
 
 # Default psql to use postgres user
 alias psql='psql -U postgres'
+
+# I accidentally type "lsl" more frequently than I'd like to admit
+alias lsl='ls "$@"'
