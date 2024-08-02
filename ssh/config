@@ -7,7 +7,7 @@ Host syntax* tacomafia.net 192.168.1.30
     ForwardAgent yes
 
 # Gateway
-Host gateway
+Host gateway gateway-borg
     Hostname gateway.l.tacomafia.net
 
 Host gateway* 192.168.*.1
@@ -42,7 +42,7 @@ Host wap*
     PubkeyAcceptedKeyTypes=+ssh-rsa
 
 # OCI
-Host oci oci-borg oci-rsync
+Host oci oci-borg
     Hostname oci.vpn.tacomafia.net
 
 Host oci* 192.168.6.6
@@ -53,11 +53,6 @@ Host *-borg *.repo.borgbase.com
     IdentityFile ~/.ssh/id_borg
     ServerAliveInterval 10
     ServerAliveCountMax 30
-    ControlMaster no
-
-# Common rsync config
-Host *-rsync
-    IdentityFile ~/.ssh/id_rsync
     ControlMaster no
 
 # Global config
