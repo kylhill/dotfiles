@@ -8,3 +8,5 @@ set skip-completed-text on
 
 set colored-stats on
 set mark-symlinked-directories on
+set colored-completion-prefix on
+set menu-complete-display-prefix on
