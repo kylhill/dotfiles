@@ -57,7 +57,7 @@ Host *-borg *.repo.borgbase.com
 # Global config
 Host *
     AddKeysToAgent yes
-    #VerifyHostKeyDNS yes
+    VerifyHostKeyDNS yes
     ControlPath ~/.cache/ssh-%r@%h:%p.sock
     ControlMaster auto
     ControlPersist 10m
