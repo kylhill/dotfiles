@@ -1,9 +1,8 @@
 # Syntax
 Host syntax syntax-borg
-    Hostname syntax.tacomafia.net
+    Hostname syntax.l.tacomafia.net
 
-Host syntax* tacomafia.net 192.168.1.30
-    Port 993
+Host syntax* 192.168.1.30
     ForwardAgent yes
 
 # Gateway
