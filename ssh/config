@@ -54,6 +54,11 @@ Host *-borg *.repo.borgbase.com
     ServerAliveCountMax 30
     ControlMaster no
 
+# KVM
+Host kvm
+    Hostname kvm.l.tacomafia.net
+    User root
+
 # Global config
 Host *
     AddKeysToAgent yes
