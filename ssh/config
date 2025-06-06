@@ -47,17 +47,18 @@ Host oci oci-borg
 Host oci* 192.168.6.6
     ForwardAgent yes
 
+# KVM
+Host kvm
+    Hostname kvm.l.tacomafia.net
+    User root
+
 # Common borg config
 Host *-borg *.repo.borgbase.com
     IdentityFile ~/.ssh/id_borg
     ServerAliveInterval 10
     ServerAliveCountMax 30
     ControlMaster no
-
-# KVM
-Host kvm
-    Hostname kvm.l.tacomafia.net
-    User root
+    Compression no
 
 # Global config
 Host *
@@ -67,3 +68,6 @@ Host *
     ControlMaster auto
     ControlPersist 10m
     User kyleh
+    ServerAliveInterval 30
+    ServerAliveCountMax 5
+    Compression yes
