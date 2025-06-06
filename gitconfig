@@ -1,6 +1,7 @@
 [color]
     ui = auto
 [core]
+    editor = vim
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [push]
     default = simple
@@ -13,3 +14,5 @@
     user = kylhill
 [safe]
     directory = /opt/appdata/fulltextrss/www/standard
+[init]
+    defaultBranch = main
