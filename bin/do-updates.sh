@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 
-cd /home/kyleh/infra
+pushd /home/kyleh/infra
 ansible-playbook site.yml -t update
+popd
 
 exit 0
