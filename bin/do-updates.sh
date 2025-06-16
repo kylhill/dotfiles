@@ -1,7 +1,5 @@
 #!/bin/sh
 set -e
 
-cd /home/kyleh/infra
+cd ~/infra
 ansible-playbook site.yml -t update
-
-exit 0
