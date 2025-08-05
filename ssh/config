@@ -35,7 +35,10 @@ Host wap
 Host wap2
     Hostname wap2.l.tacomafia.net
 
-Host wap*
+Host sw-16
+    Hostname sw-16.l.tacomafia.net
+
+Host wap* sw-*
     IdentityFile ~/.ssh/ubnt-20220508
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
