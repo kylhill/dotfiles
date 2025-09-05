@@ -1,6 +1,6 @@
 # Syntax
 Host syntax syntax-borg
-    Hostname syntax.l.tacomafia.net
+    Hostname syntax.tacomafia.net
 
 Host syntax* 192.168.1.30
     ForwardAgent yes
