@@ -2,61 +2,43 @@
 Host syntax syntax-borg
     Hostname syntax.tacomafia.net
 
-Host syntax* 192.168.1.30
+Host syntax syntax-borg syntax.tacomafia.net syntax.l.tacomafia.net 192.168.1.30 136.33.51.204
     ForwardAgent yes
 
 # Gateway
 Host gateway gateway-borg
     Hostname gateway.l.tacomafia.net
 
-Host gateway* 192.168.*.1
+Host gateway gateway-borg gateway.tacomafia.net gateway.l.tacomafia.net gateway.vpn.tacomafia.net 192.168.1.1 192.168.6.1
     ForwardAgent yes
-
-# HTPCs
-Host htpc
-    Hostname htpc.l.tacomafia.net
-
-Host htpc2
-    Hostname htpc2.l.tacomafia.net
-
-Host htpc3
-    Hostname htpc3.l.tacomafia.net
-
-Host htpc4
-    Hostname htpc4.l.tacomafia.net
-
-Host htpc*
-    User root
-
-# WAPs
-Host wap
-    Hostname wap.l.tacomafia.net
-
-Host wap2
-    Hostname wap2.l.tacomafia.net
-
-Host sw-16
-    Hostname sw-16.l.tacomafia.net
-
-Host wap* sw-*
-    IdentityFile ~/.ssh/ubnt-20220508
-    HostKeyAlgorithms=+ssh-rsa
-    PubkeyAcceptedKeyTypes=+ssh-rsa
 
 # OCI
 Host oci oci-borg
     Hostname oci.vpn.tacomafia.net
 
-Host oci* 192.168.6.6
+Host oci oci-borg oci.tacomafia.net oci.vpn.tacomafia.net 192.168.6.6 144.24.56.178
     ForwardAgent yes
 
+# Local aliases
+Host htpc htpc2 htpc3 htpc4 kvm wap wap2 sw-16
+    Hostname %h.l.tacomafia.net
+
+# HTPCs
+Host htpc htpc2 htpc3 htpc4 htpc?.l.tacomafia.net 192.168.1.21 192.168.1.22 192.168.1.23 192.168.1.24
+    User root
+
+# WAPs and Switches
+Host wap wap2 sw-16 wap.l.tacomafia.net wap2.l.tacomafia.net sw-16.l.tacomafia.net 192.168.1.51 192.168.1.52 192.168.1.53
+    IdentityFile ~/.ssh/ubnt-20220508
+    HostKeyAlgorithms=+ssh-rsa
+    PubkeyAcceptedKeyTypes=+ssh-rsa
+
 # KVM
-Host kvm
-    Hostname kvm.l.tacomafia.net
+Host kvm kvm.l.tacomafia.net 192.168.1.55
     User root
 
 # Common borg config
-Host *-borg *.repo.borgbase.com
+Host syntax-borg gateway-borg oci-borg *.repo.borgbase.com
     IdentityFile ~/.ssh/id_borg
     ServerAliveInterval 10
     ServerAliveCountMax 30
