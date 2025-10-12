@@ -24,7 +24,7 @@ Host htpc htpc2 htpc3 htpc4 kvm wap wap2 sw-16
     Hostname %h.l.tacomafia.net
 
 # HTPCs
-Host htpc htpc2 htpc3 htpc4 htpc?.l.tacomafia.net 192.168.1.21 192.168.1.22 192.168.1.23 192.168.1.24
+Host htpc htpc2 htpc3 htpc4 htpc.l.tacomafia.net htpc?.l.tacomafia.net 192.168.1.21 192.168.1.22 192.168.1.23 192.168.1.24
     User root
 
 # WAPs and Switches
