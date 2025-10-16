@@ -20,15 +20,15 @@ Host oci oci-borg oci.tacomafia.net oci.vpn.tacomafia.net 192.168.6.6 144.24.56.
     ForwardAgent yes
 
 # Local aliases
-Host htpc htpc2 htpc3 htpc4 kvm wap wap2 sw-16
+Host htpc htpc? wap wap? sw-16 kvm
     Hostname %h.l.tacomafia.net
 
 # HTPCs
-Host htpc htpc2 htpc3 htpc4 htpc.l.tacomafia.net htpc?.l.tacomafia.net 192.168.1.21 192.168.1.22 192.168.1.23 192.168.1.24
+Host htpc htpc? htpc.l.tacomafia.net htpc?.l.tacomafia.net 192.168.1.21 192.168.1.22 192.168.1.23 192.168.1.24
     User root
 
 # WAPs and Switches
-Host wap wap2 sw-16 wap.l.tacomafia.net wap2.l.tacomafia.net sw-16.l.tacomafia.net 192.168.1.51 192.168.1.52 192.168.1.53
+Host wap wap? sw-16 wap.l.tacomafia.net wap?.l.tacomafia.net sw-16.l.tacomafia.net 192.168.1.51 192.168.1.52 192.168.1.53
     IdentityFile ~/.ssh/ubnt-20220508
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
