@@ -1,41 +1,42 @@
+# Forward SSH agent to trusted hosts
+Host syntax* gateway* oci*
+    ForwardAgent yes
+
 # Syntax
 Host syntax syntax-borg
     Hostname syntax.tacomafia.net
-
-Host syntax syntax-borg syntax.tacomafia.net syntax.l.tacomafia.net 192.168.1.30 136.33.51.204
-    ForwardAgent yes
 
 # Gateway
 Host gateway gateway-borg
     Hostname gateway.l.tacomafia.net
 
-Host gateway gateway-borg gateway.tacomafia.net gateway.l.tacomafia.net gateway.vpn.tacomafia.net 192.168.1.1 192.168.6.1
-    ForwardAgent yes
-
 # OCI
 Host oci oci-borg
     Hostname oci.vpn.tacomafia.net
-
-Host oci oci-borg oci.tacomafia.net oci.vpn.tacomafia.net 192.168.6.6 144.24.56.178
-    ForwardAgent yes
 
 # Local aliases
 Host htpc htpc? wap wap? sw-16 kvm
     Hostname %h.l.tacomafia.net
 
 # HTPCs
-Host htpc htpc? htpc.l.tacomafia.net htpc?.l.tacomafia.net 192.168.1.21 192.168.1.22 192.168.1.23 192.168.1.24
+Host htpc htpc? htpc.l.tacomafia.net htpc?.l.tacomafia.net
     User root
 
 # WAPs and Switches
-Host wap wap? sw-16 wap.l.tacomafia.net wap?.l.tacomafia.net sw-16.l.tacomafia.net 192.168.1.51 192.168.1.52 192.168.1.53
+Host wap wap? sw-16 wap.l.tacomafia.net wap?.l.tacomafia.net sw-16.l.tacomafia.net
     IdentityFile ~/.ssh/ubnt-20220508
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
 
 # KVM
-Host kvm kvm.l.tacomafia.net 192.168.1.55
+Host kvm kvm.l.tacomafia.net
     User root
+
+# Git
+Host git.tacomafia.net
+    User git
+    Port 2222
+    VerifyHostKeyDNS no
 
 # Common borg config
 Host syntax-borg gateway-borg oci-borg *.repo.borgbase.com
@@ -47,23 +48,10 @@ Host syntax-borg gateway-borg oci-borg *.repo.borgbase.com
 
 # Global config
 Host *
+    User kyleh
     AddKeysToAgent yes
     VerifyHostKeyDNS yes
     ControlPath ~/.cache/ssh-%r@%h:%p.sock
     ControlMaster auto
     ControlPersist 10m
-    User kyleh
-    ServerAliveInterval 30
-    ServerAliveCountMax 5
     Compression yes
-
-    # https://www.ssh-audit.com/hardening_guides.html#ubuntu_24_04_client
-    Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-gcm@openssh.com,aes128-ctr
-    #KexAlgorithms sntrup761x25519-sha512@openssh.com,gss-curve25519-sha256-,curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group18-sha512,diffie-hellman-group-exchange-sha256,gss-group16-sha512-,diffie-hellman-group16-sha512
-    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com
-    RequiredRSASize 3072
-    HostKeyAlgorithms sk-ssh-ed25519-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
-    CASignatureAlgorithms sk-ssh-ed25519@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
-    #GSSAPIKexAlgorithms gss-curve25519-sha256-,gss-group16-sha512-
-    HostbasedAcceptedAlgorithms sk-ssh-ed25519-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
-    PubkeyAcceptedAlgorithms sk-ssh-ed25519-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
