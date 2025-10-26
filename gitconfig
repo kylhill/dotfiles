@@ -10,6 +10,7 @@
 [user]
     name = Kyle Hill
     email = kylhill@gmail.com
+    signingkey = 2E37EF3EA077FAD8
 [github]
     user = kylhill
 [init]
