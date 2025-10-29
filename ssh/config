@@ -1,38 +1,37 @@
-# Forward SSH agent to trusted hosts
-Host syntax* gateway* oci*
-    ForwardAgent yes
-
-# Syntax
+# Hostname aliases
 Host syntax syntax-borg
     Hostname syntax.tacomafia.net
 
-# Gateway
 Host gateway gateway-borg
     Hostname gateway.l.tacomafia.net
 
-# OCI
 Host oci oci-borg
     Hostname oci.vpn.tacomafia.net
 
-# Local aliases
-Host htpc htpc? wap wap? sw-16 kvm
+Host htpc htpc[2-4] kvm wap wap2 sw-16
     Hostname %h.l.tacomafia.net
 
-# HTPCs
-Host htpc htpc? htpc.l.tacomafia.net htpc?.l.tacomafia.net
+# Forward SSH agent to trusted hosts
+Host syntax syntax.l.tacomafia.net syntax.tacomafia.net
+    ForwardAgent yes
+
+Host gateway gateway.l.tacomafia.net gateway.vpn.tacomafia.net
+    ForwardAgent yes
+
+Host oci oci.vpn.tacomafia.net oci.tacomafia.net
+    ForwardAgent yes
+
+# HTPCs and KVM
+Host htpc htpc[2-4] htpc.l.tacomafia.net htpc[2-4].l.tacomafia.net kvm kvm.l.tacomafia.net
     User root
 
-# WAPs and Switches
-Host wap wap? sw-16 wap.l.tacomafia.net wap?.l.tacomafia.net sw-16.l.tacomafia.net
+# Ubiquiti gear
+Host wap wap2 wap.l.tacomafia.net wap2.l.tacomafia.net sw-16 sw-16.l.tacomafia.net
     IdentityFile ~/.ssh/ubnt-20220508
     HostKeyAlgorithms=+ssh-rsa
     PubkeyAcceptedKeyTypes=+ssh-rsa
 
-# KVM
-Host kvm kvm.l.tacomafia.net
-    User root
-
-# Git
+# Forgejo git
 Host git.tacomafia.net
     User git
     Port 2222
