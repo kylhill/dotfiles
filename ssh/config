@@ -49,6 +49,7 @@ Host syntax-borg gateway-borg oci-borg *.repo.borgbase.com
 # Global config
 Host *
     User kyleh
+    IdentityFile ~/.ssh/id_ed25519
     AddKeysToAgent yes
     VerifyHostKeyDNS yes
     ControlPath ~/.cache/ssh-%r@%h:%p.sock
