@@ -170,9 +170,4 @@ export EDITOR="$VISUAL"
 # set default postgres user
 export PGUSER="postgres"
 
-# set SSH_AUTH_SOCK if not already set
-if [[ -z "$SSH_AUTH_SOCK" ]]; then
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-fi
-
 export GPG_TTY=$(tty)
