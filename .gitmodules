@@ -16,12 +16,10 @@
 [submodule "vim/pack/bundle/start/vim-colors-solarized"]
 	path = vim/pack/bundle/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "vim/pack/bundle/start/vim-sensible"]
-	path = vim/pack/bundle/start/vim-sensible
-	url = https://github.com/tpope/vim-sensible.git
 [submodule "vim/pack/bundle/start/vim-solarized8"]
 	path = vim/pack/bundle/start/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
+	branch = neovim
 [submodule "vim/pack/bundle/start/vim-tmux-navigator"]
 	path = vim/pack/bundle/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
