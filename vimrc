@@ -10,7 +10,9 @@ set softtabstop=4   " number of spaces per tab
 
 " UI Configuration
 set noshowmode      " don't show current mode in bottom bar, Airline handles this
+set number          " show line numbers
 set showmatch       " highlight matching brackets
+set background=dark " use dark background
 
 if $TERM =~# '-256color$'
     if has("termguicolors")
