@@ -2,6 +2,7 @@
 set autochdir       " automatically set current directory to directory of last opened file
 set nowrap          " don't wrap lines
 set writebackup     " keep a backup file when overwriting a file
+set clipboard+=unnamedplus
 
 " Spaces and Tabs - Similar to vscode defaults
 set tabstop=4
