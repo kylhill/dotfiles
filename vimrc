@@ -3,10 +3,12 @@ set autochdir       " automatically set current directory to directory of last o
 set nowrap          " don't wrap lines
 set writebackup     " keep a backup file when overwriting a file
 
-" Spaces and Tabs
-set expandtab       " tabs are spaces
-set shiftwidth=4    " number of spaces per level of indentation
-set softtabstop=4   " number of spaces per tab
+" Spaces and Tabs - Similar to vscode defaults
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set smartindent
 
 " UI Configuration
 set noshowmode      " don't show current mode in bottom bar, Airline handles this
@@ -18,6 +20,7 @@ if $TERM =~# '-256color$'
         " RGB colors:
         set termguicolors
         silent! colorscheme solarized8
+        let g:airline_powerline_fonts=1
     else
         " 256 colors:
         silent! colorscheme solarized
@@ -26,7 +29,6 @@ if $TERM =~# '-256color$'
     let g:solarized_termtrans=1
     let g:airline_theme='solarized'
     let g:airline_solarized_bg='dark'
-    let g:airline_powerline_fonts=1
 
     set cursorline
     set number

@@ -1,7 +1,7 @@
 [color]
     ui = auto
 [core]
-    editor = vim
+    editor = nvim
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [push]
     default = simple
