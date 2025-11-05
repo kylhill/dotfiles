@@ -137,20 +137,12 @@ shopt -s dirspell
 stty -ixon
 
 # EXPORTS
-# Solarized colors for less
-export LESS_TERMCAP_mb=$'\E[01;31m' # begin blinking
-export LESS_TERMCAP_md=$'\E[01;38;5;74m' # begin bold
-export LESS_TERMCAP_me=$'\E[0m' # end mode
-export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
-export LESS_TERMCAP_so=$'\E[38;5;246m' # begin standout-mode - info box
-export LESS_TERMCAP_ue=$'\E[0m' # end underline
-
 # set PAGER to less
 if [ -x "$PREFIX/bin/less" ]; then
     export PAGER="$PREFIX/bin/less"
 fi
 
-# set default edtior to nvim, if it exists, otherwise use vim
+# set default editor to nvim, if it exists, otherwise use vim
 if [ -x "$PREFIX/bin/nvim" ]; then
     export VISUAL="$PREFIX/bin/nvim"
 else
