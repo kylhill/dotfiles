@@ -145,8 +145,10 @@ fi
 # set default editor to nvim, if it exists, otherwise use vim
 if [ -x "$PREFIX/bin/nvim" ]; then
     export VISUAL="$PREFIX/bin/nvim"
+    export MANPAGER="$PREFIX/bin/nvim +Man!"
 else
     export VISUAL="$PREFIX/bin/vim"
+    export MANPAGER="$PREFIX/bin/vim -M +MANPAGER -"
 fi
 export EDITOR="$VISUAL"
 
