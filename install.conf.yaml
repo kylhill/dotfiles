@@ -16,12 +16,8 @@
         path: dircolors/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
     ~/.inputrc:
-    ~/.vim:
-    ~/.vimrc:
-    ~/.config/nvim/init.vim:
-        path: vim/init.vim
-#    ~/.config/nvim:
-#        path: nvim/
+    ~/.config/nvim:
+        path: nvim/
     ~/.ssh/config:
         path: ssh/config
     ~/.local/bin:
