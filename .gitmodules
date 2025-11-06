@@ -4,25 +4,3 @@
 [submodule "dircolors/dircolors-solarized"]
 	path = dircolors/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
-[submodule "vim/pack/bundle/start/nerdtree"]
-	path = vim/pack/bundle/start/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "vim/pack/bundle/start/vim-airline"]
-	path = vim/pack/bundle/start/vim-airline
-	url = https://github.com/bling/vim-airline
-[submodule "vim/pack/bundle/start/vim-airline-themes"]
-	path = vim/pack/bundle/start/vim-airline-themes
-	url = https://github.com/vim-airline/vim-airline-themes.git
-[submodule "vim/pack/bundle/start/vim-colors-solarized"]
-	path = vim/pack/bundle/start/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "vim/pack/bundle/start/vim-solarized8"]
-	path = vim/pack/bundle/start/vim-solarized8
-	url = https://github.com/lifepillar/vim-solarized8.git
-	branch = neovim
-[submodule "vim/pack/bundle/start/vim-tmux-navigator"]
-	path = vim/pack/bundle/start/vim-tmux-navigator
-	url = https://github.com/christoomey/vim-tmux-navigator.git
-[submodule "vim/pack/bundle/start/vim-fugitive"]
-	path = vim/pack/bundle/start/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
