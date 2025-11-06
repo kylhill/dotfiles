@@ -1,20 +1,19 @@
-" General Settings
-set autochdir       " automatically set current directory to directory of last opened file
-set nowrap          " don't wrap lines
-set writebackup     " keep a backup file when overwriting a file
+set nowrap
 set clipboard+=unnamedplus
 
-" Spaces and Tabs - Similar to vscode defaults
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-set smartindent
 
-" UI Configuration
+set showmatch
+set hlsearch
+set ignorecase
+set smartcase
+
 set noshowmode      " don't show current mode in bottom bar, Airline handles this
-set showmatch       " highlight matching brackets
-set background=dark " use dark background
+set scrolloff=3
+set background=dark
 
 if $TERM =~# '-256color$'
     if has("termguicolors")
@@ -35,7 +34,7 @@ if $TERM =~# '-256color$'
     set number
 else
     " 16 colors:
-    colorscheme desert
+    colorscheme habamax
 endif
 
 " Jump to the last file position when reopening a file
