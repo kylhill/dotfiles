@@ -1,5 +1,5 @@
 set nowrap
-set clipboard+=unnamedplus
+set clipboard=unnamedplus,unnamed
 
 set tabstop=4
 set shiftwidth=4
