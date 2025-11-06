@@ -1,11 +1,11 @@
 # Hostname aliases
-Host syntax syntax-borg
+Host syntax
     Hostname syntax.tacomafia.net
 
-Host gateway gateway-borg
+Host gateway
     Hostname gateway.l.tacomafia.net
 
-Host oci oci-borg
+Host oci
     Hostname oci.vpn.tacomafia.net
 
 Host htpc htpc? kvm wap wap2 sw-16
@@ -38,17 +38,6 @@ Host wap wap.l.tacomafia.net wap2 wap2.l.tacomafia.net sw-16 sw-16.l.tacomafia.n
 Host git.tacomafia.net
     Port 2222
     User git
-
-# Common borg config
-Host syntax-borg gateway-borg oci-borg *.repo.borgbase.com
-    BatchMode yes
-    Compression no
-    ControlMaster no
-    IdentityFile ~/.ssh/id_borg
-    IPQoS none
-    StrictHostKeyChecking accept-new
-    ServerAliveInterval 10
-    ServerAliveCountMax 30
 
 # Global config
 Host *

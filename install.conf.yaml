@@ -22,8 +22,6 @@
         path: vim/init.vim
 #    ~/.config/nvim:
 #        path: nvim/
-    ~/.config/xfce4/terminal/terminalrc:
-        path: xfce4/terminal/terminalrc
     ~/.ssh/config:
         path: ssh/config
     ~/.local/bin:
