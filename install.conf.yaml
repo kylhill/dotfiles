@@ -10,19 +10,20 @@
   - git submodule update --init --recursive
 
 - link:
+    ~/.config/nvim:
+        path: nvim/
     ~/.bashrc:
     ~/.bash_aliases:
     ~/.dircolors:
         path: dircolors/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
     ~/.inputrc:
-    ~/.config/nvim:
-        path: nvim/
-    ~/.ssh/config:
-        path: ssh/config
     ~/.local/bin:
         path: bin/
+    ~/.ssh/config:
+        path: ssh/config
     ~/.tmux.conf:
+    ~/.vimrc:
 
 - create:
     - ~/.cache
