@@ -2,7 +2,7 @@
     ui = auto
 [core]
     editor = nvim
-    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    whitespace = fix,trailng-space,space-before-tab,cr-at-eol
 [push]
     default = simple
 [pull]
@@ -20,4 +20,17 @@
 [tag]
     gpgSign = true
 [help]
-    autocorrect = true
+    autocorrect = 1
+[diff]
+    colorMoved = default
+    tool = nvimdiff
+    mnemonicprefix = true
+    renames = copies
+    algorithm = histogram
+[merge]
+    conflictstyle = diff3
+    tool = nvimdiff
+    renormalize = true
+[rebase]
+    autostash = true
+    autoSquash = true
