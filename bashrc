@@ -1,164 +1,113 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# Exit if not interactive
+[[ $- != *i* ]] && return
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# History
+HISTCONTROL=ignoredups:erasedups
+HISTSIZE=50000
+HISTFILESIZE=100000
+HISTTIMEFORMAT="%F %T "
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# TERMUX: Set PREFIX to /usr if not already set.  If already set, we know we're in termux
-if [ ! "$PREFIX" ]; then
-    PREFIX=/usr
+if [[ -n "${PROMPT_COMMAND:-}" ]]; then
+    PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+else
+    PROMPT_COMMAND="history -a; history -n;"
 fi
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x "$PREFIX/bin/lesspipe" ] && eval "$(SHELL=$PREFIX/bin/sh lesspipe)"
+# Shell options
+shopt -s checkwinsize globstar autocd cdspell dirspell
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+# Disable XON/XOFF
+if [ -t 1 ]; then
+    stty -ixon 2>/dev/null || true
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
+# termux compatibility: Set PREFIX to /usr if not already set
+PREFIX="${PREFIX:-/usr}"
 
-if [ "$PREFIX" == /usr ]; then
-    # uncomment for a colored prompt, if the terminal has the capability; turned
-    # off by default to not distract the user: the focus in a terminal window
-    # should be on the output of commands, not on the prompt
-    #force_color_prompt=yes
+# lesspipe
+command -v lesspipe >/dev/null 2>&1 && eval "$(SHELL=$PREFIX/bin/sh lesspipe)"
 
-    if [ -n "$force_color_prompt" ]; then
-        if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-            # We have color support; assume it's compliant with Ecma-48
-            # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-            # a case would tend to support setf rather than setaf.)
-            color_prompt=yes
-        else
-            color_prompt=
-        fi
+# Color support: ensure tput exists and terminal supports colors
+if command -v tput >/dev/null 2>&1; then
+    COLORS="$(tput colors 2>/dev/null || echo 0)"
+else
+    COLORS=0
+fi
+
+if [ "$COLORS" -ge 8 ]; then
+    # Prompt with colors
+    PS1='\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$ '
+
+    # Dircolors
+    if command -v dircolors &>/dev/null; then
+        [[ -r ~/.dircolors ]] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     fi
 
-    if [ "$color_prompt" = yes ]; then
-        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    else
-        PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    fi
-    unset color_prompt force_color_prompt
-fi
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x "$PREFIX/bin/dircolors" ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    # Colorize common commands
     alias ls='ls --color=auto -h'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-
     alias diff='diff --color=auto'
     alias ip='ip -color=auto'
+
+    export LESS='-R --use-color -Dd+g -Du+b -M -J'
+else
+    PS1='\u@\h:\w\$ '
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# Source alias definitions
+[[ -f "$HOME/.bash_aliases" ]] && source "$HOME/.bash_aliases"
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# Bash Completion
 if ! shopt -oq posix; then
-  if [ -f "$PREFIX/share/bash-completion/bash_completion" ]; then
-    . "$PREFIX/share/bash-completion/bash_completion"
-  elif [ -f "$PREFIX/etc/bash_completion" ]; then
-    . "$PREFIX/etc/bash_completion"
-  elif [ -f "/etc/bash_completion" ]; then
-    . /etc/bash_completion
-  fi
+  for f in \
+    "$PREFIX/share/bash-completion/bash_completion" \
+    "$PREFIX/etc/bash_completion" \
+    "/etc/bash_completion"; do
+      [[ -f "$f" ]] && source "$f" && break
+  done
 fi
 
-# SHELL OPTIONS
-shopt -s autocd
-shopt -s cdspell
-shopt -s dirspell
-
-# Disable XON/XOFF flow control
-stty -ixon
-
-# EXPORTS
-# set PAGER to less
-if [ -x "$PREFIX/bin/less" ]; then
-    export PAGER="$PREFIX/bin/less"
-fi
+# Exports
+command -v less &>/dev/null && export PAGER="less"
 
 # set default editor to nvim, if it exists, otherwise use vim
-if [ -x "$PREFIX/bin/nvim" ]; then
-    export VISUAL="$PREFIX/bin/nvim"
-    export MANPAGER="$PREFIX/bin/nvim +Man!"
+if command -v nvim &>/dev/null; then
+    export EDITOR=nvim
+    export VISUAL=nvim
+    export MANPAGER="nvim +Man!"
 else
-    export VISUAL="$PREFIX/bin/vim"
-    export MANPAGER="$PREFIX/bin/vim -M +MANPAGER -"
+    export EDITOR=vim
+    export VISUAL=vim
+    export MANPAGER="vim -M +MANPAGER -"
 fi
-export EDITOR="$VISUAL"
 
-export PGUSER="postgres"
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty 2>/dev/null || true)"
 
-# MACROS
+# Docker helpers
 dbash() {
-    docker exec -it "$1" /bin/bash
+    if ! command -v docker >/dev/null 2>&1; then
+        printf '%s\n' "docker: command not found" >&2
+        return 127
+    fi
+    if [[ -z "${1:-}" ]]; then
+        printf '%s\n' "usage: dbash <container>" >&2
+        return 2
+    fi
+    if docker exec -it "$1" bash -c 'true' >/dev/null 2>&1; then
+        docker exec -it "$1" bash
+    else
+        docker exec -it "$1" sh
+    fi
 }
 dsh() {
-    docker exec -it "$1" /bin/sh
+    if ! command -v docker >/dev/null 2>&1; then
+        printf '%s\n' "docker: command not found" >&2
+        return 127
+    fi
+    if [[ -z "${1:-}" ]]; then
+        printf '%s\n' "usage: dsh <container>" >&2
+        return 2
+    fi
+    docker exec -it "$1" sh
 }
