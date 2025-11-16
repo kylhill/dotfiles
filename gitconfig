@@ -2,7 +2,9 @@
     ui = auto
 [core]
     editor = nvim
-    whitespace = fix,trailng-space,space-before-tab,cr-at-eol
+    whitespace = fix,trailing-space,space-before-tab,cr-at-eol
+    autocrlf = input
+    fsmonitor = true
 [push]
     default = simple
 [pull]
@@ -15,6 +17,8 @@
     user = kylhill
 [init]
     defaultBranch = main
+[gpg]
+    program = gpg
 [commit]
     gpgsign = true
 [tag]
@@ -27,6 +31,8 @@
     mnemonicprefix = true
     renames = copies
     algorithm = histogram
+    wsErrorHighlight = all
+    colorMovedWS = allow-indentation-change
 [merge]
     conflictstyle = diff3
     tool = nvimdiff
@@ -34,3 +40,8 @@
 [rebase]
     autostash = true
     autoSquash = true
+[fetch]
+    prune = true
+[status]
+    short = true
+    branch = true

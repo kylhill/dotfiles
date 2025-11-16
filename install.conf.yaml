@@ -13,13 +13,13 @@
     ~/.config/nvim:
         path: nvim/
     ~/.bashrc:
-    ~/.bash_aliases:
     ~/.dircolors:
         path: dircolors/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
     ~/.inputrc:
     ~/.local/bin:
         path: bin/
+    ~/.oh-my-bash:
     ~/.ssh/config:
         path: ssh/config
     ~/.tmux.conf:

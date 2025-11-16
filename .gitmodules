@@ -1,6 +1,9 @@
 [submodule "dotbot"]
 	path = dotbot
-	url = https://github.com/anishathalye/dotbot
+	url = https://github.com/anishathalye/dotbot.git
 [submodule "dircolors/dircolors-solarized"]
 	path = dircolors/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
+[submodule "oh-my-bash"]
+	path = oh-my-bash
+	url = https://github.com/ohmybash/oh-my-bash.git
