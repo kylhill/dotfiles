@@ -38,7 +38,7 @@ set splitright
 set scrolloff=3
 
 set background=dark
-colorscheme habamax
+silent! colorscheme habamax
 
 if has("termguicolors")
     set termguicolors
