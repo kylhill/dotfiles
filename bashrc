@@ -4,10 +4,13 @@ case $- in
 *) return ;;
 esac
 
-# Path to your oh-my-bash installation.
-if [ -z "${PREFIX+x}" ]; then
-    export OSH='/home/kyleh/.oh-my-bash'
+# Exit early if running in Termux
+if echo "$PREFIX" | grep -q "com.termux"; then
+    return
 fi
+
+# Path to your oh-my-bash installation.
+export OSH='/home/kyleh/.oh-my-bash'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
