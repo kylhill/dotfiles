@@ -16,7 +16,7 @@ alias bashreload='source ~/.bashrc && echo Bash config reloaded;'
 alias psql='psql -U postgres'
 
 if command -v nvim &>/dev/null; then
-    alias vim="nvim"
-    alias vimdiff="nvim -d"
+    alias vim=nvim
+    alias vimdiff='nvim -d'
     alias fd=fdfind
 fi
