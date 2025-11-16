@@ -42,6 +42,3 @@
     autoSquash = true
 [fetch]
     prune = true
-[status]
-    short = true
-    branch = true
