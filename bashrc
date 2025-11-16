@@ -4,11 +4,6 @@ case $- in
 *) return ;;
 esac
 
-# Exit early if running in Termux
-if echo "$PREFIX" | grep -q "com.termux"; then
-    return
-fi
-
 # Path to your oh-my-bash installation.
 export OSH='/home/kyleh/.oh-my-bash'
 
@@ -132,7 +127,10 @@ plugins=(
 #
 #OMB_TERM_USE_TPUT=no
 
-source "$OSH"/oh-my-bash.sh
+# Don't load oh-my-bash in Termux
+if ! echo "$PREFIX" | grep -q "com.termux"; then
+    source "$OSH"/oh-my-bash.sh
+fi
 
 # User configuration
 
