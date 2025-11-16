@@ -28,7 +28,7 @@ fi
 # OMB_HYPHEN_SENSITIVE="false"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_OSH_DAYS=13
@@ -37,7 +37,7 @@ fi
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -48,7 +48,7 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you don't want the repository to be considered dirty
 # if there are untracked files.
@@ -129,13 +129,19 @@ plugins=(
 # This disables the use of the "tput" command, and the escape sequences are
 # initialized to be the ANSI version:
 #
-#OMB_TERM_USE_TPUT=no
+OMB_TERM_USE_TPUT=no
 
 source "$OSH"/oh-my-bash.sh
 
 # User configuration
 
 export HISTCONTROL=ignoredups:erasedups
+export HISTTIMEFORMAT="%F %T "
+export GLOBIGNORE=".git:node_modules:venv"
+
+if [ -t 1 ]; then
+    stty -ixon 2>/dev/null || true
+fi
 
 # Minimal aliases - https://github.com/ohmybash/oh-my-bash/wiki/minimal_aliases
 alias dir='dir --color=auto'
