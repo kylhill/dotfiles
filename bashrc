@@ -167,16 +167,16 @@ alias psql='psql -U postgres'
 # Exports
 # Set default editor to nvim, if it exists, otherwise use vim
 if command -v nvim >/dev/null 2>&1 && [[ -t 1 && ! $(tty) =~ ^/dev/tty[1-6]$ ]]; then
-    export EDITOR="${EDITOR:-nvim}"
-    export VISUAL="${VISUAL:-nvim}"
+    export EDITOR="nvim"
+    export VISUAL="nvim"
     export MANPAGER="nvim +Man! -"
 
     alias vim=nvim
     alias vimdiff='nvim -d'
     alias fd=fdfind
 else
-    export EDITOR="${EDITOR:-vim}"
-    export VISUAL="${VISUAL:-vim}"
+    export EDITOR="vim"
+    export VISUAL="vim"
     export MANPAGER="vim -M +':set ft=man' -"
 fi
 
