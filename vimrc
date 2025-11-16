@@ -42,7 +42,7 @@ colorscheme default
 silent! colorscheme habamax
 
 " Try to set termguicolors, cursorline and background to more appealing options
-if has("gui_running") || exists('$SSH_CONNECTION') || exists('$DISPLAY') || exists('$WAYLAND_DISPLAY') || system('echo "$PREFIX" | grep -q com.termux; echo $?') ==# '0'
+if has("gui_running") || exists('$SSH_CONNECTION') || exists('$DISPLAY') || exists('$WAYLAND_DISPLAY') || exists('$PREFIX')
     if has("termguicolors")
         set termguicolors
     endif
