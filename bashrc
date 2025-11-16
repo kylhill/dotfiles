@@ -9,7 +9,7 @@ export OSH="$HOME/.oh-my-bash"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-if [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+if echo "$PREFIX" | grep -q "com.termux" || [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
     OSH_THEME="agnoster"
 else
     OSH_THEME="font"
@@ -131,10 +131,7 @@ plugins=(
 #
 #OMB_TERM_USE_TPUT=no
 
-# Don't load oh-my-bash in Termux
-if ! echo "$PREFIX" | grep -q "com.termux"; then
-    source "$OSH"/oh-my-bash.sh
-fi
+source "$OSH"/oh-my-bash.sh
 
 # User configuration
 
