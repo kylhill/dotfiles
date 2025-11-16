@@ -133,6 +133,8 @@ source "$OSH"/oh-my-bash.sh
 
 # User configuration
 
+export HISTCONTROL=ignoredups:erasedups
+
 # Aliases
 
 # Minimal aliases - https://github.com/ohmybash/oh-my-bash/wiki/minimal_aliases
