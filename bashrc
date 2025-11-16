@@ -5,7 +5,9 @@ case $- in
 esac
 
 # Path to your oh-my-bash installation.
-export OSH='/home/kyleh/.oh-my-bash'
+if [ -z "${PREFIX+x}" ]; then
+    export OSH='/home/kyleh/.oh-my-bash'
+fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -93,6 +95,7 @@ completions=(
     docker
     git
     ssh
+    system
 )
 
 # Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
@@ -100,7 +103,6 @@ completions=(
 # Example format: aliases=(vagrant composer git-avh)
 # Add wisely, as too many aliases slow down shell startup.
 aliases=(
-    custom
     general
     ls
 )
@@ -110,7 +112,6 @@ aliases=(
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    fzf
     git
     sudo
 )
@@ -133,26 +134,47 @@ source "$OSH"/oh-my-bash.sh
 
 # User configuration
 
-# Exports
-command -v less >/dev/null 2>&1 && export PAGER="less"
+# Aliases
+alias ..='cd ..'
+alias ...='cd ../../'
+alias bashreload='source ~/.bashrc && echo Bash config reloaded;'
 
-# set default editor to nvim, if it exists, otherwise use vim
+# Handy docker aliases - https://docs.linuxserver.io/general/docker-compose
+alias dtail='docker logs -tf --tail="150" "$@"'
+alias dprune='docker system prune -a -f --volumes'
+
+# Default psql to use postgres user
+alias psql='psql -U postgres'
+
+# Exports
+# Set default editor to nvim, if it exists, otherwise use vim
 if command -v nvim >/dev/null 2>&1; then
     export EDITOR="${EDITOR:-nvim}"
     export VISUAL="${VISUAL:-nvim}"
     export MANPAGER="nvim +Man! -"
+
+    alias vim=nvim
+    alias vimdiff='nvim -d'
+    alias fd=fdfind
 else
     export EDITOR="${EDITOR:-vim}"
     export VISUAL="${VISUAL:-vim}"
     export MANPAGER="vim -M +':set ft=man' -"
 fi
 
+export PAGER="less"
 export GPG_TTY="$(tty 2>/dev/null)"
 
 # Docker helpers
 dbash() {
-    command -v docker >/dev/null 2>&1 || { echo "docker not found" >&2; return 127; }
-    [[ -n "$1" ]] || { echo "usage: dbash <container>" >&2; return 2; }
+    command -v docker >/dev/null 2>&1 || {
+        echo "docker not found" >&2
+        return 127
+    }
+    [[ -n "$1" ]] || {
+        echo "usage: dbash <container>" >&2
+        return 2
+    }
 
     local shell
     shell=$(docker exec "$1" sh -c 'command -v bash || command -v sh' 2>/dev/null) || {
@@ -168,6 +190,6 @@ _complete_docker_containers() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
     local containers
     containers=$(docker ps --format '{{.Names}}' 2>/dev/null)
-    COMPREPLY=( $(compgen -W "$containers" -- "$cur") )
+    COMPREPLY=($(compgen -W "$containers" -- "$cur"))
 }
 complete -F _complete_docker_containers dbash dsh
