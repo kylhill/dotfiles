@@ -1,7 +1,6 @@
 [color]
     ui = auto
 [core]
-    editor = nvim
     whitespace = fix,trailing-space,space-before-tab,cr-at-eol
     autocrlf = input
     fsmonitor = true
@@ -27,7 +26,6 @@
     autocorrect = 1
 [diff]
     colorMoved = default
-    tool = nvimdiff
     mnemonicprefix = true
     renames = copies
     algorithm = histogram
@@ -35,7 +33,6 @@
     colorMovedWS = allow-indentation-change
 [merge]
     conflictstyle = diff3
-    tool = nvimdiff
     renormalize = true
 [rebase]
     autostash = true
