@@ -168,7 +168,7 @@ alias psql='psql -U postgres'
 
 # Exports
 # Set default editor to nvim, if it exists, otherwise use vim
-if command -v nvim >/dev/null 2>&1; then
+if command -v nvim >/dev/null 2>&1 && [[ -t 1 && ! $(tty) =~ ^/dev/tty[1-6]$ ]]; then
     export EDITOR="${EDITOR:-nvim}"
     export VISUAL="${VISUAL:-nvim}"
     export MANPAGER="nvim +Man! -"
