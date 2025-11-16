@@ -104,7 +104,6 @@ completions=(
 # Add wisely, as too many aliases slow down shell startup.
 aliases=(
     general
-    ls
 )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -135,9 +134,25 @@ source "$OSH"/oh-my-bash.sh
 # User configuration
 
 # Aliases
+
+# Minimal aliases - https://github.com/ohmybash/oh-my-bash/wiki/minimal_aliases
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias ls='ls --color=auto -h'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias ll='ls -alFh --color=auto'
+alias la='ls -Ah --color=auto'
+alias l='ls -CFh --color=auto'
+alias cls='clear'
+
 alias ..='cd ..'
 alias ...='cd ../../'
-alias bashreload='source ~/.bashrc && echo Bash config reloaded;'
+
+alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 
 # Handy docker aliases - https://docs.linuxserver.io/general/docker-compose
 alias dtail='docker logs -tf --tail="150" "$@"'
