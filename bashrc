@@ -9,7 +9,11 @@ export OSH="$HOME/.oh-my-bash"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="agnoster"
+if [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+    OSH_THEME="agnoster"
+else
+    OSH_THEME="font"
+fi
 
 # If you set OSH_THEME to "random", you can ignore themes you don't like.
 # OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
@@ -136,8 +140,6 @@ fi
 
 export HISTCONTROL=ignoredups:erasedups
 
-# Aliases
-
 # Minimal aliases - https://github.com/ohmybash/oh-my-bash/wiki/minimal_aliases
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -164,9 +166,8 @@ alias dprune='docker system prune -a -f --volumes'
 # Default psql to use postgres user
 alias psql='psql -U postgres'
 
-# Exports
 # Set default editor to nvim, if it exists, otherwise use vim
-if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$SSH_CLIENT" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
     export EDITOR="nvim"
     export VISUAL="nvim"
     export MANPAGER="nvim +Man! -"

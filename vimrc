@@ -20,7 +20,7 @@ syntax enable
 set hidden
 set nowrap
 if has('clipboard')
-    set clipboard=unnamedplus,unnamed
+    set clipboard+=unnamedplus
 endif
 
 set tabstop=4
@@ -37,11 +37,21 @@ set splitbelow
 set splitright
 set scrolloff=3
 
-set background=dark
+" Try to set habamax colorscheme, if available
+colorscheme default
 silent! colorscheme habamax
 
-if has("termguicolors")
-    set termguicolors
-endif
+" Try to set termguicolors, cursorline and background to more appealing options
+if has("gui_running") || exists('$SSH_CONNECTION') || exists('$DISPLAY') || exists('$WAYLAND_DISPLAY')
+    if has("termguicolors")
+        set termguicolors
+    endif
+    set cursorline
 
-set cursorline
+    set background=dark
+else
+    set notermguicolors
+    set nocursorline
+
+    set background=light
+endif
