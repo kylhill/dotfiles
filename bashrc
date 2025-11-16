@@ -131,7 +131,10 @@ plugins=(
 #
 OMB_TERM_USE_TPUT=no
 
-source "$OSH"/oh-my-bash.sh
+# Don't load oh-my-bash in Termux
+if ! echo "$PREFIX" | grep -q "com.termux"; then
+    source "$OSH"/oh-my-bash.sh
+fi
 
 # User configuration
 
