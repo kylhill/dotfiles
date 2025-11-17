@@ -52,4 +52,7 @@ require("lazy").setup({
       },
     },
   },
+  rocks = {
+    enabled = false,
+  },
 })
