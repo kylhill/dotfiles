@@ -7,3 +7,6 @@ opt.clipboard = "unnamedplus"
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.relativenumber = false
+
+-- opt.spell = false
+opt.list = false
