@@ -9,9 +9,11 @@ export OSH="$HOME/.oh-my-bash"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-if echo "$PREFIX" | grep -q "com.termux" || [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+if [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+    # Use a fancy theme when on a fancy terminal
     OSH_THEME="agnoster"
 else
+    # Otherwise, use a basic theme
     OSH_THEME="font"
 fi
 
@@ -131,8 +133,23 @@ plugins=(
 #
 OMB_TERM_USE_TPUT=no
 
-# Don't load oh-my-bash in Termux
-if ! echo "$PREFIX" | grep -q "com.termux"; then
+if echo "$PREFIX" | grep -q "com.termux"; then
+    # Don't load oh-my-bash in Termux
+
+    # Dircolors
+    if command -v dircolors >/dev/null 2>&1; then
+        [[ -r ~/.dircolors ]] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    fi
+
+    # Bash Completion
+    for f in \
+        "$PREFIX/share/bash-completion/bash_completion" \
+        "$PREFIX/etc/bash_completion" \
+        "/etc/bash_completion"; do
+        [[ -r "$f" ]] && source "$f" && break
+    done
+else
+    # Load oh-my-bash for everything else
     source "$OSH"/oh-my-bash.sh
 fi
 
@@ -172,8 +189,8 @@ alias dprune='docker system prune -a -f --volumes'
 # Default psql to use postgres user
 alias psql='psql -U postgres'
 
-# Set default editor to nvim, if it exists, otherwise use vim
 if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+    # Set default editor to nvim, if it exists and we're on a fancy terminal
     export EDITOR="nvim"
     export VISUAL="nvim"
     export MANPAGER="nvim +Man! -"
@@ -182,6 +199,7 @@ if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" |
     alias vimdiff='nvim -d'
     alias fd=fdfind
 else
+    # Otherwise, use vim
     export EDITOR="vim"
     export VISUAL="vim"
     export MANPAGER="vim -M +':set ft=man' -"
