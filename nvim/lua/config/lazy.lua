@@ -27,10 +27,8 @@ require("lazy").setup({
     lazy = false,
     -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
     -- have outdated releases, which may break your Neovim install.
-    -- version = false, -- always use the latest git commit
+    version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
-    -- pin version to v14 since Ubuntu 25.10 does not include Neovim >= 0.11.2
-    version = "v14",
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = {
@@ -51,8 +49,5 @@ require("lazy").setup({
         "zipPlugin",
       },
     },
-  },
-  rocks = {
-    enabled = false,
   },
 })

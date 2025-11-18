@@ -3,10 +3,7 @@
 -- Add any additional options here
 local opt = vim.opt
 
-opt.clipboard = "unnamedplus"
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.relativenumber = false
-
--- opt.spell = false
 opt.list = false
+opt.relativenumber = false
+opt.shiftwidth = 4
+opt.tabstop = 4
