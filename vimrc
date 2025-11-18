@@ -19,9 +19,6 @@ syntax enable
 
 set hidden
 set nowrap
-if has('clipboard')
-    set clipboard+=unnamedplus
-endif
 
 set tabstop=4
 set shiftwidth=4
