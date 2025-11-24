@@ -234,4 +234,4 @@ _complete_docker_containers() {
     containers=$(docker ps --format '{{.Names}}' 2>/dev/null)
     COMPREPLY=($(compgen -W "$containers" -- "$cur"))
 }
-complete -F _complete_docker_containers dbash dsh
+complete -F _complete_docker_containers dbash dsh dtail
