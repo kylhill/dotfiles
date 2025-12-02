@@ -185,9 +185,6 @@ alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 alias dtail='docker logs -tf --tail="150" "$@"'
 alias dprune='docker system prune -a -f --volumes'
 
-# Default psql to use postgres user
-alias psql='psql -U postgres'
-
 if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
     # Set default editor to nvim, if it exists and we're on a fancy terminal
     export EDITOR="nvim"
@@ -206,6 +203,7 @@ fi
 
 export PAGER="less"
 export GPG_TTY="$(tty 2>/dev/null)"
+export PGUSER="postgres"
 
 # Docker helpers
 dbash() {
