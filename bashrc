@@ -198,7 +198,6 @@ else
     # Otherwise, use vim
     export EDITOR="vim"
     export VISUAL="vim"
-    export MANPAGER="vim -M +':set ft=man' -"
 fi
 
 export PAGER="less"
