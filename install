@@ -1,15 +1,43 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+trap 'echo "Error on line $LINENO: ${BASH_COMMAND:-unknown command}" >&2' ERR
 
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="external/dotbot"
+CONFIG="${CONFIG:-install.conf.yaml}"
+DOTBOT_DIR="${DOTBOT_DIR:-external/dotbot}"
+DOTBOT_BIN="${DOTBOT_BIN:-bin/dotbot}"
 
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Resolve script directory safely
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
+cd "$BASEDIR"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+# Ensure git is available
+if ! command -v git >/dev/null 2>&1; then
+  echo "git not found in PATH" >&2
+  exit 1
+fi
+
+# Initialize / update Dotbot submodule
+git -C "$DOTBOT_DIR" submodule sync --quiet --recursive || true
+git submodule update --init --recursive "$DOTBOT_DIR"
+
+DOTBOT_PATH="$BASEDIR/$DOTBOT_DIR/$DOTBOT_BIN"
+
+# Validate Dotbot binary
+if [[ ! -x "$DOTBOT_PATH" ]]; then
+  echo "Dotbot executable not found or not executable: $DOTBOT_PATH" >&2
+  exit 1
+fi
+
+# Validate config
+if [[ ! -f "$BASEDIR/$CONFIG" ]]; then
+  echo "Dotbot config not found: $BASEDIR/$CONFIG" >&2
+  exit 1
+fi
+
+# Run Dotbot
+exec "$DOTBOT_PATH" \
+  -d "$BASEDIR" \
+  -c "$CONFIG" \
+  "$@"

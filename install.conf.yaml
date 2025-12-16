@@ -1,28 +1,34 @@
 - defaults:
     link:
-      create: true
-      force: true
+        create: true
+        relink: true
+        force: true
 
-- clean: ['~']
+- clean:
+    ~/:
+        recursive: false
 
 - shell:
-  - touch ~/.hushlogin
-  - git submodule update --init --recursive
+    - description: Create hushlogin to suppress login banner
+      quiet: true
+      command: touch ~/.hushlogin
+      if: '[ ! -f ~/.hushlogin ]'
 
 - link:
     ~/.config/nvim:
-        path: nvim/
+        path: nvim
     ~/.bashrc:
     ~/.dircolors:
         path: external/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
     ~/.inputrc:
     ~/.local/bin:
-        path: bin/
+        path: bin
     ~/.oh-my-bash:
         path: external/oh-my-bash
     ~/.ssh/config:
         path: ssh/config
+        mode: "0600"
     ~/.tmux.conf:
     ~/.vimrc:
 
@@ -30,4 +36,9 @@
     - ~/.cache
 
 - shell:
-  - source ~/.bashrc
+    - description: Reload bash configuration if interactive
+      quiet: true
+      command: |
+        if [ -n "$BASH_VERSION" ] && [ -t 1 ]; then
+          source ~/.bashrc
+        fi
