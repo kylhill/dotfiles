@@ -9,6 +9,9 @@
         recursive: false
 
 - shell:
+    - description: Init submodules
+      quiet: true
+      command: git submodule update --init --recursive
     - description: Create hushlogin to suppress login banner
       quiet: true
       command: touch ~/.hushlogin
