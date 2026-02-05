@@ -162,6 +162,9 @@ if [ -t 1 ]; then
     stty -ixon 2>/dev/null || true
 fi
 
+# Only complete directory names with cd
+complete -d cd
+
 # Minimal aliases - https://github.com/ohmybash/oh-my-bash/wiki/minimal_aliases
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
