@@ -7,14 +7,9 @@ esac
 # Path to your oh-my-bash installation.
 export OSH="$HOME/.oh-my-bash"
 
-# Detect if running in a fancy terminal (SSH, X11, or Wayland)
-_is_fancy_terminal() {
-    [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]
-}
-
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-if _is_fancy_terminal; then
+if [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
     # Use a fancy theme when on a fancy terminal
     OSH_THEME="agnoster"
 else
@@ -195,7 +190,7 @@ alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 alias dtail='docker logs -tf --tail="150" "$@"'
 alias dprune='docker system prune -a -f --volumes'
 
-if command -v nvim >/dev/null 2>&1 && _is_fancy_terminal; then
+if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
     # Set default editor to nvim, if it exists and we're on a fancy terminal
     export EDITOR="nvim"
     export VISUAL="nvim"
