@@ -37,5 +37,11 @@
 [rebase]
     autostash = true
     autoSquash = true
+[log]
+    showSignature = true
+    date = short
+[transfer]
+    fsckObjects = true
 [fetch]
+    fsckObjects = true
     prune = true
