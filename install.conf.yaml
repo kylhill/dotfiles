@@ -7,7 +7,17 @@
 - clean:
     ~/:
         recursive: false
+- create:
+    - ~/.cache
+    - ~/.ssh
 
+- shell:
+    - description: Set proper permissions on SSH directory
+      quiet: true
+      command: chmod 700 ~/.ssh
+    - description: Set proper permissions on cache directory
+      quiet: true
+      command: chmod 700 ~/.cache
 - shell:
     - description: Init submodules
       quiet: true
@@ -34,9 +44,6 @@
         mode: "0600"
     ~/.tmux.conf:
     ~/.vimrc:
-
-- create:
-    - ~/.cache
 
 - shell:
     - description: Reload bash configuration if interactive
