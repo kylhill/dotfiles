@@ -14,15 +14,16 @@ Host htpc htpc? kvm wap wap2 sw-16
 # Forward SSH agent to trusted hosts
 Host syntax syntax.l.tacomafia.net syntax.tacomafia.net 192.168.1.30
     ForwardAgent yes
-    VerifyHostKeyDNS yes
+    VerifyHostKeyDNS ask
 
 Host gateway gateway.l.tacomafia.net gateway.vpn.tacomafia.net gateway.tacomafia.net 192.168.1.1 192.168.6.1
     ForwardAgent yes
-    VerifyHostKeyDNS yes
+    VerifyHostKeyDNS ask
 
 Host oci oci.vpn.tacomafia.net oci.tacomafia.net
     ForwardAgent yes
-    VerifyHostKeyDNS yes
+    VerifyHostKeyDNS ask
+    Compression yes
 
 # HTPCs and KVM
 Host htpc htpc.l.tacomafia.net htpc? htpc?.l.tacomafia.net kvm kvm.l.tacomafia.net
@@ -38,14 +39,17 @@ Host wap wap.l.tacomafia.net wap2 wap2.l.tacomafia.net wap3 wap3.l.tacomafia.net
 Host git.tacomafia.net
     Port 2222
     User git
+    Compression yes
 
 # Global config
 Host *
     AddKeysToAgent yes
-    Compression yes
     ControlMaster auto
     ControlPath ~/.cache/ssh-%r@%h:%p.sock
     ControlPersist 10m
+    HashKnownHosts yes
     IdentityFile ~/.ssh/id_ed25519
     IPQoS ef none
+    ServerAliveCountMax 3
+    ServerAliveInterval 60
     User kyleh
