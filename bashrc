@@ -237,8 +237,3 @@ _complete_docker_containers() {
     COMPREPLY=($(compgen -W "$containers" -- "$cur"))
 }
 complete -F _complete_docker_containers dbash dsh dtail
-
-# Use stable SSH agent socket for tmux
-if [ -S "$HOME/.ssh/ssh-agent.sock" ]; then
-    export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
-fi
