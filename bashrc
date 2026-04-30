@@ -238,7 +238,7 @@ _complete_docker_containers() {
 }
 complete -F _complete_docker_containers dbash dsh dtail
 
-# Use stable SSH agent socket for tmux
-if [ -S "$HOME/.ssh/ssh-agent.sock" ]; then
-    export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
+# Use local ssh-agent, if available
+if [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
