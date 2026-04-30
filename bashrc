@@ -147,9 +147,6 @@ if echo "$PREFIX" | grep -q "com.termux"; then
         "/etc/bash_completion"; do
         [[ -r "$f" ]] && source "$f" && break
     done
-
-    # Automatically use Termux ssh agent
-    alias ssh='ssha'
 else
     # Load oh-my-bash for everything else
     source "$OSH"/oh-my-bash.sh
