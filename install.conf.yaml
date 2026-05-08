@@ -42,6 +42,8 @@
     ~/.ssh/config:
         path: ssh/config
         mode: "0600"
+    ~/.copilot/copilot-instructions.md:
+        path: copilot-instructions.md
     ~/.tmux.conf:
     ~/.vimrc:
 
