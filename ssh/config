@@ -15,17 +15,17 @@ Host htpc htpc? kvm wap wap2 sw-16
 Host syntax syntax.l.tacomafia.net syntax.tacomafia.net 192.168.1.30
     ForwardAgent yes
     StrictHostKeyChecking accept-new
-    VerifyHostKeyDNS ask
+    VerifyHostKeyDNS yes
 
 Host gateway gateway.l.tacomafia.net gateway.vpn.tacomafia.net gateway.tacomafia.net 192.168.1.1 192.168.6.1
     ForwardAgent yes
     StrictHostKeyChecking accept-new
-    VerifyHostKeyDNS ask
+    VerifyHostKeyDNS yes
 
 Host oci oci.vpn.tacomafia.net oci.tacomafia.net
     ForwardAgent yes
     StrictHostKeyChecking accept-new
-    VerifyHostKeyDNS ask
+    VerifyHostKeyDNS yes
     Compression yes
 
 # HTPCs and KVM
