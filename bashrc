@@ -226,6 +226,10 @@ dbash() {
 }
 alias dsh=dbash
 
+dtail() {
+    docker logs -tf --tail="150" "$@"
+}
+
 _complete_docker_containers() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
     local containers
@@ -233,10 +237,6 @@ _complete_docker_containers() {
     COMPREPLY=($(compgen -W "$containers" -- "$cur"))
 }
 complete -F _complete_docker_containers dbash dsh dtail
-
-dtail() {
-    docker logs -tf --tail="150" "$@"
-}
 
 dprune() {
     local exclude="${1:-minecraft}"
