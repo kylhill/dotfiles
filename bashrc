@@ -186,36 +186,6 @@ alias ...='cd ../../'
 
 alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 
-# Handy docker functions - https://docs.linuxserver.io/general/docker-compose
-dtail() {
-    docker logs -tf --tail="150" "$@"
-}
-dprune() {
-    local exclude="${1:-minecraft}"
-    echo "Pruning Docker resources (excluding: $exclude)..."
-
-    # Remove stopped containers, skipping any whose name matches the exclusion pattern
-    docker ps -a --filter status=exited --filter status=created --format '{{.Names}}' \
-        | grep -v "$exclude" \
-        | xargs -r docker rm
-
-    # Prune images not referenced by any remaining container
-    docker image prune -a -f
-
-    # Remove unused custom networks, explicitly skipping excluded ones.
-    # docker network prune only protects running containers; stopped containers
-    # don't count, so we must do this manually.
-    docker network ls --format '{{.Name}}' --filter type=custom \
-        | grep -v "$exclude" \
-        | xargs -r docker network rm 2>/dev/null || true
-
-    # Prune anonymous and dangling volumes
-    docker volume prune -f
-
-    # Prune build cache
-    docker builder prune -f
-}
-
 if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
     # Set default editor to nvim, if it exists and we're on a fancy terminal
     export EDITOR="nvim"
@@ -263,6 +233,36 @@ _complete_docker_containers() {
     COMPREPLY=($(compgen -W "$containers" -- "$cur"))
 }
 complete -F _complete_docker_containers dbash dsh dtail
+
+dtail() {
+    docker logs -tf --tail="150" "$@"
+}
+
+dprune() {
+    local exclude="${1:-minecraft}"
+    echo "Pruning Docker resources (excluding: $exclude)..."
+
+    # Remove stopped containers, skipping any whose name matches the exclusion pattern
+    docker ps -a --filter status=exited --filter status=created --format '{{.Names}}' \
+        | grep -v "$exclude" \
+        | xargs -r docker rm
+
+    # Prune images not referenced by any remaining container
+    docker image prune -a -f
+
+    # Remove unused custom networks, explicitly skipping excluded ones.
+    # docker network prune only protects running containers; stopped containers
+    # don't count, so we must do this manually.
+    docker network ls --format '{{.Name}}' --filter type=custom \
+        | grep -v "$exclude" \
+        | xargs -r docker network rm 2>/dev/null || true
+
+    # Prune anonymous and dangling volumes
+    docker volume prune -f
+
+    # Prune build cache
+    docker builder prune -f
+}
 
 # Use local ssh-agent, if available
 if [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
