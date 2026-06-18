@@ -18,7 +18,7 @@
 [gpg]
     program = gpg
 [help]
-    autocorrect = 1
+    autocorrect = prompt
 [diff]
     colorMoved = default
     mnemonicprefix = true
@@ -30,7 +30,6 @@
     conflictstyle = diff3
     renormalize = true
 [rebase]
-    autostash = true
     autoSquash = true
 [log]
     showSignature = true

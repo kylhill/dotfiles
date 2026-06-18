@@ -21,6 +21,7 @@ git clone --recurse-submodules <repository-url> ~/.dotfiles
 The installer initializes missing submodules and links the managed files into the
 home directory. Existing destinations are force-replaced by Dotbot. Back up any
 configuration that should be retained before running it on a new machine.
+Start a new shell afterward, or run `source ~/.bashrc` in an existing Bash session.
 
 The main managed paths are:
 

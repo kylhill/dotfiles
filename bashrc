@@ -160,16 +160,20 @@ if echo "$PREFIX" | grep -q "com.termux"; then
     done
 else
     # Load oh-my-bash for everything else
-    source "$OSH"/oh-my-bash.sh
+    if [[ -r "$OSH/oh-my-bash.sh" ]]; then
+        source "$OSH/oh-my-bash.sh"
+    else
+        printf 'Oh My Bash not found: %s\n' "$OSH/oh-my-bash.sh" >&2
+    fi
 fi
 
 # User configuration
 
-export HISTCONTROL=ignoredups:erasedups
+export HISTCONTROL=ignoreboth:erasedups
 export HISTTIMEFORMAT="%F %T "
 export HISTSIZE=10000
 export HISTFILESIZE=20000
-export GLOBIGNORE=".git:node_modules:venv"
+export GLOBIGNORE=".*:node_modules:venv"
 
 if [ -t 1 ]; then
     stty -ixon 2>/dev/null || true

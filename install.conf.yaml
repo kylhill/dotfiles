@@ -56,11 +56,3 @@
         find . \( -path ./.git -o -path ./external \) -prune -o \( -type d -o -type f \) -exec chmod go-w {} +
         chmod 700 ~/.ssh ~/.ssh/config.d ssh ssh/config.d
         chmod 600 ~/.ssh/config ~/.ssh/config.d/*.conf
-
-- shell:
-    - description: Reload bash configuration if interactive
-      quiet: true
-      command: |
-        if [ -n "$BASH_VERSION" ] && [ -t 1 ]; then
-          source ~/.bashrc
-        fi
