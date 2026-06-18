@@ -10,7 +10,10 @@ set ruler
 set wildmenu
 set display+=lastline
 set autoread
-autocmd FocusGained,BufEnter * checktime
+augroup dotfiles_checktime
+    autocmd!
+    autocmd FocusGained,BufEnter * checktime
+augroup END
 set history=10000
 
 " Enable filetype detection, plugins, indentation, and syntax highlighting

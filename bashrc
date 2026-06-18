@@ -188,8 +188,8 @@ alias vdir='vdir --color=auto'
 alias ls='ls --color=auto -h'
 
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias fgrep='grep -F --color=auto'
+alias egrep='grep -E --color=auto'
 
 alias ll='ls -alFh --color=auto'
 alias la='ls -Ah --color=auto'
@@ -221,7 +221,6 @@ fi
 
 export PAGER="less"
 export GPG_TTY="$(tty 2>/dev/null)"
-export PGUSER="postgres"
 
 # Docker helpers
 dbash() {

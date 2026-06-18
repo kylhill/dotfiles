@@ -29,7 +29,7 @@ EOF
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -l|--limit)
-      if [[ $# -lt 2 || -z "$2" ]]; then
+      if [[ $# -lt 2 || -z "$2" || "$2" == -* ]]; then
         echo "Option $1 requires a host limit" >&2
         usage >&2
         exit 2
@@ -38,7 +38,7 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     -t|--tags)
-      if [[ $# -lt 2 || -z "$2" ]]; then
+      if [[ $# -lt 2 || -z "$2" || "$2" == -* ]]; then
         echo "Option $1 requires a tag list" >&2
         usage >&2
         exit 2
@@ -98,6 +98,8 @@ ARGS=(
 [[ -n "$LIMIT" ]] && ARGS+=(-l "$LIMIT")
 
 # Echo command for visibility over SSH
-echo "Running: ansible-playbook ${ARGS[*]}" >&2
+printf 'Running:' >&2
+printf ' %q' ansible-playbook "${ARGS[@]}" >&2
+printf '\n' >&2
 
 ansible-playbook "${ARGS[@]}"
