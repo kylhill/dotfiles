@@ -29,10 +29,20 @@ EOF
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -l|--limit)
+      if [[ $# -lt 2 || -z "$2" ]]; then
+        echo "Option $1 requires a host limit" >&2
+        usage >&2
+        exit 2
+      fi
       LIMIT="$2"
       shift 2
       ;;
     -t|--tags)
+      if [[ $# -lt 2 || -z "$2" ]]; then
+        echo "Option $1 requires a tag list" >&2
+        usage >&2
+        exit 2
+      fi
       TAGS="$2"
       shift 2
       ;;

@@ -7,9 +7,20 @@ esac
 # Path to your oh-my-bash installation.
 export OSH="$HOME/.oh-my-bash"
 
+_term_colors=0
+if command -v tput >/dev/null 2>&1; then
+    _term_colors="$(tput colors 2>/dev/null || printf '0')"
+fi
+if [[ "${TERM:-dumb}" != "dumb" && "${TERM:-}" != "linux" && "$_term_colors" =~ ^[0-9]+$ && "$_term_colors" -ge 256 ]]; then
+    fancy_terminal=true
+else
+    fancy_terminal=false
+fi
+unset _term_colors
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-if [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+if [[ "$fancy_terminal" == true ]]; then
     # Use a fancy theme when on a fancy terminal
     OSH_THEME="agnoster"
 else
@@ -186,7 +197,7 @@ alias ...='cd ../../'
 
 alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 
-if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+if command -v nvim >/dev/null 2>&1 && [[ "$fancy_terminal" == true ]]; then
     # Set default editor to nvim, if it exists and we're on a fancy terminal
     export EDITOR="nvim"
     export VISUAL="nvim"
@@ -194,11 +205,14 @@ if command -v nvim >/dev/null 2>&1 && [[ -n "$SSH_CONNECTION" || -n "$DISPLAY" |
 
     alias vim=nvim
     alias vimdiff='nvim -d'
-    alias fd=fdfind
 else
     # Otherwise, use vim
     export EDITOR="vim"
     export VISUAL="vim"
+fi
+
+if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
+    alias fd=fdfind
 fi
 
 export PAGER="less"
@@ -244,7 +258,7 @@ dprune() {
 
     # Remove stopped containers, skipping any whose name matches the exclusion pattern
     docker ps -a --filter status=exited --filter status=created --format '{{.Names}}' \
-        | grep -v "$exclude" \
+        | grep -Fv -- "$exclude" \
         | xargs -r docker rm
 
     # Prune images not referenced by any remaining container
@@ -254,7 +268,7 @@ dprune() {
     # docker network prune only protects running containers; stopped containers
     # don't count, so we must do this manually.
     docker network ls --format '{{.Name}}' --filter type=custom \
-        | grep -v "$exclude" \
+        | grep -Fv -- "$exclude" \
         | xargs -r docker network rm 2>/dev/null || true
 
     # Prune anonymous and dangling volumes

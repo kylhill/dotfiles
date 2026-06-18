@@ -1,9 +1,8 @@
 [color]
     ui = auto
 [core]
-    whitespace = fix,trailing-space,space-before-tab,cr-at-eol
+    whitespace = trailing-space,space-before-tab,cr-at-eol
     autocrlf = input
-    fsmonitor = true
 [push]
     default = simple
 [pull]
@@ -18,10 +17,6 @@
     defaultBranch = main
 [gpg]
     program = gpg
-[commit]
-    gpgsign = true
-[tag]
-    gpgSign = true
 [help]
     autocorrect = 1
 [diff]
