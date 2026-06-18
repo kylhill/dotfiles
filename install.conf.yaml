@@ -41,6 +41,9 @@
     ~/.ssh/config:
         path: ssh/config
         mode: "0600"
+    ~/.ssh/config.d/90-linux.conf:
+        path: ssh/config.d/90-linux.conf
+        mode: "0600"
     ~/.copilot/copilot-instructions.md:
         path: copilot-instructions.md
     ~/.tmux.conf:
