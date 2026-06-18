@@ -1,3 +1,6 @@
+# Include drop-in configs
+Include ~/.ssh/config.d/*.conf
+
 # Hostname aliases
 Host syntax
     HostName syntax.tacomafia.net
@@ -40,9 +43,6 @@ Host git.tacomafia.net
     Port 2222
     User git
     Compression yes
-
-# Include drop-in configs
-Include ~/.ssh/config.d/*.conf
 
 # Global config
 Host *
