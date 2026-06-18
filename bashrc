@@ -264,7 +264,12 @@ dprune() {
     docker builder prune -f
 }
 
-# Use local ssh-agent, if available
-if [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
+# Prefer an existing valid SSH agent (such as a forwarded agent).
+# Otherwise fall back to the local persistent ssh-agent, if available.
+if [ -n "${SSH_AUTH_SOCK:-}" ] && [ -S "${SSH_AUTH_SOCK}" ]; then
+  :
+elif [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
   export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+else
+  unset SSH_AUTH_SOCK
 fi

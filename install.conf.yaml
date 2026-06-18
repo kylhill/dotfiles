@@ -9,15 +9,14 @@
         recursive: false
 - create:
     - ~/.cache
+    - ~/.cache/ssh
     - ~/.ssh
+    - ~/.ssh/config.d
 
 - shell:
-    - description: Set proper permissions on SSH directory
+    - description: Set proper permissions on directories
       quiet: true
-      command: chmod 700 ~/.ssh
-    - description: Set proper permissions on cache directory
-      quiet: true
-      command: chmod 700 ~/.cache
+      command: chmod 700 ~/.ssh ~/.ssh/config.d ~/.cache ~/.cache/ssh
 - shell:
     - description: Init submodules
       quiet: true
