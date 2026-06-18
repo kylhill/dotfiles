@@ -50,6 +50,11 @@
     ~/.vimrc:
 
 - shell:
+    - description: Set proper permissions on SSH configuration
+      quiet: true
+      command: chmod 700 ~/.ssh ~/.ssh/config.d ssh ssh/config.d && chmod 600 ~/.ssh/config ~/.ssh/config.d/*.conf
+
+- shell:
     - description: Reload bash configuration if interactive
       quiet: true
       command: |
