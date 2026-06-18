@@ -220,7 +220,11 @@ if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
 fi
 
 export PAGER="less"
-export GPG_TTY="$(tty 2>/dev/null)"
+if [[ -t 0 ]]; then
+    export GPG_TTY="$(tty)"
+else
+    unset GPG_TTY
+fi
 
 # Docker helpers
 dbash() {

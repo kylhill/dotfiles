@@ -1,4 +1,6 @@
-# Copilot Instructions
+# Agent Instructions
+
+These instructions apply to work in this dotfiles repository.
 
 ## Repository Overview
 

@@ -10,13 +10,15 @@
 [user]
     name = Kyle Hill
     email = kylhill@gmail.com
-    signingkey = 2E37EF3EA077FAD8
+    signingkey = E644A61F810BDC4D1294867A2E37EF3EA077FAD8
 [github]
     user = kylhill
 [init]
     defaultBranch = main
 [gpg]
     program = gpg
+[alias]
+    vlog = log --show-signature
 [help]
     autocorrect = prompt
 [diff]
@@ -31,10 +33,8 @@
 [rebase]
     autoSquash = true
 [log]
-    showSignature = true
     date = short
 [transfer]
     fsckObjects = true
 [fetch]
-    fsckObjects = true
     prune = true

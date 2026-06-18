@@ -6,23 +6,42 @@ trap 'echo "Error on line $LINENO: ${BASH_COMMAND:-unknown command}" >&2' ERR
 CONFIG="${CONFIG:-install.conf.yaml}"
 DOTBOT_DIR="${DOTBOT_DIR:-external/dotbot}"
 DOTBOT_BIN="${DOTBOT_BIN:-bin/dotbot}"
+SUBMODULE_JOBS="${SUBMODULE_JOBS:-4}"
 
 # Resolve script directory safely
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 cd "$BASEDIR"
 
-# Ensure git is available
-if ! command -v git >/dev/null 2>&1; then
-  echo "git not found in PATH" >&2
-  exit 1
+# Validate bootstrap dependencies
+for command in git python3; do
+  if ! command -v "$command" >/dev/null 2>&1; then
+    echo "$command not found in PATH" >&2
+    exit 1
+  fi
+done
+
+# Initialize all submodules once, including Dotbot's nested dependencies.
+git submodule sync --quiet --recursive
+git submodule update --init --recursive --jobs "$SUBMODULE_JOBS"
+
+if [[ "$DOTBOT_DIR" = /* ]]; then
+  DOTBOT_ROOT="$DOTBOT_DIR"
+else
+  DOTBOT_ROOT="$BASEDIR/$DOTBOT_DIR"
 fi
 
-# Initialize / update Dotbot submodule
-git submodule sync --quiet --recursive -- "$DOTBOT_DIR"
-git submodule update --init --recursive "$DOTBOT_DIR"
+if [[ "$DOTBOT_BIN" = /* ]]; then
+  DOTBOT_PATH="$DOTBOT_BIN"
+else
+  DOTBOT_PATH="$DOTBOT_ROOT/$DOTBOT_BIN"
+fi
 
-DOTBOT_PATH="$BASEDIR/$DOTBOT_DIR/$DOTBOT_BIN"
+if [[ "$CONFIG" = /* ]]; then
+  CONFIG_PATH="$CONFIG"
+else
+  CONFIG_PATH="$BASEDIR/$CONFIG"
+fi
 
 # Validate Dotbot binary
 if [[ ! -x "$DOTBOT_PATH" ]]; then
@@ -31,13 +50,13 @@ if [[ ! -x "$DOTBOT_PATH" ]]; then
 fi
 
 # Validate config
-if [[ ! -f "$BASEDIR/$CONFIG" ]]; then
-  echo "Dotbot config not found: $BASEDIR/$CONFIG" >&2
+if [[ ! -f "$CONFIG_PATH" ]]; then
+  echo "Dotbot config not found: $CONFIG_PATH" >&2
   exit 1
 fi
 
 # Run Dotbot
 exec "$DOTBOT_PATH" \
   -d "$BASEDIR" \
-  -c "$CONFIG" \
+  -c "$CONFIG_PATH" \
   "$@"

@@ -18,9 +18,6 @@
       quiet: true
       command: chmod 700 ~/.ssh ~/.ssh/config.d ~/.cache ~/.cache/ssh
 - shell:
-    - description: Init submodules
-      quiet: true
-      command: git submodule update --init --recursive
     - description: Create hushlogin to suppress login banner
       quiet: true
       command: touch ~/.hushlogin
@@ -44,8 +41,6 @@
     ~/.ssh/config.d/90-linux.conf:
         path: ssh/config.d/90-linux.conf
         mode: "0600"
-    ~/.copilot/copilot-instructions.md:
-        path: copilot-instructions.md
     ~/.tmux.conf:
     ~/.vimrc:
 
