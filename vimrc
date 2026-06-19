@@ -22,7 +22,7 @@ syntax enable
 
 set hidden
 set nowrap
-set modeline
+set nomodeline
 
 set tabstop=4
 set shiftwidth=4
