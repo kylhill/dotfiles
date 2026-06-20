@@ -201,6 +201,9 @@ alias ...='cd ../../'
 
 alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 
+alias hcodex='HEADROOM_TELEMETRY=off headroom wrap codex'
+alias hcopilot='HEADROOM_TELEMETRY=off headroom wrap copilot --subscription'
+
 if command -v nvim >/dev/null 2>&1 && [[ "$fancy_terminal" == true ]]; then
     # Set default editor to nvim, if it exists and we're on a fancy terminal
     export EDITOR="nvim"
@@ -264,9 +267,9 @@ dprune() {
     echo "Pruning Docker resources (excluding: $exclude)..."
 
     # Remove stopped containers, skipping any whose name matches the exclusion pattern
-    docker ps -a --filter status=exited --filter status=created --format '{{.Names}}' \
-        | grep -Fv -- "$exclude" \
-        | xargs -r docker rm
+    docker ps -a --filter status=exited --filter status=created --format '{{.Names}}' |
+        grep -Fv -- "$exclude" |
+        xargs -r docker rm
 
     # Prune images not referenced by any remaining container
     docker image prune -a -f
@@ -274,9 +277,9 @@ dprune() {
     # Remove unused custom networks, explicitly skipping excluded ones.
     # docker network prune only protects running containers; stopped containers
     # don't count, so we must do this manually.
-    docker network ls --format '{{.Name}}' --filter type=custom \
-        | grep -Fv -- "$exclude" \
-        | xargs -r docker network rm 2>/dev/null || true
+    docker network ls --format '{{.Name}}' --filter type=custom |
+        grep -Fv -- "$exclude" |
+        xargs -r docker network rm 2>/dev/null || true
 
     # Prune anonymous and dangling volumes
     docker volume prune -f
@@ -287,5 +290,5 @@ dprune() {
 
 # Use local ssh-agent, if available
 if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
-  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
