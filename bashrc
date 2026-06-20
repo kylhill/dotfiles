@@ -1,3 +1,6 @@
+# shellcheck shell=bash
+# shellcheck disable=SC2034
+
 # Enable the subsequent settings only in interactive sessions
 case $- in
 *i*) ;;
@@ -143,7 +146,7 @@ plugins=(
 #
 OMB_TERM_USE_TPUT=no
 
-if echo "$PREFIX" | grep -q "com.termux"; then
+if [[ ${PREFIX:-} == *com.termux* ]]; then
     # Don't load oh-my-bash in Termux
 
     # Dircolors
@@ -156,6 +159,7 @@ if echo "$PREFIX" | grep -q "com.termux"; then
         "$PREFIX/share/bash-completion/bash_completion" \
         "$PREFIX/etc/bash_completion" \
         "/etc/bash_completion"; do
+        # shellcheck source=/dev/null
         [[ -r "$f" ]] && source "$f" && break
     done
 else
@@ -201,8 +205,12 @@ alias ...='cd ../../'
 
 alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 
-alias hcodex='HEADROOM_TELEMETRY=off headroom wrap codex'
-alias hcopilot='HEADROOM_TELEMETRY=off headroom wrap copilot --subscription'
+# Headroom configuration
+export HEADROOM_TELEMETRY=off
+export HEADROOM_OUTPUT_SHAPER=1
+
+alias hcodex='headroom wrap codex'
+alias hcopilot='headroom wrap copilot --subscription -- --model claude-sonnet-4.6'
 
 if command -v nvim >/dev/null 2>&1 && [[ "$fancy_terminal" == true ]]; then
     # Set default editor to nvim, if it exists and we're on a fancy terminal
@@ -224,7 +232,8 @@ fi
 
 export PAGER="less"
 if [[ -t 0 ]]; then
-    export GPG_TTY="$(tty)"
+    GPG_TTY="$(tty)"
+    export GPG_TTY
 else
     unset GPG_TTY
 fi
@@ -235,7 +244,7 @@ dbash() {
         echo "docker not found" >&2
         return 127
     }
-    [[ -n "$1" ]] || {
+    [[ -n "${1:-}" ]] || {
         echo "usage: dbash <container>" >&2
         return 2
     }
@@ -257,8 +266,12 @@ dtail() {
 _complete_docker_containers() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
     local containers
+    local container
     containers=$(docker ps --format '{{.Names}}' 2>/dev/null)
-    COMPREPLY=($(compgen -W "$containers" -- "$cur"))
+    COMPREPLY=()
+    while IFS= read -r container; do
+        COMPREPLY+=("$container")
+    done < <(compgen -W "$containers" -- "$cur")
 }
 complete -F _complete_docker_containers dbash dsh dtail
 
