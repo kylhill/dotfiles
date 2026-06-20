@@ -206,8 +206,15 @@ alias ...='cd ../../'
 alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 
 # Headroom configuration
+export HEADROOM_TELEMETRY=off
+#export HEADROOM_OUTPUT_SHAPER=1
+
 hcodex() {
-    OPENAI_BASE_URL="http://127.0.0.1:8787/v1" codex "$@"
+    headroom wrap codex "$@"
+}
+
+hcopilot() {
+    headroom wrap copilot --subscription -- --model claude-sonnet-4.6 "$@"
 }
 
 if command -v nvim >/dev/null 2>&1 && [[ "$fancy_terminal" == true ]]; then
