@@ -205,18 +205,6 @@ alias ...='cd ../../'
 
 alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 
-# Headroom configuration
-export HEADROOM_TELEMETRY=off
-#export HEADROOM_OUTPUT_SHAPER=1
-
-hcodex() {
-    headroom wrap codex "$@"
-}
-
-hcopilot() {
-    headroom wrap copilot --subscription -- --model claude-sonnet-4.6 "$@"
-}
-
 if command -v nvim >/dev/null 2>&1 && [[ "$fancy_terminal" == true ]]; then
     # Set default editor to nvim, if it exists and we're on a fancy terminal
     export EDITOR="nvim"
