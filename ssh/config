@@ -35,6 +35,7 @@ Host wap wap.l.tacomafia.net wap? wap?.l.tacomafia.net sw-16 sw-16.l.tacomafia.n
     IdentitiesOnly yes
     HostKeyAlgorithms +ssh-rsa
     PubkeyAcceptedAlgorithms +ssh-rsa
+    MACs +hmac-sha2-256
     StrictHostKeyChecking accept-new
 
 # Forgejo git
