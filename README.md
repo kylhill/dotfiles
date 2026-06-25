@@ -29,7 +29,7 @@ The main managed paths are:
 - `~/.gitconfig`
 - `~/.config/nvim` and `~/.vimrc`
 - `~/.tmux.conf`
-- `~/.ssh/config` and `~/.ssh/config.d/90-linux.conf`
+- `~/.ssh/config`, `~/.ssh/config.d/20-ssh-audit.conf`, and `~/.ssh/config.d/90-linux.conf`
 - `~/.local/bin`
 
 SSH directories and repository sources are assigned restrictive permissions at
