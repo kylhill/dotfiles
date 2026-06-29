@@ -1,10 +1,33 @@
 return {
-  { "maxmx03/solarized.nvim" },
+  {
+    "maxmx03/solarized.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      palette = "solarized",
+      variant = "winter",
+      transparent = {
+        enabled = false,
+      },
+    },
+    config = function(_, opts)
+      vim.opt.termguicolors = true
+      vim.opt.background = "dark"
+      require("solarized").setup(opts)
+    end,
+  },
 
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "solarized",
+      colorscheme = function()
+        vim.opt.termguicolors = true
+        vim.opt.background = "dark"
+        local ok = pcall(vim.cmd.colorscheme, "solarized")
+        if not ok then
+          vim.cmd.colorscheme("catppuccin")
+        end
+      end,
     },
   },
 }
