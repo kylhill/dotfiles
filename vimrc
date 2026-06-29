@@ -55,12 +55,9 @@ if exists("&termguicolors")
     endif
 endif
 
-silent! colorscheme catppuccin
-if !exists("g:colors_name") || g:colors_name !=# "catppuccin"
-    silent! colorscheme habamax
-endif
-
+silent! colorscheme habamax
 if $TERM !=# 'linux' && &t_Co >= 256
+    silent! colorscheme catppuccin
     set cursorline
 else
     set nocursorline
