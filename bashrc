@@ -14,7 +14,7 @@ _term_colors=0
 if command -v tput >/dev/null 2>&1; then
     _term_colors="$(tput colors 2>/dev/null || printf '0')"
 fi
-if [[ "${TERM:-dumb}" != "dumb" && "${TERM:-}" != "linux" && "$_term_colors" =~ ^[0-9]+$ && "$_term_colors" -ge 256 ]]; then
+if [[ "${TERM:-}" != "linux" && "$_term_colors" =~ ^[0-9]+$ && "$_term_colors" -ge 256 ]]; then
     fancy_terminal=true
 else
     fancy_terminal=false
@@ -23,13 +23,7 @@ unset _term_colors
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-if [[ "$fancy_terminal" == true ]]; then
-    # Use a fancy theme when on a fancy terminal
-    OSH_THEME="agnoster"
-else
-    # Otherwise, use a basic theme
-    OSH_THEME="font"
-fi
+OSH_THEME="agnoster"
 
 # If you set OSH_THEME to "random", you can ignore themes you don't like.
 # OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
