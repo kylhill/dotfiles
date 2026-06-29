@@ -1,13 +1,4 @@
-" Simple Vim defaults for interactive use across local, remote, and TTY sessions.
-
-if filereadable(expand("$VIMRUNTIME/defaults.vim"))
-    unlet! skip_defaults_vim
-    source $VIMRUNTIME/defaults.vim
-else
-    set nocompatible
-    filetype plugin indent on
-    syntax enable
-endif
+" Local Vim overrides, intended to be sourced after system Vim defaults.
 
 set nomodeline
 set autoread
@@ -20,6 +11,9 @@ set hidden
 set nowrap
 set cursorline
 set history=10000
+set complete-=i
+set display+=lastline
+set laststatus=2
 
 set tabstop=4
 set shiftwidth=4
@@ -35,6 +29,11 @@ set smartcase
 set splitbelow
 set splitright
 set scrolloff=3
+set sidescroll=1
+set sidescrolloff=2
+set tabpagemax=50
+set sessionoptions-=options
+set viewoptions-=options
 
 set background=dark
 
