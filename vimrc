@@ -8,6 +8,9 @@ if filereadable(expand("$VIMRUNTIME/defaults.vim"))
     unlet! g:skip_defaults_vim
     source $VIMRUNTIME/defaults.vim
     let g:skip_defaults_vim = 1
+else
+    set nocompatible
+    filetype plugin indent on
 endif
 
 set nomodeline
@@ -53,9 +56,12 @@ if exists("&termguicolors")
     endif
 endif
 
-colorscheme default
+silent! colorscheme default
 if $TERM !=# 'linux' && &t_Co >= 256
-    silent! colorscheme habamax
+    silent! colorscheme catppuccin
+    if !exists("g:colors_name") || g:colors_name !=# "catppuccin"
+        silent! colorscheme habamax
+    endif
 endif
 set background=dark
-syntax enable
+silent! syntax enable
