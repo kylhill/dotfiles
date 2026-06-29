@@ -22,7 +22,6 @@ augroup END
 
 set hidden
 set nowrap
-set cursorline
 set history=10000
 set complete-=i
 set display+=lastline
@@ -56,12 +55,16 @@ if exists("&termguicolors")
     endif
 endif
 
-silent! colorscheme default
-if $TERM !=# 'linux' && &t_Co >= 256
-    silent! colorscheme catppuccin
-    if !exists("g:colors_name") || g:colors_name !=# "catppuccin"
-        silent! colorscheme habamax
-    endif
+silent! colorscheme catppuccin
+if !exists("g:colors_name") || g:colors_name !=# "catppuccin"
+    silent! colorscheme habamax
 endif
+
+if $TERM !=# 'linux' && &t_Co >= 256
+    set cursorline
+else
+    set nocursorline
+endif
+
 set background=dark
 silent! syntax enable
