@@ -1,4 +1,14 @@
-" Local Vim overrides, intended to be sourced after system Vim defaults.
+" Vim defaults plus local overrides.
+"
+" This file is used both as ~/.vimrc and as /etc/vim/vimrc.local.  Source
+" defaults.vim here so the local overrides below are layered on top in both
+" cases, then prevent Debian's system vimrc from loading defaults.vim again
+" after vimrc.local.
+if filereadable(expand("$VIMRUNTIME/defaults.vim"))
+    unlet! g:skip_defaults_vim
+    source $VIMRUNTIME/defaults.vim
+    let g:skip_defaults_vim = 1
+endif
 
 set nomodeline
 set autoread
@@ -34,8 +44,6 @@ set sidescrolloff=2
 set tabpagemax=50
 set sessionoptions-=options
 set viewoptions-=options
-
-set background=dark
 
 if exists("&termguicolors")
     if has("gui_running") || $COLORTERM =~? 'truecolor\|24bit'
