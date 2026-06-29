@@ -18,6 +18,19 @@ return {
   },
 
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 900,
+  },
+
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 800,
+  },
+
+  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = function()
