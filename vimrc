@@ -1,32 +1,30 @@
-" Legacy configuration file for vim
+" Simple Vim defaults for interactive use across local, remote, and TTY sessions.
 
-" vim-sensible defaults
-set nocompatible
-set backspace=indent,eol,start
-set smarttab
-set incsearch
-set laststatus=2
-set ruler
-set wildmenu
-set display+=lastline
+if filereadable(expand("$VIMRUNTIME/defaults.vim"))
+    unlet! skip_defaults_vim
+    source $VIMRUNTIME/defaults.vim
+else
+    set nocompatible
+    filetype plugin indent on
+    syntax enable
+endif
+
+set nomodeline
 set autoread
 augroup dotfiles_checktime
     autocmd!
     autocmd FocusGained,BufEnter * checktime
 augroup END
-set history=10000
-
-" Enable filetype detection, plugins, indentation, and syntax highlighting
-filetype plugin indent on
-syntax enable
 
 set hidden
 set nowrap
-set nomodeline
+set cursorline
+set history=10000
 
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set smarttab
 set autoindent
 
 set showmatch
@@ -38,21 +36,19 @@ set splitbelow
 set splitright
 set scrolloff=3
 
-" Try to set habamax colorscheme, if available
-colorscheme default
-silent! colorscheme habamax
+set background=dark
 
-" Use richer display settings only when the terminal advertises sufficient color support
-if has("gui_running") || exists('$PREFIX') || ($TERM !=# 'dumb' && $TERM !=# 'linux' && (&t_Co >= 256 || $COLORTERM =~? 'truecolor\|24bit'))
-    if has("termguicolors")
+if exists("&termguicolors")
+    if has("gui_running") || $COLORTERM =~? 'truecolor\|24bit'
         set termguicolors
+    else
+        set notermguicolors
     endif
-    set cursorline
-
-    set background=dark
-else
-    set notermguicolors
-    set nocursorline
-
-    set background=light
 endif
+
+colorscheme default
+if $TERM !=# 'linux' && &t_Co >= 256
+    silent! colorscheme habamax
+endif
+set background=dark
+syntax enable
