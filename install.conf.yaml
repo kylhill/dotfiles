@@ -22,6 +22,10 @@
       quiet: true
       command: touch ~/.hushlogin
       if: '[ ! -f ~/.hushlogin ]'
+- shell:
+    - description: Remove deprecated SSH audit config
+      quiet: true
+      command: rm -f ~/.ssh/config.d/20-ssh-audit.conf
 
 - link:
     ~/.config/nvim:
@@ -38,9 +42,9 @@
     ~/.ssh/config:
         path: ssh/config
         mode: "0600"
-    ~/.ssh/config.d/20-ssh-audit.conf:
-        path: ssh/config.d/20-ssh-audit.conf
-        mode: "0600"
+#    ~/.ssh/config.d/20-ssh-audit.conf:
+#        path: ssh/config.d/20-ssh-audit.conf
+#        mode: "0600"
     ~/.ssh/config.d/90-linux.conf:
         path: ssh/config.d/90-linux.conf
         mode: "0600"
