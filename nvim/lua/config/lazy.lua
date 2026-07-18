@@ -33,5 +33,8 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "solarized", "catppuccin", "tokyonight", "habamax" } },
+  rocks = {
+    enabled = false,
+  },
+  install = { colorscheme = { "solarized", "catppuccin", "habamax" } },
 })

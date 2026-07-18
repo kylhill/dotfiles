@@ -20,15 +20,10 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,
-    priority = 900,
+    lazy = true,
   },
 
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 800,
-  },
+  { "folke/tokyonight.nvim", enabled = false },
 
   {
     "LazyVim/LazyVim",
@@ -38,7 +33,10 @@ return {
         vim.opt.background = "dark"
         local ok = pcall(vim.cmd.colorscheme, "solarized")
         if not ok then
-          vim.cmd.colorscheme("catppuccin")
+          ok = pcall(vim.cmd.colorscheme, "catppuccin")
+        end
+        if not ok then
+          vim.cmd.colorscheme("habamax")
         end
       end,
     },
