@@ -140,8 +140,8 @@ plugins=(
 #
 OMB_TERM_USE_TPUT=no
 
-if [[ ${PREFIX:-} == *com.termux* ]]; then
-    # Don't load oh-my-bash in Termux
+if [[ ${PREFIX:-} == *com.termux* || -v KASM_SSH ]]; then
+    # Don't load oh-my-bash in Termux or Kasm SSH sessions
 
     # Dircolors
     if command -v dircolors >/dev/null 2>&1; then
