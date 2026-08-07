@@ -199,8 +199,9 @@ alias ...='cd ../../'
 
 alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
 
-if command -v nvim >/dev/null 2>&1 && [[ "$fancy_terminal" == true ]]; then
-    # Set default editor to nvim, if it exists and we're on a fancy terminal
+if command -v nvim >/dev/null 2>&1 &&
+    [[ "$fancy_terminal" == true && ${PREFIX:-} != *com.termux* && ! -v KASM_SSH ]]; then
+    # Set default editor to nvim on supported fancy terminals
     export EDITOR="nvim"
     export VISUAL="nvim"
     export MANPAGER="nvim +Man! -"
