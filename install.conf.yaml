@@ -35,8 +35,10 @@
         path: external/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
     ~/.inputrc:
-    ~/.local/bin:
-        path: bin
+    ~/.local/bin/do-updates.sh:
+        path: bin/do-updates.sh
+    ~/.local/bin/fix-x.sh:
+        path: bin/fix-x.sh
     ~/.oh-my-bash:
         path: external/oh-my-bash
     ~/.ssh/config:
