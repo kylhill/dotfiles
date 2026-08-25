@@ -1,62 +1,15 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
-trap 'echo "Error on line $LINENO: ${BASH_COMMAND:-unknown command}" >&2' ERR
+set -e
 
-CONFIG="${CONFIG:-install.conf.yaml}"
-DOTBOT_DIR="${DOTBOT_DIR:-external/dotbot}"
-DOTBOT_BIN="${DOTBOT_BIN:-bin/dotbot}"
-SUBMODULE_JOBS="${SUBMODULE_JOBS:-4}"
+CONFIG="install.conf.yaml"
+DOTBOT_DIR="external/dotbot"
 
-# Resolve script directory safely
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cd "$BASEDIR"
+cd "${BASEDIR}"
+git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
+git submodule update --init --recursive "${DOTBOT_DIR}"
 
-# Validate bootstrap dependencies
-for command in git python3; do
-  if ! command -v "$command" >/dev/null 2>&1; then
-    echo "$command not found in PATH" >&2
-    exit 1
-  fi
-done
-
-# Initialize all submodules once, including Dotbot's nested dependencies.
-git submodule sync --quiet --recursive
-git submodule update --init --recursive --jobs "$SUBMODULE_JOBS"
-
-if [[ "$DOTBOT_DIR" = /* ]]; then
-  DOTBOT_ROOT="$DOTBOT_DIR"
-else
-  DOTBOT_ROOT="$BASEDIR/$DOTBOT_DIR"
-fi
-
-if [[ "$DOTBOT_BIN" = /* ]]; then
-  DOTBOT_PATH="$DOTBOT_BIN"
-else
-  DOTBOT_PATH="$DOTBOT_ROOT/$DOTBOT_BIN"
-fi
-
-if [[ "$CONFIG" = /* ]]; then
-  CONFIG_PATH="$CONFIG"
-else
-  CONFIG_PATH="$BASEDIR/$CONFIG"
-fi
-
-# Validate Dotbot binary
-if [[ ! -x "$DOTBOT_PATH" ]]; then
-  echo "Dotbot executable not found or not executable: $DOTBOT_PATH" >&2
-  exit 1
-fi
-
-# Validate config
-if [[ ! -f "$CONFIG_PATH" ]]; then
-  echo "Dotbot config not found: $CONFIG_PATH" >&2
-  exit 1
-fi
-
-# Run Dotbot
-exec "$DOTBOT_PATH" \
-  -d "$BASEDIR" \
-  -c "$CONFIG_PATH" \
-  "$@"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"

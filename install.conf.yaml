@@ -2,30 +2,26 @@
     link:
         create: true
         relink: true
-        force: true
+        backup: true
 
 - clean:
     ~/:
         recursive: false
-- create:
-    - ~/.cache
-    - ~/.cache/ssh
-    - ~/.ssh
-    - ~/.ssh/config.d
+    ~/.config:
+        recursive: false
+    ~/.local/bin:
+        recursive: false
+    ~/.ssh/config.d:
+        recursive: false
 
-- shell:
-    - description: Set proper permissions on directories
-      quiet: true
-      command: chmod 700 ~/.ssh ~/.ssh/config.d ~/.cache ~/.cache/ssh
-- shell:
-    - description: Create hushlogin to suppress login banner
-      quiet: true
-      command: touch ~/.hushlogin
-      if: '[ ! -f ~/.hushlogin ]'
-- shell:
-    - description: Remove deprecated SSH audit config
-      quiet: true
-      command: rm -f ~/.ssh/config.d/20-ssh-audit.conf
+- create:
+    ~/.cache:
+    ~/.cache/ssh:
+        mode: 0700
+    ~/.ssh:
+        mode: 0700
+    ~/.ssh/config.d:
+        mode: 0700
 
 - link:
     ~/.config/nvim:
@@ -39,23 +35,28 @@
         path: bin/do-updates.sh
     ~/.local/bin/fix-x.sh:
         path: bin/fix-x.sh
-    ~/.local/bin/migrate-local-bin.sh:
-        path: bin/migrate-local-bin.sh
     ~/.oh-my-bash:
         path: external/oh-my-bash
     ~/.ssh/config:
         path: ssh/config
-        mode: "0600"
     ~/.ssh/config.d/90-linux.conf:
         path: ssh/config.d/90-linux.conf
-        mode: "0600"
     ~/.tmux.conf:
     ~/.vimrc:
 
 - shell:
+    - description: Create hushlogin to suppress login banner
+      quiet: true
+      command: test -f ~/.hushlogin || touch ~/.hushlogin
+
+- shell:
     - description: Install tmux plugin manager and plugins
-      if: command -v tmux >/dev/null 2>&1
+      quiet: true
       command: |
+        set -e
+        if ! command -v tmux >/dev/null 2>&1; then
+            exit 0
+        fi
         if [ ! -d ~/.tmux/plugins/tpm ]; then
             git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
         fi
@@ -65,6 +66,6 @@
     - description: Set proper permissions on managed files
       quiet: true
       command: |
-        find . \( -path ./.git -o -path ./external \) -prune -o \( -type d -o -type f \) -exec chmod go-w {} +
+        set -e
         chmod 700 ~/.ssh ~/.ssh/config.d ssh ssh/config.d
-        chmod 600 ~/.ssh/config ~/.ssh/config.d/*.conf
+        chmod 600 ssh/config ssh/config.d/*.conf ~/.ssh/config ~/.ssh/config.d/*.conf

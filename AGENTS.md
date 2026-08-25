@@ -35,8 +35,9 @@ This runs Dotbot with `install.conf.yaml`, which:
 ## Key Conventions
 
 ### Dotbot config (`install.conf.yaml`)
-- `relink: true` and `force: true` are set globally — symlinks are always recreated
-- SSH config is linked with explicit `mode: "0600"`
+- Do not edit `install`; it is copied from `external/dotbot/tools/git-submodule/install`, with only `DOTBOT_DIR` adjusted for this repository
+- `relink: true` and `backup: true` are set globally — conflicting files receive timestamped backups
+- SSH file permissions are enforced by the final shell step because `link` does not support `mode`
 - Adding a new dotfile: add an entry under the `link:` section mapping `~/.target` to the repo path
 
 ### Neovim (`nvim/`)
