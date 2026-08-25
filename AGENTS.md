@@ -53,7 +53,7 @@ This runs Dotbot with `install.conf.yaml`, which:
 
 ### Git (`gitconfig`)
 - GPG commit and tag signing is enabled by default
-- `pull.rebase = true`, `rebase.autostash = true`, `rebase.autoSquash = true`
+- `pull.rebase = true` and `rebase.autoSquash = true`; automatic stashing is intentionally disabled
 - `fetch.prune = true` — remote-tracking branches are pruned on fetch
 
 ### Scripts (`bin/`)

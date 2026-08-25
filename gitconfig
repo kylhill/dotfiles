@@ -1,22 +1,16 @@
-[color]
-    ui = auto
 [core]
     whitespace = trailing-space,space-before-tab,cr-at-eol
     autocrlf = input
 [push]
-    default = simple
+    autoSetupRemote = true
 [pull]
     rebase = true
 [user]
     name = Kyle Hill
     email = kylhill@gmail.com
     signingkey = E644A61F810BDC4D1294867A2E37EF3EA077FAD8
-[github]
-    user = kylhill
 [init]
     defaultBranch = main
-[gpg]
-    program = gpg
 [alias]
     vlog = log --show-signature
 [help]
@@ -24,7 +18,6 @@
 [diff]
     colorMoved = default
     mnemonicprefix = true
-    renames = true
     algorithm = histogram
     wsErrorHighlight = all
     colorMovedWS = allow-indentation-change
@@ -32,9 +25,11 @@
     conflictstyle = zdiff3
 [rebase]
     autoSquash = true
+[rerere]
+    enabled = true
+[safe]
+    bareRepository = explicit
 [log]
     date = short
-[transfer]
-    fsckObjects = true
 [fetch]
     prune = true
