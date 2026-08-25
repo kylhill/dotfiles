@@ -55,6 +55,9 @@ if exists("&termguicolors")
     endif
 endif
 
+set background=dark
+silent! syntax enable
+
 silent! colorscheme habamax
 if $TERM !=# 'linux' && &t_Co >= 256
     silent! colorscheme catppuccin
@@ -62,6 +65,3 @@ if $TERM !=# 'linux' && &t_Co >= 256
 else
     set nocursorline
 endif
-
-set background=dark
-silent! syntax enable

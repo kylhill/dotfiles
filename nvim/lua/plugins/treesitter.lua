@@ -2,7 +2,11 @@ return {
   {
     "mason-org/mason.nvim",
     opts = {
-      ensure_installed = { "tree-sitter-cli" },
+      ensure_installed = {
+        "lua-language-server",
+        "shellcheck",
+        "tree-sitter-cli",
+      },
     },
   },
   {
