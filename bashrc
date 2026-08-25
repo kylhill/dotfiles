@@ -21,9 +21,12 @@ else
 fi
 unset _term_colors
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="agnoster"
+# Use the Powerline-based theme only when the terminal supports it.
+if [[ "$fancy_terminal" == true ]]; then
+    OSH_THEME="agnoster"
+else
+    OSH_THEME="font"
+fi
 
 # If you set OSH_THEME to "random", you can ignore themes you don't like.
 # OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
@@ -48,9 +51,6 @@ DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -87,10 +87,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Would you like to use another custom folder than $OSH/custom?
 # OSH_CUSTOM=/path/to/new-custom-folder
 
-# To disable the uses of "sudo" by oh-my-bash, please set "false" to
-# this variable.  The default behavior for the empty value is "true".
-OMB_USE_SUDO=true
-
 # To enable/disable display of Python virtualenv and condaenv
 # OMB_PROMPT_SHOW_PYTHON_VENV=true  # enable
 # OMB_PROMPT_SHOW_PYTHON_VENV=false # disable
@@ -105,7 +101,6 @@ OMB_USE_SUDO=true
 # Add wisely, as too many completions slow down shell startup.
 completions=(
     docker
-    git
     ssh
 )
 
@@ -113,9 +108,7 @@ completions=(
 # Custom aliases may be added to ~/.oh-my-bash/custom/aliases/
 # Example format: aliases=(vagrant composer git-avh)
 # Add wisely, as too many aliases slow down shell startup.
-aliases=(
-    general
-)
+aliases=()
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
 # Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
@@ -145,13 +138,18 @@ if [[ ${PREFIX:-} == *com.termux* || -v KASM_SSH ]]; then
 
     # Dircolors
     if command -v dircolors >/dev/null 2>&1; then
-        [[ -r ~/.dircolors ]] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+        if [[ -r ~/.dircolors ]]; then
+            eval "$(dircolors -b ~/.dircolors)"
+        else
+            eval "$(dircolors -b)"
+        fi
     fi
 
     # Bash Completion
     for f in \
         "$PREFIX/share/bash-completion/bash_completion" \
         "$PREFIX/etc/bash_completion" \
+        "/usr/share/bash-completion/bash_completion" \
         "/etc/bash_completion"; do
         # shellcheck source=/dev/null
         [[ -r "$f" ]] && source "$f" && break
@@ -171,7 +169,6 @@ export HISTCONTROL=ignoreboth:erasedups
 export HISTTIMEFORMAT="%F %T "
 export HISTSIZE=10000
 export HISTFILESIZE=20000
-export GLOBIGNORE=".*:node_modules:venv"
 
 if [ -t 1 ]; then
     stty -ixon 2>/dev/null || true
@@ -197,7 +194,7 @@ alias cls='clear'
 alias ..='cd ..'
 alias ...='cd ../../'
 
-alias bashreload='source ~/.bashrc && echo Sourced ~/.bashrc!'
+alias bashreload='omb reload'
 
 if command -v nvim >/dev/null 2>&1 &&
     [[ "$fancy_terminal" == true && ${PREFIX:-} != *com.termux* && ! -v KASM_SSH ]]; then
