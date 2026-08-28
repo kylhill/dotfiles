@@ -50,19 +50,6 @@
       command: test -f ~/.hushlogin || touch ~/.hushlogin
 
 - shell:
-    - description: Install tmux plugin manager and plugins
-      quiet: true
-      command: |
-        set -e
-        if ! command -v tmux >/dev/null 2>&1; then
-            exit 0
-        fi
-        if [ ! -d ~/.tmux/plugins/tpm ]; then
-            git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-        fi
-        ~/.tmux/plugins/tpm/bin/install_plugins
-
-- shell:
     - description: Set proper permissions on managed files
       quiet: true
       command: |
