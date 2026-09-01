@@ -166,7 +166,6 @@ fi
 # User configuration
 
 export HISTCONTROL=ignoreboth:erasedups
-export HISTTIMEFORMAT="%F %T "
 export HISTSIZE=10000
 export HISTFILESIZE=20000
 
