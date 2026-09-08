@@ -59,4 +59,3 @@ This runs Dotbot with `install.conf.yaml`, which:
 
 ### Scripts (`bin/`)
 - All scripts use `set -euo pipefail` with an ERR trap for line-level error reporting
-- `do-updates.sh` wraps `ansible-playbook` and expects an infra directory at `$INFRA_DIR` (default: `~/infra`)
