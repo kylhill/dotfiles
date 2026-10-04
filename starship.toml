@@ -1,0 +1,37 @@
+# Home Manager prompt layout with ASCII symbols for any terminal font.
+add_newline = false
+format = "$username$hostname$directory$nix_shell$git_branch$git_status$character"
+
+[username]
+format = "[$user]($style)"
+show_always = true
+style_user = "blue"
+
+[hostname]
+format = "[@$hostname]($style) "
+ssh_only = false
+style = "blue"
+
+[directory]
+format = "[$path]($style) "
+style = "cyan"
+truncation_length = 3
+read_only = " [read-only]"
+
+[nix_shell]
+format = "[$symbol]($style) "
+style = "cyan"
+symbol = "nix "
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+style = "green"
+symbol = "git "
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+style = "yellow"
+
+[character]
+error_symbol = "[>](red)"
+success_symbol = "[>](green)"

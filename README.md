@@ -4,7 +4,8 @@ Personal Linux configuration managed with [Dotbot](https://github.com/anishathal
 
 ## Requirements
 
-- Bash
+- Bash and bash-completion
+- Starship for the prompt; a plain Bash prompt is used when it is absent
 - Git
 - Python 3, used by Dotbot
 - Optional tools configured here: Neovim, Vim, tmux, GnuPG, Docker, and Ansible
@@ -25,11 +26,11 @@ Start a new shell afterward, or run `source ~/.bashrc` in an existing Bash sessi
 
 The main managed paths are:
 
-- `~/.bashrc`, `~/.inputrc`, and `~/.dircolors`
+- `~/.bashrc`, `~/.inputrc`, `~/.dircolors`, and `~/.config/starship.toml`
 - `~/.gitconfig`
 - `~/.config/nvim` and `~/.vimrc`
 - `~/.tmux.conf`
-- `~/.ssh/config`, `~/.ssh/config.d/20-ssh-audit.conf`, and `~/.ssh/config.d/90-linux.conf`
+- `~/.ssh/config`, `~/.ssh/config.d/90-linux.conf`
 - `~/.local/bin`
 
 SSH directories and repository sources are assigned restrictive permissions at

@@ -3,13 +3,7 @@ return {
     "maxmx03/solarized.nvim",
     lazy = false,
     priority = 1000,
-    opts = {
-      palette = "solarized",
-      variant = "winter",
-      transparent = {
-        enabled = false,
-      },
-    },
+    opts = {},
     config = function(_, opts)
       vim.opt.termguicolors = true
       vim.opt.background = "dark"

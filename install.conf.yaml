@@ -23,6 +23,12 @@
         mode: 0700
 
 - link:
+    ~/.config/bash/docker.bash:
+        path: bash/docker.bash
+    ~/.config/direnv/direnv.toml:
+        path: direnv.toml
+    ~/.config/starship.toml:
+        path: starship.toml
     ~/.config/nvim:
         path: nvim
     ~/.bashrc:
@@ -30,14 +36,27 @@
         path: external/dircolors-solarized/dircolors.256dark
     ~/.gitconfig:
     ~/.inputrc:
-    ~/.oh-my-bash:
-        path: external/oh-my-bash
     ~/.ssh/config:
         path: ssh/config
     ~/.ssh/config.d/90-linux.conf:
         path: ssh/config.d/90-linux.conf
     ~/.tmux.conf:
     ~/.vimrc:
+
+- shell:
+    - description: Remove legacy Oh My Bash installation
+      quiet: true
+      command: |
+        python3 - <<'PYTHON'
+        import shutil
+        from pathlib import Path
+
+        legacy = Path.home() / ".oh-my-bash"
+        if legacy.is_symlink():
+            legacy.unlink()
+        elif legacy.is_dir():
+            shutil.rmtree(legacy)
+        PYTHON
 
 - shell:
     - description: Create hushlogin to suppress login banner

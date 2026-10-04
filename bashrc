@@ -1,213 +1,142 @@
 # shellcheck shell=bash
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC1090,SC1091
 
-# Enable the subsequent settings only in interactive sessions
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
 case $- in
-*i*) ;;
-*) return ;;
+    *i*) ;;
+      *) return;;
 esac
 
-# Path to your oh-my-bash installation.
-export OSH="$HOME/.oh-my-bash"
-
-_term_colors=0
-if command -v tput >/dev/null 2>&1; then
-    _term_colors="$(tput colors 2>/dev/null || printf '0')"
-fi
-if [[ "${TERM:-}" != "linux" && "$_term_colors" =~ ^[0-9]+$ && "$_term_colors" -ge 256 ]]; then
-    fancy_terminal=true
-else
-    fancy_terminal=false
-fi
-unset _term_colors
-
-# Use the Powerline-based theme only when the terminal supports it.
-if [[ "$fancy_terminal" == true ]]; then
-    OSH_THEME="agnoster"
-else
-    OSH_THEME="font"
-fi
-
-# If you set OSH_THEME to "random", you can ignore themes you don't like.
-# OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
-# You can also specify the list from which a theme is randomly selected:
-# OMB_THEME_RANDOM_CANDIDATES=("font" "powerline-light" "minimal")
-
-# Uncomment the following line to use case-sensitive completion.
-# OMB_CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# OMB_HYPHEN_SENSITIVE="false"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_OSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you don't want the repository to be considered dirty
-# if there are untracked files.
-# SCM_GIT_DISABLE_UNTRACKED_DIRTY="true"
-
-# Uncomment the following line if you want to completely ignore the presence
-# of untracked files in the repository.
-# SCM_GIT_IGNORE_UNTRACKED="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.  One of the following values can
-# be used to specify the timestamp format.
-# * 'mm/dd/yyyy'     # mm/dd/yyyy + time
-# * 'dd.mm.yyyy'     # dd.mm.yyyy + time
-# * 'yyyy-mm-dd'     # yyyy-mm-dd + time
-# * '[mm/dd/yyyy]'   # [mm/dd/yyyy] + [time] with colors
-# * '[dd.mm.yyyy]'   # [dd.mm.yyyy] + [time] with colors
-# * '[yyyy-mm-dd]'   # [yyyy-mm-dd] + [time] with colors
-# If not set, the default value is 'yyyy-mm-dd'.
-# HIST_STAMPS='yyyy-mm-dd'
-
-# Uncomment the following line if you do not want OMB to overwrite the existing
-# aliases by the default OMB aliases defined in lib/*.sh
-# OMB_DEFAULT_ALIASES="check"
-
-# Would you like to use another custom folder than $OSH/custom?
-# OSH_CUSTOM=/path/to/new-custom-folder
-
-# To enable/disable display of Python virtualenv and condaenv
-# OMB_PROMPT_SHOW_PYTHON_VENV=true  # enable
-# OMB_PROMPT_SHOW_PYTHON_VENV=false # disable
-
-# To enable/disable Spack environment information
-# OMB_PROMPT_SHOW_SPACK_ENV=true  # enable
-# OMB_PROMPT_SHOW_SPACK_ENV=false # disable
-
-# Which completions would you like to load? (completions can be found in ~/.oh-my-bash/completions/*)
-# Custom completions may be added to ~/.oh-my-bash/custom/completions/
-# Example format: completions=(ssh git bundler gem pip pip3)
-# Add wisely, as too many completions slow down shell startup.
-completions=(
-    docker
-    ssh
-)
-
-# Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
-# Custom aliases may be added to ~/.oh-my-bash/custom/aliases/
-# Example format: aliases=(vagrant composer git-avh)
-# Add wisely, as too many aliases slow down shell startup.
-aliases=()
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
-# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    sudo
-)
-
-# Which plugins would you like to conditionally load? (plugins can be found in ~/.oh-my-bash/plugins/*)
-# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
-# Example format:
-#  if [ "$DISPLAY" ] || [ "$SSH" ]; then
-#      plugins+=(tmux-autoattach)
-#  fi
-
-# If you want to reduce the initialization cost of the "tput" command to
-# initialize color escape sequences, you can uncomment the following setting.
-# This disables the use of the "tput" command, and the escape sequences are
-# initialized to be the ANSI version:
-#
-OMB_TERM_USE_TPUT=no
-
-if [[ ${PREFIX:-} == *com.termux* || -v KASM_SSH ]]; then
-    # Don't load oh-my-bash in Termux or Kasm SSH sessions
-
-    # Dircolors
-    if command -v dircolors >/dev/null 2>&1; then
-        if [[ -r ~/.dircolors ]]; then
-            eval "$(dircolors -b ~/.dircolors)"
-        else
-            eval "$(dircolors -b)"
-        fi
-    fi
-
-    # Bash Completion
-    for f in \
-        "$PREFIX/share/bash-completion/bash_completion" \
-        "$PREFIX/etc/bash_completion" \
-        "/usr/share/bash-completion/bash_completion" \
-        "/etc/bash_completion"; do
-        # shellcheck source=/dev/null
-        [[ -r "$f" ]] && source "$f" && break
-    done
-else
-    # Load oh-my-bash for everything else
-    if [[ -r "$OSH/oh-my-bash.sh" ]]; then
-        source "$OSH/oh-my-bash.sh"
-    else
-        printf 'Oh My Bash not found: %s\n' "$OSH/oh-my-bash.sh" >&2
-    fi
-fi
-
-# User configuration
-
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTSIZE=10000
 export HISTFILESIZE=20000
 
-if [ -t 1 ]; then
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+shopt -s globstar
+
+# Additional interactive shell conveniences.
+shopt -s extglob checkjobs cdspell dirspell lithist
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Appliance/mobile sessions keep the plain prompt and system editor.
+_dotfiles_basic=false
+if [[ ${PREFIX:-} == *com.termux* || -v KASM_SSH || ${TERM:-dumb} == dumb || ${TERM:-} == linux ]]; then
+    _dotfiles_basic=true
+fi
+
+_term_colors=0
+if command -v tput >/dev/null 2>&1; then
+    _term_colors=$(tput colors 2>/dev/null || printf '0')
+fi
+fancy_terminal=false
+if [[ $_dotfiles_basic == false && $_term_colors =~ ^[0-9]+$ && $_term_colors -ge 256 ]]; then
+    fancy_terminal=true
+fi
+unset _dotfiles_basic _term_colors
+
+# Use the system-style prompt, keeping basic terminals plain.
+if [[ $fancy_terminal == true ]]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # Set the terminal title on supported terminals.
+    case "${TERM:-}" in
+        xterm*|rxvt*)
+            PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+            ;;
+    esac
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+
+# enable color support of ls and also add handy aliases
+if command -v dircolors >/dev/null 2>&1; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# Load programmable completion once, including Termux installation paths.
+if ! shopt -oq posix && [[ -z ${BASH_COMPLETION_VERSINFO:-} ]]; then
+    _completion_paths=(/usr/share/bash-completion/bash_completion /etc/bash_completion)
+    if [[ -n ${PREFIX:-} && $PREFIX != /usr ]]; then
+        _completion_paths=("$PREFIX/share/bash-completion/bash_completion" "$PREFIX/etc/bash_completion" "${_completion_paths[@]}")
+    fi
+    for f in "${_completion_paths[@]}"; do
+        [[ -r "$f" ]] && source "$f" && break
+    done
+    unset f _completion_paths
+fi
+
+if [ -t 0 ]; then
     stty -ixon 2>/dev/null || true
 fi
 
 # Only complete directory names with cd
 complete -d cd
 
-# Minimal aliases - https://github.com/ohmybash/oh-my-bash/wiki/minimal_aliases
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias ls='ls --color=auto -h'
-
-alias grep='grep --color=auto'
-alias fgrep='grep -F --color=auto'
-alias egrep='grep -E --color=auto'
-
-alias ll='ls -alFh --color=auto'
-alias la='ls -Ah --color=auto'
-alias l='ls -CFh --color=auto'
-alias cls='clear'
-
-alias ..='cd ..'
-alias ...='cd ../../'
-
-alias bashreload='omb reload'
-
-if command -v nvim >/dev/null 2>&1 &&
-    [[ "$fancy_terminal" == true && ${PREFIX:-} != *com.termux* && ! -v KASM_SSH ]]; then
-    # Set default editor to nvim on supported fancy terminals
+if [[ $fancy_terminal == true ]] && command -v nvim >/dev/null 2>&1; then
     export EDITOR="nvim"
     export VISUAL="nvim"
     export MANPAGER="nvim +Man! -"
-
     alias vim=nvim
     alias vimdiff='nvim -d'
 else
-    # Otherwise, use vim
-    export EDITOR="vim"
-    export VISUAL="vim"
+    unalias vim vimdiff 2>/dev/null || true
+    [[ ${MANPAGER:-} != 'nvim +Man! -' ]] || unset MANPAGER
+    if command -v vim >/dev/null 2>&1; then
+        export EDITOR="vim"
+    else
+        export EDITOR="vi"
+    fi
+    export VISUAL="$EDITOR"
 fi
 
 if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
@@ -222,68 +151,11 @@ else
     unset GPG_TTY
 fi
 
-# Docker helpers
-dbash() {
-    command -v docker >/dev/null 2>&1 || {
-        echo "docker not found" >&2
-        return 127
-    }
-    [[ -n "${1:-}" ]] || {
-        echo "usage: dbash <container>" >&2
-        return 2
-    }
-
-    local shell
-    shell=$(docker exec "$1" sh -c 'command -v bash || command -v sh' 2>/dev/null) || {
-        echo "container not found or no shell" >&2
-        return 1
-    }
-
-    docker exec -it "$1" "$shell"
-}
-alias dsh=dbash
-
-dtail() {
-    docker logs -tf --tail="150" "$@"
-}
-
-_complete_docker_containers() {
-    local cur="${COMP_WORDS[COMP_CWORD]}"
-    local containers
-    local container
-    containers=$(docker ps --format '{{.Names}}' 2>/dev/null)
-    COMPREPLY=()
-    while IFS= read -r container; do
-        COMPREPLY+=("$container")
-    done < <(compgen -W "$containers" -- "$cur")
-}
-complete -F _complete_docker_containers dbash dsh dtail
-
-dprune() {
-    local exclude="${1:-minecraft}"
-    echo "Pruning Docker resources (excluding: $exclude)..."
-
-    # Remove stopped containers, skipping any whose name matches the exclusion pattern
-    docker ps -a --filter status=exited --filter status=created --format '{{.Names}}' |
-        grep -Fv -- "$exclude" |
-        xargs -r docker rm
-
-    # Prune images not referenced by any remaining container
-    docker image prune -a -f
-
-    # Remove unused custom networks, explicitly skipping excluded ones.
-    # docker network prune only protects running containers; stopped containers
-    # don't count, so we must do this manually.
-    docker network ls --format '{{.Name}}' --filter type=custom |
-        grep -Fv -- "$exclude" |
-        xargs -r docker network rm 2>/dev/null || true
-
-    # Prune anonymous and dangling volumes
-    docker volume prune -f
-
-    # Prune build cache
-    docker builder prune -f
-}
+# Load Docker helpers only when the client is installed.
+if command -v docker >/dev/null 2>&1 && [[ -r "$HOME/.config/bash/docker.bash" ]]; then
+    # shellcheck source=bash/docker.bash
+    source "$HOME/.config/bash/docker.bash"
+fi
 
 # Use local ssh-agent, if available
 if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
@@ -291,5 +163,6 @@ if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; 
 fi
 
 if command -v direnv >/dev/null 2>&1; then
+    export DIRENV_LOG_FORMAT=""
     eval "$(direnv hook bash)"
 fi
