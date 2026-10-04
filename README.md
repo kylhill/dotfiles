@@ -24,6 +24,18 @@ home directory. Existing destinations are force-replaced by Dotbot. Back up any
 configuration that should be retained before running it on a new machine.
 Start a new shell afterward, or run `source ~/.bashrc` in an existing Bash session.
 
+For Termux, after checking out the repository, run:
+
+```bash
+bash bootstrap-termux.sh
+```
+
+The bootstrap upgrades Termux packages, installs Git, Python, Starship, Vim,
+dnsutils, and bash-completion, initializes both submodules, and runs the installer.
+Python is installed without recommended packages because Dotbot does not need pip.
+Other packages include their normal recommendations. Already installed packages
+are not removed.
+
 The main managed paths are:
 
 - `~/.bashrc`, `~/.inputrc`, `~/.dircolors`, and `~/.config/starship.toml`

@@ -163,9 +163,9 @@ if command -v docker >/dev/null 2>&1 && [[ -r "$HOME/.config/bash/docker.bash" ]
 fi
 
 # Use local ssh-agent, if available
-if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-fi
+#if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
+#    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+#fi
 
 # Enable direnv integration
 if command -v direnv >/dev/null 2>&1; then
