@@ -16,7 +16,6 @@ This runs Dotbot with `install.conf.yaml`, which:
 1. Creates `~/.cache` and `~/.ssh` directories
 2. Initializes git submodules (`external/dotbot`, `external/dircolors-solarized`)
 3. Symlinks all config files to their target locations in `$HOME`
-4. Removes the legacy `~/.oh-my-bash` installation without following symlinks
 
 ## Architecture
 

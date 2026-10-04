@@ -44,21 +44,6 @@
     ~/.vimrc:
 
 - shell:
-    - description: Remove legacy Oh My Bash installation
-      quiet: true
-      command: |
-        python3 - <<'PYTHON'
-        import shutil
-        from pathlib import Path
-
-        legacy = Path.home() / ".oh-my-bash"
-        if legacy.is_symlink():
-            legacy.unlink()
-        elif legacy.is_dir():
-            shutil.rmtree(legacy)
-        PYTHON
-
-- shell:
     - description: Create hushlogin to suppress login banner
       quiet: true
       command: test -f ~/.hushlogin || touch ~/.hushlogin
