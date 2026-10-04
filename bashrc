@@ -41,34 +41,40 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# Appliance/mobile sessions keep the plain prompt and system editor.
-_dotfiles_basic=false
-if [[ ${PREFIX:-} == *com.termux* || -v KASM_SSH || ${TERM:-dumb} == dumb || ${TERM:-} == linux ]]; then
-    _dotfiles_basic=true
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# enable a colored prompt whenever the terminal supports it
+force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if command -v tput >/dev/null 2>&1 && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
 fi
 
-_term_colors=0
-if command -v tput >/dev/null 2>&1; then
-    _term_colors=$(tput colors 2>/dev/null || printf '0')
-fi
-fancy_terminal=false
-if [[ $_dotfiles_basic == false && $_term_colors =~ ^[0-9]+$ && $_term_colors -ge 256 ]]; then
-    fancy_terminal=true
-fi
-unset _dotfiles_basic _term_colors
-
-# Use the system-style prompt, keeping basic terminals plain.
-if [[ $fancy_terminal == true ]]; then
+if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    # Set the terminal title on supported terminals.
-    case "${TERM:-}" in
-        xterm*|rxvt*)
-            PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-            ;;
-    esac
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
 # enable color support of ls and also add handy aliases
 if command -v dircolors >/dev/null 2>&1; then
@@ -103,18 +109,22 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# Load programmable completion once, including Termux installation paths.
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
 if ! shopt -oq posix && [[ -z ${BASH_COMPLETION_VERSINFO:-} ]]; then
-    _completion_paths=(/usr/share/bash-completion/bash_completion /etc/bash_completion)
-    if [[ -n ${PREFIX:-} && $PREFIX != /usr ]]; then
-        _completion_paths=("$PREFIX/share/bash-completion/bash_completion" "$PREFIX/etc/bash_completion" "${_completion_paths[@]}")
-    fi
-    for f in "${_completion_paths[@]}"; do
-        [[ -r "$f" ]] && source "$f" && break
-    done
-    unset f _completion_paths
+  if [ -n "${PREFIX:-}" ] && [ -f "$PREFIX/share/bash-completion/bash_completion" ]; then
+    . "$PREFIX/share/bash-completion/bash_completion"
+  elif [ -n "${PREFIX:-}" ] && [ -f "$PREFIX/etc/bash_completion" ]; then
+    . "$PREFIX/etc/bash_completion"
+  elif [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
 
+# Personal shell customizations.
 if [ -t 0 ]; then
     stty -ixon 2>/dev/null || true
 fi
@@ -122,7 +132,8 @@ fi
 # Only complete directory names with cd
 complete -d cd
 
-if [[ $fancy_terminal == true ]] && command -v nvim >/dev/null 2>&1; then
+# Prefer the best installed editor on every system.
+if command -v nvim >/dev/null 2>&1; then
     export EDITOR="nvim"
     export VISUAL="nvim"
     export MANPAGER="nvim +Man! -"
@@ -144,12 +155,6 @@ if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
 fi
 
 export PAGER="less"
-if [[ -t 0 ]]; then
-    GPG_TTY="$(tty)"
-    export GPG_TTY
-else
-    unset GPG_TTY
-fi
 
 # Load Docker helpers only when the client is installed.
 if command -v docker >/dev/null 2>&1 && [[ -r "$HOME/.config/bash/docker.bash" ]]; then
@@ -162,6 +167,7 @@ if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; 
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
 
+# Enable direnv integration
 if command -v direnv >/dev/null 2>&1; then
     export DIRENV_LOG_FORMAT=""
     eval "$(direnv hook bash)"

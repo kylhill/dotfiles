@@ -51,8 +51,8 @@ This runs Dotbot with `install.conf.yaml`, which:
 
 ### Shell (`bashrc`)
 - Uses standard Bash and bash-completion, with Starship when available
-- KASM SSH, Termux, Linux consoles, and low-color terminals use a plain prompt and Vim/vi without Neovim aliases
-- Other 256-color terminals use Starship and Neovim when installed
+- Bash prompt colors use the system skeleton's capability check (`tput setaf 1`), enabled by default
+- All systems use Neovim and alias Vim commands to it when installed; otherwise the editor falls back to Vim/vi
 - Shell and tmux prompts use ASCII symbols; do not require Nerd Fonts
 - Preserves forwarded SSH agents; local sockets are used only when no agent is set
 

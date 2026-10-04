@@ -5,7 +5,7 @@ Personal Linux configuration managed with [Dotbot](https://github.com/anishathal
 ## Requirements
 
 - Bash and bash-completion
-- Starship for the prompt; a plain Bash prompt is used when it is absent
+- Bash prompt colors are enabled when the terminal supports them (`tput setaf 1`)
 - Git
 - Python 3, used by Dotbot
 - Optional tools configured here: Neovim, Vim, tmux, GnuPG, Docker, and Ansible
