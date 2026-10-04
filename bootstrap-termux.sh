@@ -15,7 +15,7 @@ ln -sfnT "$PREFIX/etc/termux/mirrors/default" "$PREFIX/etc/termux/chosen_mirrors
 pkg --check-mirror update
 pkg upgrade -y
 
-pkg install -y git starship vim dnsutils bash-completion
+pkg install -y git starship vim dnsutils bash-completion ncurses-utils
 
 # Dotbot needs Python, but not pip.
 pkg install -y --no-install-recommends python
