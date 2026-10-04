@@ -10,7 +10,9 @@ fi
 
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 
-pkg update
+# Termux's default mirror is packages-cf.termux.dev.
+ln -sfnT "$PREFIX/etc/termux/mirrors/default" "$PREFIX/etc/termux/chosen_mirrors"
+pkg --check-mirror update
 pkg upgrade -y
 
 pkg install -y git starship vim dnsutils bash-completion

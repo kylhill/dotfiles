@@ -30,7 +30,8 @@ For Termux, after checking out the repository, run:
 bash bootstrap-termux.sh
 ```
 
-The bootstrap upgrades Termux packages, installs Git, Python, Starship, Vim,
+The bootstrap selects the `packages-cf.termux.dev` mirror, upgrades Termux
+packages, installs Git, Python, Starship, Vim,
 dnsutils, and bash-completion, initializes both submodules, and runs the installer.
 Python is installed without recommended packages because Dotbot does not need pip.
 Other packages include their normal recommendations. Already installed packages
