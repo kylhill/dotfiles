@@ -172,3 +172,8 @@ if command -v direnv >/dev/null 2>&1; then
     export DIRENV_LOG_FORMAT=""
     eval "$(direnv hook bash)"
 fi
+
+# Enable the Starship prompt when installed.
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+fi
